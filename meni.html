@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meni | Restoran Dobar Tek</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: #333;
+        }
+        header {
+            background: #8b0000;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background: #333;
+            display: flex;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            display: block;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background: #a52a2a;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #8b0000;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .menu-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background: white;
+            transition: transform 0.2s;
+            text-align: center;
+        }
+        .menu-item:hover {
+            transform: scale(1.03);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .menu-item h3 {
+            margin: 15px 0 10px;
+        }
+        .menu-item p {
+            margin: 0 15px 15px;
+        }
+        .price {
+            font-weight: bold;
+            color: #8b0000;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Naš Meni</h1>
+        <p>Odaberite svoje omiljeno jelo</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Početna</a>
+        <a href="meni.html">Meni</a>
+    </nav>
+
+    <section>
+        <h2>Jela</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Ćevapi">
+                <h3>Ćevapi</h3>
+                <p>Sočni ćevapi posluženi s lukom i lepinjom.</p>
+                <p class="price">8 €</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e" alt="Pasta Carbonara">
+                <h3>Pasta Carbonara</h3>
+                <p>Kremasta tjestenina s pancetom i parmezanom.</p>
+                <p class="price">10 €</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1604909052948-93b1f112b8d3" alt="Piletina s povrćem">
+                <h3>Piletina s povrćem</h3>
+                <p>Grilana piletina s povrtnim prilogom.</p>
+                <p class="price">9 €</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Restoran Dobar Tek</p>
+    </footer>
+</body>
+</html>
