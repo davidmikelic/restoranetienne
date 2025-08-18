@@ -6,32 +6,29 @@
 <title>Etienne - Menu</title>
 <style>
 :root{
---bg:#0f0f10; --card:#18191b; --text:#f6f6f6; --muted:#b7b7b7;
---accent:#ffb703; --max:1100px; --radius:14px;
+--bg:#faf9f7; --card:#ffffff; --text:#222; --muted:#666;
+--accent:#c92a2a; --max:1100px; --radius:12px;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:color-mix(in srgb, var(--bg) 88%, transparent);border-bottom:1px solid #242529}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+header{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid #ddd}
 .wrap{max-width:var(--max);margin:auto;padding:18px 20px}
-.brand{display:flex;gap:12px;align-items:center}
-.brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent)}
-nav{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:8px}
-nav a{padding:8px 12px;border-radius:20px;background:#1f2023;border:1px solid #2a2c31;text-decoration:none;color:var(--text)}
-nav a:hover{border-color:var(--accent)}
-h2{font-size:clamp(28px,3.5vw,40px);letter-spacing:.5px;margin:34px 0 10px}
-.section-desc{color:var(--muted);margin:0 0 18px}
+.brand{display:flex;justify-content:space-between;align-items:center}
+.brand h1{font-size:22px;color:var(--accent)}
+nav{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:12px}
+nav a{padding:6px 12px;border-radius:20px;background:#f2f2f2;text-decoration:none;color:var(--text);font-size:14px;border:1px solid #e0e0e0}
+nav a:hover{background:var(--accent);color:#fff}
+h2{font-size:clamp(26px,3.5vw,34px);letter-spacing:.5px;margin:34px 0 10px;color:var(--accent)}
 section{scroll-margin-top:90px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.item{grid-column:span 12;background:var(--card);border:1px solid #242529;border-radius:var(--radius);padding:16px}
-@media (min-width:680px){.item{grid-column:span 6}}
-@media (min-width:980px){.item{grid-column:span 4}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.item{background:var(--card);border:1px solid #e0e0e0;border-radius:var(--radius);padding:16px}
 .title{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.name{font-weight:600;font-size:18px}
+.name{font-weight:600;font-size:17px}
 .price{font-weight:700;white-space:nowrap;color:var(--accent)}
 .desc{color:var(--muted);margin-top:6px;font-size:14px}
-footer{border-top:1px solid #242529;margin-top:40px}
-.note{color:var(--muted);font-size:14px;margin-top:8px}
-.divider{height:1px;background:#242529;margin:8px 0 18px}
+footer{border-top:1px solid #ddd;margin-top:40px;padding:20px;text-align:center;font-size:14px;color:var(--muted)}
+.back a{color:var(--accent);text-decoration:none;font-weight:600}
+.back a:hover{text-decoration:underline}
 html{scroll-behavior:smooth}
 </style>
 </head>
@@ -39,10 +36,8 @@ html{scroll-behavior:smooth}
 <header>
 <div class="wrap">
 <div class="brand">
-<div class="dot"></div>
-<div>
-<strong>Etienne</strong><br />
-<span class="note">Restoran • Menu</span>
+<h1>Etienne</h1>
+<div class="back"><a href="index.html">← Povratak na početnu</a></div>
 </div>
 </div>
 <nav>
