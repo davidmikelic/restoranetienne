@@ -1,130 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meni | Restoran Dobar Tek</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
-            color: #333;
-        }
-        header {
-            background: #8b0000;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        nav {
-            background: #333;
-            display: flex;
-            justify-content: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 25px;
-            display: block;
-            font-weight: bold;
-        }
-        nav a:hover {
-            background: #a52a2a;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        section h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-            color: #8b0000;
-        }
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .menu-item {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            background: white;
-            transition: transform 0.2s;
-            text-align: center;
-        }
-        .menu-item:hover {
-            transform: scale(1.03);
-        }
-        .menu-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .menu-item h3 {
-            margin: 15px 0 10px;
-        }
-        .menu-item p {
-            margin: 0 15px 15px;
-        }
-        .price {
-            font-weight: bold;
-            color: #8b0000;
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Etienne - Menu</title>
+<style>
+:root{
+--bg:#0f0f10; --card:#18191b; --text:#f6f6f6; --muted:#b7b7b7;
+--accent:#ffb703; --max:1100px; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:color-mix(in srgb, var(--bg) 88%, transparent);border-bottom:1px solid #242529}
+.wrap{max-width:var(--max);margin:auto;padding:18px 20px}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent)}
+nav{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:8px}
+nav a{padding:8px 12px;border-radius:20px;background:#1f2023;border:1px solid #2a2c31;text-decoration:none;color:var(--text)}
+nav a:hover{border-color:var(--accent)}
+h2{font-size:clamp(28px,3.5vw,40px);letter-spacing:.5px;margin:34px 0 10px}
+.section-desc{color:var(--muted);margin:0 0 18px}
+section{scroll-margin-top:90px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.item{grid-column:span 12;background:var(--card);border:1px solid #242529;border-radius:var(--radius);padding:16px}
+@media (min-width:680px){.item{grid-column:span 6}}
+@media (min-width:980px){.item{grid-column:span 4}}
+.title{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.name{font-weight:600;font-size:18px}
+.price{font-weight:700;white-space:nowrap;color:var(--accent)}
+.desc{color:var(--muted);margin-top:6px;font-size:14px}
+footer{border-top:1px solid #242529;margin-top:40px}
+.note{color:var(--muted);font-size:14px;margin-top:8px}
+.divider{height:1px;background:#242529;margin:8px 0 18px}
+html{scroll-behavior:smooth}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Naš Meni</h1>
-        <p>Odaberite svoje omiljeno jelo</p>
-    </header>
+<header>
+<div class="wrap">
+<div class="brand">
+<div class="dot"></div>
+<div>
+<strong>Etienne</strong><br />
+<span class="note">Restoran • Menu</span>
+</div>
+</div>
+<nav>
+<a href="#predjela">Hladna predjela</a>
+<a href="#juhe">Juhe</a>
+<a href="#djeca">Dječji meni</a>
+<a href="#tjestenine">Tjestenine & Rižoti</a>
+<a href="#meso">Mesna jela</a>
+<a href="#specijalna">Specijalna jela</a>
+<a href="#ribe">Ribe & Mekušci</a>
+<a href="#salate">Salate</a>
+<a href="#prilozi">Prilozi</a>
+<a href="#pizze">Pizze</a>
+<a href="#deserti">Deserti</a>
+</nav>
+</div>
+</header>
 
-    <nav>
-        <a href="index.html">Početna</a>
-        <a href="meni.html">Meni</a>
-    </nav>
+<main class="wrap">
+<!-- HLADNA PREDJELA -->
+<section id="predjela">
+<h2>Hladna predjela / Antipasti</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Pršut / sir</div><div class="price">€ 13,80</div></div><p class="desc">Prosciutto crudo & formaggio</p></article>
+<article class="item"><div class="title"><div class="name">Morski pijat</div><div class="price">€ 16,50</div></div><p class="desc">Pašteta od tune, inćuni, salata od hobotnice</p></article>
+<article class="item"><div class="title"><div class="name">Carpaccio od bifteka</div><div class="price">€ 16,50</div></div><p class="desc">Grana padano & rukola</p></article>
+<article class="item"><div class="title"><div class="name">Salata od hobotnice</div><div class="price">€ 15,00</div></div><p class="desc">Octopus salad</p></article>
+</div>
+<div class="divider"></div>
+</section>
 
-    <section>
-        <h2>Jela</h2>
-        <div class="menu">
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Ćevapi">
-                <h3>Ćevapi</h3>
-                <p>Sočni ćevapi posluženi s lukom i lepinjom.</p>
-                <p class="price">8 €</p>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e" alt="Pasta Carbonara">
-                <h3>Pasta Carbonara</h3>
-                <p>Kremasta tjestenina s pancetom i parmezanom.</p>
-                <p class="price">10 €</p>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1604909052948-93b1f112b8d3" alt="Piletina s povrćem">
-                <h3>Piletina s povrćem</h3>
-                <p>Grilana piletina s povrtnim prilogom.</p>
-                <p class="price">9 €</p>
-            </div>
-        </div>
-    </section>
+<!-- JUHE -->
+<section id="juhe">
+<h2>Juhe / Zuppe</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Goveđa juha</div><div class="price">€ 5,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Juha od rajčice</div><div class="price">€ 4,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Krem juha od gljiva</div><div class="price">€ 5,00</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
 
-    <footer>
-        <p>© 2025 Restoran Dobar Tek</p>
-    </footer>
-</body>
-</html>
+<!-- DJEČJI MENI -->
+<section id="djeca">
+<h2>Dječji meni</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Špageti (rajčica / bolonjez)</div><div class="price">€ 7,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Pileći medaljoni</div><div class="price">€ 6,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Ćevapčići s pomesom</div><div class="price">€ 6,50</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- TJESTENINE & RIŽOTI -->
+<section id="tjestenine">
+<h2>Tjestenine & Rižoti</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Tjestenina sa morskim plodovima (rižoto)</div><div class="price">€ 19,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Rižoto sa kozicama i tikvicama</div><div class="price">€ 15,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Rižoto sa gljivama</div><div class="price">€ 13,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Rižoto sa sipama</div><div class="price">€ 15,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Tjestenina sa tartufima i pršutom</div><div class="price">€ 18,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Lasagne</div><div class="price">€ 16,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Špageti Carbonara</div><div class="price">€ 14,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Špageti Bolognese</div><div class="price">€ 14,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Zeleni rezanci sa lososom i gorgonzolom</div><div class="price">€ 17,00</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- MESNA JELA -->
+<section id="meso">
+<h2>Mesna jela</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Svinjski medaljoni sa pancetom</div><div class="price">€ 17,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Istarski odrezak</div><div class="price">€ 15,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Pileći file sa prilogom</div><div class="price">€ 12,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Biftek na žaru sa prilogom</div><div class="price">€ 29,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Biftek u gorgonzola umaku</div><div class="price">€ 32,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Biftek u umaku zelenog papra</div><div class="price">€ 32,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Biftek u tartuf umaku</div><div class="price">€ 32,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Miješano meso na žaru</div><div class="price">€ 17,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Ćevapčići sa prilogom</div><div class="price">€ 13,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Bečki odrezak</div><div class="price">€ 13,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Pljeskavica sa sirom (300 g)</div><div class="price">€ 17,00</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- SPECIJALNA JELA -->
+<section id="specijalna">
+<h2>Specijalna jela</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Beefburger Angus</div><div class="price">€ 13,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Svinjska rebarca sa krumpirom</div><div class="price">€ 17,00</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- RIBE -->
+<section id="ribe">
+<h2>Ribe & Mekušci</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Riblja plata (2 osobe)</div><div class="price">€ 42,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Morski tris</div><div class="price">€ 22,00</div></div></article>
+<article class="item"><div class="title"><div class="name">File brancina</div><div class="price">€ 18,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Riba porcija (brancin, orada)</div><div class="price">€ 18,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Lignje na žaru</div><div class="price">€ 18,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Lignje pržene</div><div class="price">€ 18,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Tuna steak</div><div class="price">€ 23,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Pedoći na buzaru</div><div class="price">€ 14,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Škampi žar (0,5 kg)</div><div class="price">€ 35,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Škampi buzara sa tagliatellama (0,5 kg)</div><div class="price">€ 36,00</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- SALATE -->
+<section id="salate">
+<h2>Salate</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Grčka salata</div><div class="price">€ 12,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Caprese</div><div class="price">€ 12,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Salata s tunom i sirom</div><div class="price">€ 12,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Cezar salata</div><div class="price">€ 12,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Zelena salata</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Salata od krastavaca</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Salata od kupusa</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Salata od rajčica</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Miješana salata</div><div class="price">€ 5,50</div></div></article>
+</div>
+<div class="divider"></div>
+</section>
+
+<!-- PRILOZI -->
+<section id="prilozi">
+<h2>Prilozi</h2>
+<div class="grid">
+<article class="item"><div class="title"><div class="name">Pomfrit</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Kuhani krumpir</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Gljive sa žara</div><div class="price">€ 6,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Povrće na žaru</div><div class="price">€ 6,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Blitva s krumpirom</div><div class="price">€ 5,50</div></div></article>
+<article class="item"><div class="title"><div class="name">Tartar umak</div><div class="price">€ 2,00</div></div></article>
+<article class="item"><div class="title"><div class="name">Ketchup / Majoneza / Senf / Ajvar</div><div class="price">€ 1,00</
