@@ -1,103 +1,196 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restoran Etienne</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
-            color: #333;
-        }
-        header {
-            background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center/cover;
-            color: white;
-            padding: 120px 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        header p {
-            font-size: 1.3em;
-        }
-        nav {
-            background: #8b0000;
-            display: flex;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 25px;
-            display: block;
-            font-weight: bold;
-        }
-        nav a:hover {
-            background: #a52a2a;
-        }
-        section {
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2em;
-            color: #8b0000;
-        }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .kontakt-info {
-            text-align: center;
-            font-size: 1.2em;
-            line-height: 1.8em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Etienne</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --bg: #f9fafb;
+      --text: #1a1a1a;
+      --muted: #6c757d;
+      --light: #ffffff;
+      --dark: #0d6efd;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #e0e0e0;
+      --muted: #a0a0a0;
+      --light: #1f1f1f;
+      --dark: #0d6efd;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.4s,color 0.4s; }
+
+    header { position:fixed; top:0; left:0; width:100%; z-index:100; background:transparent; transition:background 0.3s,box-shadow 0.3s; }
+    header.scrolled { background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); }
+    nav { max-width:1100px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:18px 24px; }
+    nav a { color:#fff; text-decoration:none; margin-left:20px; font-weight:500; transition:0.3s; }
+    nav a:hover { color:var(--primary); }
+
+    .brand { font-weight:700; font-size:22px; color:#fff; letter-spacing:1px; }
+
+    .toggle-theme, .toggle-lang { cursor:pointer; background:none; border:none; font-size:16px; margin-left:15px; color:#fff; transition:0.3s; }
+
+    .hero { 
+      background:url("images/hero.jpg") center/cover no-repeat; 
+      height:100vh; 
+      display:flex; 
+      justify-content:center; 
+      align-items:center; 
+      text-align:center; 
+      color:#fff; 
+      position:relative; 
+    }
+    .hero::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+    .hero > div { position:relative; z-index:2; }
+    .hero h1 { font-size: clamp(36px,6vw,64px); margin-bottom:16px; font-weight:700; }
+    .hero p { font-size:20px; margin-bottom:28px; color:#f1f1f1; }
+    .btn { background:var(--primary); color:#fff; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:600; transition:0.3s; display:inline-block; }
+    .btn:hover { background:#0b5ed7; }
+
+    section { max-width:1100px; margin:auto; padding:90px 20px; }
+    section h2 { font-size:32px; margin-bottom:20px; text-align:center; font-weight:700; color:var(--text); }
+    section p { text-align:center; color:var(--muted); font-size:18px; max-width:700px; margin:auto; }
+
+    footer { background:var(--light); color:var(--muted); text-align:center; padding:24px; font-size:14px; transition:background 0.3s; }
+    body.dark footer { background:#1f1f1f; color:var(--muted); }
+
+    .fade-in { opacity:0; transform:translateY(30px); transition:all 0.8s ease-out; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Restoran Etienne</h1>
-        <p>Radno vrijeme: 14:00 - 20:00</p>
-    </header>
 
-    <nav>
-        <a href="#o-nama">O nama</a>
-        <a href="meni.html">Meni</a>
-        <a href="#kontakt">Kontakt</a>
-    </nav>
+<header>
+  <nav>
+    <div class="brand">Etienne</div>
+    <div class="links">
+      <a href="index.html" id="nav-home">Početna</a>
+      <a href="meni.html" id="nav-menu">Meni</a>
+      <a href="#kontakt" id="nav-contact">Kontakt</a>
+      <button class="toggle-theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="toggle-lang" onclick="toggleLanguage()">EN</button>
+    </div>
+  </nav>
+</header>
 
-    <section id="o-nama">
-        <h2>O nama</h2>
-        <p style="text-align:center; max-width:700px; margin:auto;">
-            Dobrodošli u Restoran Etienne! 
-            Koristimo samo najkvalitetnije domaće namirnice, a svaki obrok pripremamo s ljubavlju. 
-            Posjetite nas i uživajte u opuštenoj atmosferi u Kampu Kažela u Medulinu.
-        </p>
-    </section>
+<section class="hero">
+  <div>
+    <h1 id="hero-title">Dobrodošli</h1>
+    <p id="hero-subtitle">Radno vrijeme: 10:00-22:00</p>
+    <a href="meni.html" class="btn" id="hero-btn">Pogledaj meni</a>
+  </div>
+</section>
 
-    <section id="kontakt">
-        <h2>Kontakt</h2>
-        <div class="kontakt-info">
-            📍 Lokacija: Kapovica 350, Medulin <br>
-            📞 Telefon: <a href="tel:+38598224394">098 224 394</a>
-        </div>
-    </section>
+<section id="o-nama" class="fade-in">
+  <h2 id="about-title">O nama</h2>
+  <p id="about-text">Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.</p>
+</section>
 
-    <footer>
-        <p>© 2025 Restoran Etienne | Sva prava pridržana</p>
-    </footer>
+<section id="kontakt" class="fade-in">
+  <h2 id="contact-title">Kontakt</h2>
+  <p id="contact-text">📍 Adresa: Kapovica 350, Medulin<br>
+     ☎ Telefon: <a href="tel:+38598224394">098 224 394</a><br>
+     ✉ Email: batana.beach@gmail.com</p>
+</section>
+
+<footer>
+  <span id="footer-text">© 2025 Restoran Etienne | Sva prava pridržana</span>
+</footer>
+
+<script>
+  // Translations
+  const translations = {
+    hr: {
+      navHome: "Početna",
+      navMenu: "Meni",
+      navContact: "Kontakt",
+      heroTitle: "Dobrodošli",
+      heroSubtitle: "Radno vrijeme: 10:00-22:00",
+      heroBtn: "Pogledaj meni",
+      aboutTitle: "O nama",
+      aboutText: "Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
+      contactTitle: "Kontakt",
+      contactText: "📍 Adresa: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      footerText: "© 2025 Restoran Etienne | Sva prava pridržana"
+    },
+    en: {
+      navHome: "Home",
+      navMenu: "Menu",
+      navContact: "Contact",
+      heroTitle: "Welcome",
+      heroSubtitle: "Opening hours: 10:00-22:00",
+      heroBtn: "View menu",
+      aboutTitle: "About us",
+      aboutText: "Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
+      contactTitle: "Contact",
+      contactText: "📍 Address: Kapovica 350, Medulin<br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      footerText: "© 2025 Restaurant Etienne | All rights reserved"
+    }
+  };
+
+  let currentLang = "hr";
+
+  function toggleLanguage() {
+    currentLang = currentLang === "hr" ? "en" : "hr";
+    applyTranslations();
+    document.querySelector(".toggle-lang").textContent = currentLang === "hr" ? "EN" : "HR";
+  }
+
+  function applyTranslations() {
+    document.getElementById("nav-home").textContent = translations[currentLang].navHome;
+    document.getElementById("nav-menu").textContent = translations[currentLang].navMenu;
+    document.getElementById("nav-contact").textContent = translations[currentLang].navContact;
+    document.getElementById("hero-title").textContent = translations[currentLang].heroTitle;
+    document.getElementById("hero-subtitle").textContent = translations[currentLang].heroSubtitle;
+    document.getElementById("hero-btn").textContent = translations[currentLang].heroBtn;
+    document.getElementById("about-title").textContent = translations[currentLang].aboutTitle;
+    document.getElementById("about-text").innerHTML = translations[currentLang].aboutText;
+    document.getElementById("contact-title").textContent = translations[currentLang].contactTitle;
+    document.getElementById("contact-text").innerHTML = translations[currentLang].contactText;
+    document.getElementById("footer-text").textContent = translations[currentLang].footerText;
+  }
+
+  // Sticky header
+  window.addEventListener('scroll', function(){
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Fade-in animations
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = { threshold: 0.2 };
+  const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+  faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+  // Dark mode toggle
+  const toggleBtn = document.querySelector(".toggle-theme");
+  toggleBtn.addEventListener("click", ()=>{
+    document.body.classList.toggle("dark");
+    const icon = toggleBtn.querySelector("i");
+    if(document.body.classList.contains("dark")){
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    } else {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    }
+  });
+
+  // Load default language
+  applyTranslations();
+</script>
+
 </body>
 </html>
