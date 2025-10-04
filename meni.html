@@ -1,228 +1,531 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Etienne - Menu</title>
-<style>
-:root{
---bg:#faf9f7; --card:#ffffff; --text:#222; --muted:#666;
---accent:#c92a2a; --max:1100px; --radius:12px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-header{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid #ddd}
-.wrap{max-width:var(--max);margin:auto;padding:18px 20px}
-.brand{display:flex;justify-content:space-between;align-items:center}
-.brand h1{font-size:22px;color:var(--accent)}
-nav{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:12px}
-nav a{padding:6px 12px;border-radius:20px;background:#f2f2f2;text-decoration:none;color:var(--text);font-size:14px;border:1px solid #e0e0e0}
-nav a:hover{background:var(--accent);color:#fff}
-h2{font-size:clamp(26px,3.5vw,34px);letter-spacing:.5px;margin:34px 0 10px;color:var(--accent)}
-section{scroll-margin-top:90px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.item{background:var(--card);border:1px solid #e0e0e0;border-radius:var(--radius);padding:16px}
-.title{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.name{font-weight:600;font-size:17px}
-.price{font-weight:700;white-space:nowrap;color:var(--accent)}
-.desc{color:var(--muted);margin-top:6px;font-size:14px}
-footer{border-top:1px solid #ddd;margin-top:40px;padding:20px;text-align:center;font-size:14px;color:var(--muted)}
-.back a{color:var(--accent);text-decoration:none;font-weight:600}
-.back a:hover{text-decoration:underline}
-html{scroll-behavior:smooth}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meni - Restoran Etienne</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --bg: #f9fafb;
+      --text: #1a1a1a;
+      --muted: #6c757d;
+      --light: #ffffff;
+      --dark: #0d6efd;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #e0e0e0;
+      --muted: #a0a0a0;
+      --light: #1f1f1f;
+      --dark: #0d6efd;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background 0.4s,color 0.4s;}
+
+    header{position:fixed;top:0;left:0;width:100%;z-index:100;background:transparent;transition:background 0.3s,box-shadow 0.3s;}
+    header.scrolled{background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);}
+    nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;}
+    nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;transition:0.3s;}
+    nav a:hover{color:var(--primary);}
+    .brand{font-weight:700;font-size:22px;color:#fff;letter-spacing:1px;}
+    .toggle-theme{cursor:pointer;background:none;border:none;font-size:20px;margin-left:20px;color:#fff;transition:0.3s;}
+
+     /* ✅ Lokalna slika iz foldera images */
+    .hero { 
+      background:url("images/hero.jpg") center/cover no-repeat; 
+      height:100vh; 
+      display:flex; 
+      justify-content:center; 
+      align-items:center; 
+      text-align:center; 
+      color:#fff; 
+      position:relative; 
+    }
+    .hero::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+    .hero > div { position:relative; z-index:2; }
+    .hero h1 { font-size: clamp(36px,6vw,64px); margin-bottom:16px; font-weight:700; }
+    .hero p { font-size:20px; margin-bottom:28px; color:#f1f1f1; }
+    .btn { background:var(--primary); color:#fff; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:600; transition:0.3s; display:inline-block; }
+    .btn:hover { background:#0b5ed7; }
+
+    section{max-width:1100px;margin:auto;padding:90px 20px;}
+    h2{font-size:28px;margin-bottom:30px;text-align:center;font-weight:700;}
+
+    /* Tabs */
+    .tabs{display:flex;justify-content:center;margin-bottom:30px;}
+    .tab-btn{background:var(--light);border:1px solid #ddd;padding:12px 24px;margin:0 8px;border-radius:8px;cursor:pointer;font-weight:600;transition:0.3s;}
+    .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+    body.dark .tab-btn{background:#1f1f1f;border-color:#333;color:var(--text);}
+    body.dark .tab-btn.active{background:var(--primary);color:#fff;}
+
+    .menu-section{display:none;}
+    .menu-section.active{display:block;}
+
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;}
+    .menu-item{background:var(--light);padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.05);transition:transform 0.3s, box-shadow 0.3s;}
+    .menu-item:hover{transform:translateY(-5px);box-shadow:0 8px 18px rgba(0,0,0,0.1);}
+    .menu-item h3{margin-bottom:8px;font-size:20px;}
+    .menu-item p{margin-bottom:10px;color:var(--muted);font-size:15px;}
+    .price{font-weight:700;color:var(--primary);font-size:16px;}
+
+    footer{background:var(--light);color:var(--muted);text-align:center;padding:24px;font-size:14px;transition:background 0.3s;}
+    body.dark footer{background:#1f1f1f;color:var(--muted);}
+  </style>
 </head>
 <body>
+
 <header>
-<div class="wrap">
-<div class="brand">
-<h1>Etienne</h1>
-<div class="back"><a href="index.html">← Povratak na početnu</a></div>
-</div>
-</div>
-<nav>
-<a href="#predjela">Hladna predjela</a>
-<a href="#juhe">Juhe</a>
-<a href="#djeca">Dječji meni</a>
-<a href="#tjestenine">Tjestenine & Rižoti</a>
-<a href="#meso">Mesna jela</a>
-<a href="#specijalna">Specijalna jela</a>
-<a href="#ribe">Ribe & Mekušci</a>
-<a href="#salate">Salate</a>
-<a href="#prilozi">Prilozi</a>
-<a href="#pizze">Pizze</a>
-<a href="#deserti">Deserti</a>
-</nav>
-</div>
+  <nav>
+    <div class="brand">Etienne</div>
+    <div class="links">
+      <a href="index.html">Početna</a>
+      <a href="meni.html">Meni</a>
+      <a href="index.html#kontakt">Kontakt</a>
+      <button class="toggle-theme"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </nav>
 </header>
 
-<main class="wrap">
-<!-- HLADNA PREDJELA -->
-<section id="predjela">
-<h2>Hladna predjela / Antipasti</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Pršut / sir</div><div class="price">€ 13,80</div></div><p class="desc">Prosciutto crudo & formaggio</p></article>
-<article class="item"><div class="title"><div class="name">Morski pijat</div><div class="price">€ 16,50</div></div><p class="desc">Pašteta od tune, inćuni, salata od hobotnice</p></article>
-<article class="item"><div class="title"><div class="name">Carpaccio od bifteka</div><div class="price">€ 16,50</div></div><p class="desc">Grana padano & rukola</p></article>
-<article class="item"><div class="title"><div class="name">Salata od hobotnice</div><div class="price">€ 15,00</div></div><p class="desc">Octopus salad</p></article>
-</div>
-<div class="divider"></div>
+<section class="hero">
+  <div>
+    <h1>Naš meni</h1>
+  </div>
 </section>
 
-<!-- JUHE -->
-<section id="juhe">
-<h2>Juhe / Zuppe</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Goveđa juha</div><div class="price">€ 5,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Juha od rajčice</div><div class="price">€ 4,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Krem juha od gljiva</div><div class="price">€ 5,00</div></div></article>
-</div>
-<div class="divider"></div>
+<section>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="hrana">🍽 Hrana</button>
+    <button class="tab-btn" data-tab="pica">🥂 Pića</button>
+  </div>
+
+  <!-- Hrana -->
+  <div id="hrana" class="menu-section active">
+
+    <!-- HLADNA PREDJELA -->
+    <section id="predjela">
+      <h2>Hladna predjela / Antipasti</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Pršut / sir</h3><p>Prosciutto crudo & formaggio</p><div class="price">€ 13,80</div></div>
+        <div class="menu-item"><h3>Morski pijat</h3><p>Pašteta od tune, inćuni, salata od hobotnice</p><div class="price">€ 16,50</div></div>
+        <div class="menu-item"><h3>Carpaccio od bifteka</h3><p>Grana padano & rukola</p><div class="price">€ 16,50</div></div>
+        <div class="menu-item"><h3>Salata od hobotnice</h3><p>Octopus salad</p><div class="price">€ 15,00</div></div>
+      </div>
+    </section>
+
+    <!-- JUHE -->
+    <section id="juhe">
+      <h2>Juhe / Zuppe</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Goveđa juha</h3><div class="price">€ 5,00</div></div>
+        <div class="menu-item"><h3>Juha od rajčice</h3><div class="price">€ 4,50</div></div>
+        <div class="menu-item"><h3>Krem juha od gljiva</h3><div class="price">€ 5,00</div></div>
+      </div>
+    </section>
+
+    <!-- DJEČJI MENI -->
+    <section id="djeca">
+      <h2>Dječji meni</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Špageti (rajčica / bolonjez)</h3><div class="price">€ 7,00</div></div>
+        <div class="menu-item"><h3>Pileći medaljoni</h3><div class="price">€ 6,50</div></div>
+        <div class="menu-item"><h3>Ćevapčići s pomesom</h3><div class="price">€ 6,50</div></div>
+      </div>
+    </section>
+
+    <!-- TJESTENINE & RIŽOTI -->
+    <section id="tjestenine">
+      <h2>Tjestenine & Rižoti</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Tjestenina sa morskim plodovima (rižoto)</h3><div class="price">€ 19,50</div></div>
+        <div class="menu-item"><h3>Rižoto sa kozicama i tikvicama</h3><div class="price">€ 15,50</div></div>
+        <div class="menu-item"><h3>Rižoto sa gljivama</h3><div class="price">€ 13,50</div></div>
+        <div class="menu-item"><h3>Rižoto sa sipama</h3><div class="price">€ 15,00</div></div>
+        <div class="menu-item"><h3>Tjestenina sa tartufima i pršutom</h3><div class="price">€ 18,50</div></div>
+        <div class="menu-item"><h3>Lasagne</h3><div class="price">€ 16,00</div></div>
+        <div class="menu-item"><h3>Špageti Carbonara</h3><div class="price">€ 14,00</div></div>
+        <div class="menu-item"><h3>Špageti Bolognese</h3><div class="price">€ 14,00</div></div>
+        <div class="menu-item"><h3>Zeleni rezanci sa lososom i gorgonzolom</h3><div class="price">€ 17,00</div></div>
+      </div>
+    </section>
+
+    <!-- MESNA JELA -->
+    <section id="meso">
+      <h2>Mesna jela</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Svinjski medaljoni sa pancetom</h3><div class="price">€ 17,00</div></div>
+        <div class="menu-item"><h3>Istarski odrezak</h3><div class="price">€ 15,50</div></div>
+        <div class="menu-item"><h3>Pileći file sa prilogom</h3><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Biftek na žaru sa prilogom</h3><div class="price">€ 29,00</div></div>
+        <div class="menu-item"><h3>Biftek u gorgonzola umaku</h3><div class="price">€ 32,50</div></div>
+        <div class="menu-item"><h3>Biftek u umaku zelenog papra</h3><div class="price">€ 32,50</div></div>
+        <div class="menu-item"><h3>Biftek u tartuf umaku</h3><div class="price">€ 32,50</div></div>
+        <div class="menu-item"><h3>Miješano meso na žaru</h3><div class="price">€ 17,00</div></div>
+        <div class="menu-item"><h3>Ćevapčići sa prilogom</h3><div class="price">€ 13,00</div></div>
+        <div class="menu-item"><h3>Bečki odrezak</h3><div class="price">€ 13,00</div></div>
+        <div class="menu-item"><h3>Pljeskavica sa sirom (300 g)</h3><div class="price">€ 17,00</div></div>
+      </div>
+    </section>
+
+    <!-- SPECIJALNA JELA -->
+    <section id="specijalna">
+      <h2>Specijalna jela</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Beefburger Angus</h3><div class="price">€ 13,00</div></div>
+        <div class="menu-item"><h3>Svinjska rebarca sa krumpirom</h3><div class="price">€ 17,00</div></div>
+      </div>
+    </section>
+
+    <!-- RIBE -->
+    <section id="ribe">
+      <h2>Ribe & Mekušci</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Riblja plata (2 osobe)</h3><div class="price">€ 42,00</div></div>
+        <div class="menu-item"><h3>Morski tris</h3><div class="price">€ 22,00</div></div>
+        <div class="menu-item"><h3>File brancina</h3><div class="price">€ 18,00</div></div>
+        <div class="menu-item"><h3>Riba porcija (brancin, orada)</h3><div class="price">€ 18,00</div></div>
+        <div class="menu-item"><h3>Lignje na žaru</h3><div class="price">€ 18,50</div></div>
+        <div class="menu-item"><h3>Lignje pržene</h3><div class="price">€ 18,50</div></div>
+        <div class="menu-item"><h3>Tuna steak</h3><div class="price">€ 23,00</div></div>
+        <div class="menu-item"><h3>Pedoći na buzaru</h3><div class="price">€ 14,00</div></div>
+        <div class="menu-item"><h3>Škampi žar (0,5 kg)</h3><div class="price">€ 35,00</div></div>
+        <div class="menu-item"><h3>Škampi buzara sa tagliatellama (0,5 kg)</h3><div class="price">€ 36,00</div></div>
+      </div>
+    </section>
+
+    <!-- SALATE -->
+    <section id="salate">
+      <h2>Salate</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Grčka salata</h3><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Caprese</h3><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Salata s tunom i sirom</h3><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Cezar salata</h3><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Zelena salata</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Salata od krastavaca</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Salata od kupusa</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Salata od rajčica</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Miješana salata</h3><div class="price">€ 5,50</div></div>
+      </div>
+    </section>
+
+    <!-- PRILOZI -->
+    <section id="prilozi">
+      <h2>Prilozi</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Pomfrit</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Kuhani krumpir</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Gljive sa žara</h3><div class="price">€ 6,50</div></div>
+        <div class="menu-item"><h3>Povrće na žaru</h3><div class="price">€ 6,50</div></div>
+        <div class="menu-item"><h3>Blitva s krumpirom</h3><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Tartar umak</h3><div class="price">€ 2,00</div></div>
+        <div class="menu-item"><h3>Ketchup / Majoneza / Senf / Ajvar</h3><div class="price">€ 0,50</div></div>
+      </div>
+    </section>
+
+    <!-- PIZZE -->
+    <section id="pizze">
+      <h2>Pizze</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Margherita</h3><p>tomato, mozzarella</p><div class="price">€ 10,00</div></div>
+        <div class="menu-item"><h3>Capriciosa</h3><p>tomato, mozzarella, ham, mushrooms</p><div class="price">€ 11,50</div></div>
+        <div class="menu-item"><h3>Salamino</h3><p>tomato, mozzarella, salami</p><div class="price">€ 11,50</div></div>
+        <div class="menu-item"><h3>Quattrostagioni</h3><p>tomato, mozzarella, tunfish, ham, mushrooms, artichokes</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Prosciutto</h3><p>tomato, mozzarella, ham</p><div class="price">€ 11,50</div></div>
+        <div class="menu-item"><h3>Primavera</h3><p>tomato, mozzarella, ham, rucola, cherry tomato, grana padano</p><div class="price">€ 13,50</div></div>
+        <div class="menu-item"><h3>Quattroformaggi</h3><p>tomato, 4 cheese</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Istriana</h3><p>tomato, mozzarella, Istrian ham, grana padano, rucola</p><div class="price">€ 13,50</div></div>
+        <div class="menu-item"><h3>Mortadela</h3><p>pesto genovese, mozzarella, mortadela, burrata, pistachio</p><div class="price">€ 17,00</div></div>
+        <div class="menu-item"><h3>Frutti di mare</h3><p>tomato, mozzarella, seafood</p><div class="price">€ 17,00</div></div>
+        <div class="menu-item"><h3>Vegetariana</h3><p>tomato, mozzarella, vegetables</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Tonno</h3><p>tomato, mozzarella, tunfish</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Fantasia</h3><p>tomato, mozzarella, ham, bacon, paprika, cream</p><div class="price">€ 13,50</div></div>
+        <div class="menu-item"><h3>Calzone</h3><p>tomato, mozzarella, ham, mushrooms</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Romana</h3><p>tomato, mozzarella, onion, anchovies, capers, olives</p><div class="price">€ 12,00</div></div>
+        <div class="menu-item"><h3>Hawaii</h3><p>tomato, mozzarella, ham, ananas</p><div class="price">€ 12,50</div></div>
+        <div class="menu-item"><h3>Diavolo</h3><p>tomato, mozzarella, spicy salami, pepperoni</p><div class="price">€ 12,50</div></div>
+        <div class="menu-item"><h3>Tartuffi</h3><p>tomato, mozzarella, mushrooms, truffles</p><div class="price">€ 14,50</div></div>
+        <div class="menu-item"><h3>Funghi</h3><p>tomato, mozzarella, mushrooms</p><div class="price">€ 11,50</div></div>
+        <div class="menu-item"><h3>Salmone</h3><p>tomato, mozzarella, salmon</p><div class="price">€ 14,00</div></div>
+        <div class="menu-item"><h3>Pizza Nutella sa orasima</h3><div class="price">€ 10,50</div></div>
+      </div>
+    </section>
+
+    <!-- DESERTI -->
+    <section id="deserti">
+      <h2>Deserti</h2>
+      <div class="menu-grid">
+        <div class="menu-item"><h3>Palačinke sa marmeladom</h3><p>Crepes with jam</p><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Palačinke sa čokoladom</h3><p>Crepes with chocolate</p><div class="price">€ 5,50</div></div>
+        <div class="menu-item"><h3>Palačinke sa sladoledom i šumskim voćem</h3><p>Crepes with ice-cream and wild berries</p><div class="price">€ 6,00</div></div>
+        <div class="menu-item"><h3>Tiramisu</h3><div class="price">€ 6,00</div></div>
+        <div class="menu-item"><h3>Lava cake (Chocolate soufflé)</h3><div class="price">€ 6,00</div></div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <!-- PIĆA -->
+<div id="pica" class="menu-section">
+
+  <!-- Topli napitci -->
+  <section id="topli-napitci">
+    <h2>Topli napitci / Bevande calde<br>Warm drinks / Heisse Getränke</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Espresso</h3><div class="price">€ 1,80</div></div>
+      <div class="menu-item"><h3>Dupli espresso</h3><div class="price">€ 3,60</div></div>
+      <div class="menu-item"><h3>Espresso bez kofeina / Decaffeinato</h3><div class="price">€ 2,50</div></div>
+      <div class="menu-item"><h3>Veliki cappuccino</h3><div class="price">€ 2,50</div></div>
+      <div class="menu-item"><h3>Veliki macchiato</h3><div class="price">€ 2,50</div></div>
+      <div class="menu-item"><h3>Bijela kava</h3><div class="price">€ 2,80</div></div>
+      <div class="menu-item"><h3>Kava sa šlagom</h3><div class="price">€ 2,80</div></div>
+      <div class="menu-item"><h3>Nescafe</h3><div class="price">€ 3,00</div></div>
+      <div class="menu-item"><h3>Ice coffee</h3><div class="price">€ 5,80</div></div>
+      <div class="menu-item"><h3>Čaj / Tea</h3><div class="price">€ 2,20</div></div>
+      <div class="menu-item"><h3>Irish coffee</h3><div class="price">€ 6,50</div></div>
+    </div>
+  </section>
+
+  <!-- Bezalkoholna pića -->
+  <section id="bezalkoholna">
+    <h2>Bezalkoholna pića / Bevande analcoliche<br>Non-alcoholic beverages / Alkoholfreie Getränke</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Pepsi 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Pepsi Zero 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Fanta 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Sprite 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Schweppes Tangerine 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Schweppes Bitter Lemon 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Schweppes Tonic water 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Pašareta 0,25 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Juice 0,20 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Sok od marelice / Apricot 0,20 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Sok od jabuke / Apple 0,20 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Sok od borovnice / Berry 0,20 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Ledeni čaj / Ice tea 0,33 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Cedevita 0,30 l</h3><div class="price">€ 3,00</div></div>
+      <div class="menu-item"><h3>Limunada 0,40 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Mineralna / Sparkling 1,00 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Mineralna / Sparkling 0,50 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Mineralna / Sparkling 0,25 l</h3><div class="price">€ 2,50</div></div>
+      <div class="menu-item"><h3>Prirodna voda / Natural 0,75 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Prirodna voda / Natural 0,33 l</h3><div class="price">€ 2,50</div></div>
+    </div>
+  </section>
+
+  <!-- Šankomat -->
+  <section id="sankomat">
+    <h2>Šankomat / Draught drinks</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Cola / Sprite 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Cola / Sprite 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Naranča / Orange 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Naranča / Orange 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Jabuka / Apple 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Jabuka / Apple 0,50 l</h3><div class="price">€ 5,00</div></div>
+    </div>
+  </section>
+
+  <!-- Miješana pića -->
+  <section id="mijesana">
+    <h2>Miješana pića / Bevande miste<br>Mixed drinks / Mixgetränke</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Gemišt 0,30 l</h3><div class="price">€ 3,20</div></div>
+      <div class="menu-item"><h3>Gemišt 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Bambus 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Bambus 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Miš maš 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Miš maš 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Radla 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Radla 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Špeci 0,30 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Špeci 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Apfel Schorle 0,30 l</h3><div class="price">€ 3,20</div></div>
+      <div class="menu-item"><h3>Apfel Schorle 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Aperol mix 0,30 l</h3><div class="price">€ 7,30</div></div>
+      <div class="menu-item"><h3>Somersby Cider 0,33 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Hugo 0,30 l</h3><div class="price">€ 7,30</div></div>
+    </div>
+  </section>
+
+  <!-- Kokteli -->
+  <section id="kokteli">
+    <h2>Kokteli / Cocktails</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Summer Sunrise</h3><p>vodka, orange juice, grenadine</p><div class="price">€ 10,00</div></div>
+      <div class="menu-item"><h3>Pina Colada</h3><p>bacardi, pineapple juice, cream, coconut syrup</p><div class="price">€ 10,00</div></div>
+      <div class="menu-item"><h3>Cuba Libre</h3><p>bacardi, cola, lemon</p><div class="price">€ 10,00</div></div>
+      <div class="menu-item"><h3>Mojito</h3><p>bacardi, black sugar, lime, mint, soda</p><div class="price">€ 11,00</div></div>
+      <div class="menu-item"><h3>Blue Hawaii</h3><p>bacardi, vodka, blue curacao, pineapple juice</p><div class="price">€ 10,00</div></div>
+    </div>
+  </section>
+
+  <!-- Piva -->
+  <section id="piva">
+    <h2>Pivo / Birre / Beers / Bier</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Pivo točeno / Draught beer 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Pivo točeno / Draught beer 0,30 l</h3><div class="price">€ 3,20</div></div>
+      <div class="menu-item"><h3>Tuborg 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Tuborg 0,33 l</h3><div class="price">€ 3,50</div></div>
+      <div class="menu-item"><h3>Pan Lager 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Pan Zlatni 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Pan Bezalkoholni 0,50 l</h3><div class="price">€ 4,50</div></div>
+      <div class="menu-item"><h3>Budweiser tamni / svijetli 0,50 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Erdinger / Paulaner 0,50 l</h3><div class="price">€ 5,50</div></div>
+      <div class="menu-item"><h3>Zlatni medvjed (craft beer) 0,50 l</h3><div class="price">€ 5,80</div></div>
+      <div class="menu-item"><h3>Grička vještica (craft beer) 0,50 l</h3><div class="price">€ 5,80</div></div>
+      <div class="menu-item"><h3>Baltazar (craft beer) 0,50 l</h3><div class="price">€ 5,80</div></div>
+    </div>
+  </section>
+
+  <!-- Žestoka domaća -->
+  <section id="shots">
+    <h2>Žestoka domaća pića / Shots</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Biska 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Medenica 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Lozovača 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Šljivovica 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Travarica 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Vodka 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Kruškovac 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Pelinkovac 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Amaro 0,03 l</h3><div class="price">€ 4,00</div></div>
+    </div>
+  </section>
+
+  <!-- Žestoka strana -->
+  <section id="foreign">
+    <h2>Žestoka strana pića / Foreign alcoholic drinks</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Jack Daniels 0,03 l</h3><div class="price">€ 5,50</div></div>
+      <div class="menu-item"><h3>Cynar 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Jagermeister 0,03 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Bacardi 0,03 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Gin 0,03 l</h3><div class="price">€ 4,00</div></div>
+      <div class="menu-item"><h3>Baileys 0,03 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Ballantines 0,03 l</h3><div class="price">€ 5,00</div></div>
+      <div class="menu-item"><h3>Chivas / Hennessy 0,03 l</h3><div class="price">€ 6,50</div></div>
+      <div class="menu-item"><h3>Jameson 0,03 l</h3><div class="price">€ 5,50</div></div>
+    </div>
+  </section>
+
+<!-- Vina / Vini / Vines / Wein -->
+<section id="vina">
+  <h2>Vina / Vini / Vines / Wein</h2>
+
+  <!-- Domaće otvoreno vino -->
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>Domaće otvoreno vino bijelo / crno</h3>
+      <p>Open house vines white/red</p>
+      <div class="price">1 l € 15,00</div>
+    </div>
+  </div>
+
+  <!-- Bijela vina -->
+  <h3 class="subcategory">Bijela vina / White vines</h3>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>Malvazija Babos</h3>
+      <div class="price">0,75 l € 28,50</div>
+    </div>
+    <div class="menu-item">
+      <h3>Valbisugo Babos</h3>
+      <div class="price">0,75 l € 35,00</div>
+    </div>
+    <div class="menu-item">
+      <h3>Muškat Babos</h3>
+      <div class="price">0,75 l € 28,50</div>
+    </div>
+  </div>
+
+  <!-- Crna vina -->
+  <h3 class="subcategory">Crna vina / Red vines</h3>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>Merlot Babos</h3>
+      <div class="price">0,75 l € 28,50</div>
+    </div>
+    <div class="menu-item">
+      <h3>Marana Babos</h3>
+      <div class="price">0,75 l € 35,00</div>
+    </div>
+  </div>
+
+  <!-- Pjenušci -->
+  <h3 class="subcategory">Pjenušci / Spumanti / Sparkling</h3>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>Brut Babos</h3>
+      <div class="price">0,75 l € 32,50</div>
+    </div>
+    <div class="menu-item">
+      <h3>Rosé Babos</h3>
+      <div class="price">0,75 l € 32,50</div>
+    </div>
+  </div>
+
+  <!-- Desertna vina -->
+  <h3 class="subcategory">Desertna vina / Dessert vines</h3>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>Martini Bianco</h3>
+      <div class="price">0,10 l € 4,00</div>
+    </div>
+    <div class="menu-item">
+      <h3>Martini Rosso</h3>
+      <div class="price">0,10 l € 4,00</div>
+    </div>
+  </div>
 </section>
 
-<!-- DJEČJI MENI -->
-<section id="djeca">
-<h2>Dječji meni</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Špageti (rajčica / bolonjez)</div><div class="price">€ 7,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Pileći medaljoni</div><div class="price">€ 6,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Ćevapčići s pomesom</div><div class="price">€ 6,50</div></div></article>
-</div>
-<div class="divider"></div>
+
+
+<script>
+  // Sticky header
+  window.addEventListener('scroll', function(){
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Dark mode toggle
+  const toggleBtn = document.querySelector(".toggle-theme");
+  toggleBtn.addEventListener("click", ()=>{
+    document.body.classList.toggle("dark");
+    const icon = toggleBtn.querySelector("i");
+    if(document.body.classList.contains("dark")){
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    } else {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    }
+  });
+
+  // Tabs
+  const tabs = document.querySelectorAll(".tab-btn");
+  const sections = document.querySelectorAll(".menu-section");
+  tabs.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      tabs.forEach(b=>b.classList.remove("active"));
+      sections.forEach(s=>s.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+  });
+
+</script>
+
+</section>
+<footer>
+  © 2025 Restoran Etienne | Sva prava pridržana
+</footer>
 </section>
 
-<!-- TJESTENINE & RIŽOTI -->
-<section id="tjestenine">
-<h2>Tjestenine & Rižoti</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Tjestenina sa morskim plodovima (rižoto)</div><div class="price">€ 19,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Rižoto sa kozicama i tikvicama</div><div class="price">€ 15,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Rižoto sa gljivama</div><div class="price">€ 13,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Rižoto sa sipama</div><div class="price">€ 15,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Tjestenina sa tartufima i pršutom</div><div class="price">€ 18,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Lasagne</div><div class="price">€ 16,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Špageti Carbonara</div><div class="price">€ 14,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Špageti Bolognese</div><div class="price">€ 14,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Zeleni rezanci sa lososom i gorgonzolom</div><div class="price">€ 17,00</div></div></article>
-</div>
-<div class="divider"></div>
-</section>
-
-<!-- MESNA JELA -->
-<section id="meso">
-<h2>Mesna jela</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Svinjski medaljoni sa pancetom</div><div class="price">€ 17,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Istarski odrezak</div><div class="price">€ 15,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Pileći file sa prilogom</div><div class="price">€ 12,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Biftek na žaru sa prilogom</div><div class="price">€ 29,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Biftek u gorgonzola umaku</div><div class="price">€ 32,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Biftek u umaku zelenog papra</div><div class="price">€ 32,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Biftek u tartuf umaku</div><div class="price">€ 32,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Miješano meso na žaru</div><div class="price">€ 17,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Ćevapčići sa prilogom</div><div class="price">€ 13,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Bečki odrezak</div><div class="price">€ 13,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Pljeskavica sa sirom (300 g)</div><div class="price">€ 17,00</div></div></article>
-</div>
-<div class="divider"></div>
-</section>
-
-<!-- SPECIJALNA JELA -->
-<section id="specijalna">
-<h2>Specijalna jela</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Beefburger Angus</div><div class="price">€ 13,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Svinjska rebarca sa krumpirom</div><div class="price">€ 17,00</div></div></article>
-</div>
-<div class="divider"></div>
-</section>
-
-<!-- RIBE -->
-<section id="ribe">
-<h2>Ribe & Mekušci</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Riblja plata (2 osobe)</div><div class="price">€ 42,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Morski tris</div><div class="price">€ 22,00</div></div></article>
-<article class="item"><div class="title"><div class="name">File brancina</div><div class="price">€ 18,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Riba porcija (brancin, orada)</div><div class="price">€ 18,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Lignje na žaru</div><div class="price">€ 18,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Lignje pržene</div><div class="price">€ 18,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Tuna steak</div><div class="price">€ 23,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Pedoći na buzaru</div><div class="price">€ 14,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Škampi žar (0,5 kg)</div><div class="price">€ 35,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Škampi buzara sa tagliatellama (0,5 kg)</div><div class="price">€ 36,00</div></div></article>
-</div>
-<div class="divider"></div>
-</section>
-
-<!-- SALATE -->
-<section id="salate">
-<h2>Salate</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Grčka salata</div><div class="price">€ 12,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Caprese</div><div class="price">€ 12,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Salata s tunom i sirom</div><div class="price">€ 12,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Cezar salata</div><div class="price">€ 12,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Zelena salata</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Salata od krastavaca</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Salata od kupusa</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Salata od rajčica</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Miješana salata</div><div class="price">€ 5,50</div></div></article>
-</div>
-<div class="divider"></div>
-</section>
-
-<!-- PRILOZI -->
-<section id="prilozi">
-<h2>Prilozi</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Pomfrit</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Kuhani krumpir</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Gljive sa žara</div><div class="price">€ 6,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Povrće na žaru</div><div class="price">€ 6,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Blitva s krumpirom</div><div class="price">€ 5,50</div></div></article>
-<article class="item"><div class="title"><div class="name">Tartar umak</div><div class="price">€ 2,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Ketchup / Majoneza / Senf / Ajvar</div><div class="price">€ 0,50</
-</div>
-<div class="divider"></div>
-</section>
-  
-<!-- PIZZE -->
-<section id="pizze">
-<h2>Pizze</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Margherita</div><div class="price">€ 10,00</div></div><p class="desc">tomato, mozzarella</p></article>
-<article class="item"><div class="title"><div class="name">Capriciosa</div><div class="price">€ 11,50</div></div><p class="desc">tomato, mozzarella, ham, mushrooms</p></article>
-<article class="item"><div class="title"><div class="name">Salamino</div><div class="price">€ 11,50</div></div><p class="desc">tomato, mozzarella, salami</p></article>
-<article class="item"><div class="title"><div class="name">Quattrostagioni</div><div class="price">€ 12,00</div></div><p class="desc">tomato, mozzarella, tunfish, ham, mushrooms, artichokes</p></article>
-<article class="item"><div class="title"><div class="name">Prosciutto</div><div class="price">€ 11,50</div></div><p class="desc">tomato, mozzarella, ham</p></article>
-<article class="item"><div class="title"><div class="name">Primavera</div><div class="price">€ 13,50</div></div><p class="desc">tomato, mozzarella, ham, rucola, cherry tomato, grana padano</p></article>
-<article class="item"><div class="title"><div class="name">Quattroformaggi</div><div class="price">€ 12,00</div></div><p class="desc">tomato, 4 cheese</p></article>
-<article class="item"><div class="title"><div class="name">Istriana</div><div class="price">€ 13,50</div></div><p class="desc">tomato, mozzarella, Istrian ham, grana padano, rucola</p></article>
-<article class="item"><div class="title"><div class="name">Mortadela</div><div class="price">€ 17,00</div></div><p class="desc">pesto genovese, mozzarella, mortadela, burrata, pistachio</p></article>
-<article class="item"><div class="title"><div class="name">Frutti di mare</div><div class="price">€ 17,00</div></div><p class="desc">tomato, mozzarella, seafood</p></article>
-<article class="item"><div class="title"><div class="name">Vegetariana</div><div class="price">€ 12,00</div></div><p class="desc">tomato, mozzarella, vegetables</p></article>
-<article class="item"><div class="title"><div class="name">Tonno</div><div class="price">€ 12,00</div></div><p class="desc">tomato, mozzarella, tunfish</p></article>
-<article class="item"><div class="title"><div class="name">Fantasia</div><div class="price">€ 13,50</div></div><p class="desc">tomato, mozzarella, ham, bacon, paprika, cream</p></article>
-<article class="item"><div class="title"><div class="name">Calzone</div><div class="price">€ 12,00</div></div><p class="desc">tomato, mozzarella, ham, mushrooms</p></article>
-<article class="item"><div class="title"><div class="name">Romana</div><div class="price">€ 12,00</div></div><p class="desc">tomato, mozzarella, onion, anchovies, capers, olives</p></article>
-<article class="item"><div class="title"><div class="name">Hawaii</div><div class="price">€ 12,50</div></div><p class="desc">tomato, mozzarella, ham, ananas</p></article>
-<article class="item"><div class="title"><div class="name">Diavolo</div><div class="price">€ 12,50</div></div><p class="desc">tomato, mozzarella, spicy salami, pepperoni</p></article>
-<article class="item"><div class="title"><div class="name">Tartuffi</div><div class="price">€ 14,50</div></div><p class="desc">tomato, mozzarella, mushrooms, truffles</p></article>
-<article class="item"><div class="title"><div class="name">Funghi</div><div class="price">€ 11,50</div></div><p class="desc">tomato, mozzarella, mushrooms</p></article>
-<article class="item"><div class="title"><div class="name">Salmone</div><div class="price">€ 14,00</div></div><p class="desc">tomato, mozzarella, salmon</p></article>
-<article class="item"><div class="title"><div class="name">Pizza Nutella sa orasima</div><div class="price">€ 10,50</div></div></article>
-</div>
-</section>
-
-<!-- DESERTI -->
-<section id="deserti">
-<h2>Deserti</h2>
-<div class="grid">
-<article class="item"><div class="title"><div class="name">Palačinke sa marmeladom</div><div class="price">€ 5,50</div></div><p class="desc">Crepes with jam</p></article>
-<article class="item"><div class="title"><div class="name">Palačinke sa čokoladom</div><div class="price">€ 5,50</div></div><p class="desc">Crepes with chocolate</p></article>
-<article class="item"><div class="title"><div class="name">Palačinke sa sladoledom i šumskim voćem</div><div class="price">€ 6,00</div></div><p class="desc">Crepes with ice-cream and wild berries</p></article>
-<article class="item"><div class="title"><div class="name">Tiramisu</div><div class="price">€ 6,00</div></div></article>
-<article class="item"><div class="title"><div class="name">Lava cake (Chocolate soufflé)</div><div class="price">€ 6,00</div></div></article>
-</div>
-</section>
+</body>
+</html>
