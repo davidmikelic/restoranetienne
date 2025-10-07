@@ -33,7 +33,26 @@
 
     .brand { font-weight:700; font-size:22px; color:#fff; letter-spacing:1px; }
 
-    .toggle-theme, .toggle-lang { cursor:pointer; background:none; border:none; font-size:16px; margin-left:15px; color:#fff; transition:0.3s; }
+    .toggle-theme { cursor:pointer; background:none; border:none; font-size:16px; margin-left:15px; color:#fff; transition:0.3s; }
+
+    /* 🌐 Language dropdown */
+    .lang-dropdown { position: relative; display: inline-block; margin-left: 10px; }
+    .lang-btn { cursor:pointer; background:none; border:none; color:#fff; font-size:18px; padding:6px 8px; display:flex; align-items:center; gap:8px; }
+    .lang-menu {
+      position:absolute; right:0; top:120%;
+      background:rgba(0,0,0,0.85); color:#fff;
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:10px; overflow:hidden;
+      min-width:140px; backdrop-filter: blur(6px);
+      transform:scale(0.95); opacity:0; pointer-events:none; transition:0.15s ease;
+    }
+    .lang-dropdown.open .lang-menu { transform:scale(1); opacity:1; pointer-events:auto; }
+    .lang-item {
+      display:block; width:100%; text-align:left; padding:10px 14px; background:transparent;
+      border:none; color:#fff; cursor:pointer; font-weight:600; letter-spacing:0.5px;
+    }
+    .lang-item:hover { background:rgba(255,255,255,0.08); }
+    .lang-item.active { color: #61dafb; }
 
     .hero { 
       background:url("etienne.jpg") center/cover no-repeat; 
@@ -68,12 +87,26 @@
 <header>
   <nav>
     <div class="brand">Etienne</div>
-    <div class="links">
+    <div class="links" style="display:flex;align-items:center;">
       <a href="index.html" id="nav-home">Početna</a>
       <a href="meni.html" id="nav-menu">Meni</a>
       <a href="#kontakt" id="nav-contact">Kontakt</a>
-      <button class="toggle-theme"><i class="fa-solid fa-moon"></i></button>
-      <button class="toggle-lang" onclick="toggleLanguage()">EN</button>
+
+      <button class="toggle-theme" aria-label="Promijeni temu"><i class="fa-solid fa-moon"></i></button>
+
+      <!-- 🌐 Language Dropdown -->
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Odabir jezika">
+          <i class="fa-solid fa-globe"></i><span id="current-lang-label">HR</span>
+        </button>
+        <div class="lang-menu" role="menu" aria-label="Jezici">
+          <button class="lang-item" data-lang="hr" role="menuitem">HR</button>
+          <button class="lang-item" data-lang="en" role="menuitem">EN</button>
+          <button class="lang-item" data-lang="it" role="menuitem">IT</button>
+          <button class="lang-item" data-lang="de" role="menuitem">DE</button>
+        </div>
+      </div>
+      <!-- /Language Dropdown -->
     </div>
   </nav>
 </header>
@@ -81,7 +114,7 @@
 <section class="hero">
   <div>
     <h1 id="hero-title">Dobrodošli</h1>
-    <p id="hero-subtitle">Radno vrijeme: 14:00-20:00</p>
+    <p id="hero-subtitle">Radno vrijeme: 14:00–20:00</p>
     <a href="meni.html" class="btn" id="hero-btn">Pogledaj meni</a>
   </div>
 </section>
@@ -103,57 +136,156 @@
 </footer>
 
 <script>
-  // Translations
+  // ====== Translations (HR / EN / IT / DE) ======
   const translations = {
     hr: {
       navHome: "Početna",
       navMenu: "Meni",
       navContact: "Kontakt",
       heroTitle: "Dobrodošli",
-      heroSubtitle: "Radno vrijeme: 14:00-20:00",
+      heroSubtitle: "Radno vrijeme: 14:00–20:00",
       heroBtn: "Pogledaj meni",
       aboutTitle: "O nama",
-      aboutText: "Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
+      aboutText:
+        "Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
       contactTitle: "Kontakt",
-      contactText: "📍 Adresa: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
-      footerText: "© 2025 Restoran Etienne | Sva prava pridržana"
+      contactText:
+        "📍 Adresa: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: bumbari.b.m@gmail.com",
+      footerText: "© 2025 Restoran Etienne | Sva prava pridržana",
+      shortLabel: "HR",
     },
     en: {
       navHome: "Home",
       navMenu: "Menu",
       navContact: "Contact",
       heroTitle: "Welcome",
-      heroSubtitle: "Opening hours: 10:00-22:00",
+      heroSubtitle: "Opening hours: 14:00–20:00",
       heroBtn: "View menu",
       aboutTitle: "About us",
-      aboutText: "Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
+      aboutText:
+        "Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
       contactTitle: "Contact",
-      contactText: "📍 Address: Kapovica 350, Medulin<br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
-      footerText: "© 2025 Restaurant Etienne | All rights reserved"
+      contactText:
+        "📍 Address: Kapovica 350, Medulin<br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      footerText: "© 2025 Restaurant Etienne | All rights reserved",
+      shortLabel: "EN",
+    },
+    it: {
+      navHome: "Home",
+      navMenu: "Menù",
+      navContact: "Contatti",
+      heroTitle: "Benvenuti",
+      heroSubtitle: "Orario di apertura: 14:00–20:00",
+      heroBtn: "Guarda il menù",
+      aboutTitle: "Chi siamo",
+      aboutText:
+        "Il ristorante Etienne si trova a due passi dal mare e offre una splendida vista insieme a una ricca selezione di piatti locali e freschi. La nostra missione è offrire agli ospiti un'esperienza gastronomica indimenticabile in un'atmosfera mediterranea.",
+      contactTitle: "Contatti",
+      contactText:
+        "📍 Indirizzo: Kapovica 350, Medulin<br>☎ Telefono: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      footerText: "© 2025 Ristorante Etienne | Tutti i diritti riservati",
+      shortLabel: "IT",
+    },
+    de: {
+      navHome: "Startseite",
+      navMenu: "Speisekarte",
+      navContact: "Kontakt",
+      heroTitle: "Willkommen",
+      heroSubtitle: "Öffnungszeiten: 14:00–20:00",
+      heroBtn: "Speisekarte ansehen",
+      aboutTitle: "Über uns",
+      aboutText:
+        "Das Restaurant Etienne liegt direkt am Meer und bietet einen wunderschönen Ausblick sowie eine große Auswahl an regionalen und frischen Gerichten. Unsere Mission ist es, unseren Gästen ein unvergessliches gastronomisches Erlebnis in mediterranem Ambiente zu bieten.",
+      contactTitle: "Kontakt",
+      contactText:
+        "📍 Adresse: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ E-Mail: batana.beach@gmail.com",
+      footerText: "© 2025 Restaurant Etienne | Alle Rechte vorbehalten",
+      shortLabel: "DE",
     }
   };
 
-  let currentLang = "hr";
+  const langDropdown = document.getElementById("langDropdown");
+  const langButton = langDropdown.querySelector(".lang-btn");
+  const langMenu = langDropdown.querySelector(".lang-menu");
+  const langItems = langDropdown.querySelectorAll(".lang-item");
+  const currentLangLabel = document.getElementById("current-lang-label");
 
-  function toggleLanguage() {
-    currentLang = currentLang === "hr" ? "en" : "hr";
-    applyTranslations();
-    document.querySelector(".toggle-lang").textContent = currentLang === "hr" ? "EN" : "HR";
+  const elements = {
+    navHome: document.getElementById("nav-home"),
+    navMenu: document.getElementById("nav-menu"),
+    navContact: document.getElementById("nav-contact"),
+    heroTitle: document.getElementById("hero-title"),
+    heroSubtitle: document.getElementById("hero-subtitle"),
+    heroBtn: document.getElementById("hero-btn"),
+    aboutTitle: document.getElementById("about-title"),
+    aboutText: document.getElementById("about-text"),
+    contactTitle: document.getElementById("contact-title"),
+    contactText: document.getElementById("contact-text"),
+    footerText: document.getElementById("footer-text"),
+  };
+
+  function applyTranslations(lang) {
+    const t = translations[lang] || translations.hr;
+
+    elements.navHome.textContent = t.navHome;
+    elements.navMenu.textContent = t.navMenu;
+    elements.navContact.textContent = t.navContact;
+
+    elements.heroTitle.textContent = t.heroTitle;
+    elements.heroSubtitle.textContent = t.heroSubtitle;
+    elements.heroBtn.textContent = t.heroBtn;
+
+    elements.aboutTitle.textContent = t.aboutTitle;
+    elements.aboutText.innerHTML = t.aboutText;
+
+    elements.contactTitle.textContent = t.contactTitle;
+    elements.contactText.innerHTML = t.contactText;
+
+    elements.footerText.textContent = t.footerText;
+
+    currentLangLabel.textContent = t.shortLabel;
+
+    document.documentElement.lang = lang; // <html lang="..">
+    localStorage.setItem("language", lang);
+
+    // Active item styling
+    langItems.forEach(i => i.classList.toggle("active", i.dataset.lang === lang));
   }
 
-  function applyTranslations() {
-    document.getElementById("nav-home").textContent = translations[currentLang].navHome;
-    document.getElementById("nav-menu").textContent = translations[currentLang].navMenu;
-    document.getElementById("nav-contact").textContent = translations[currentLang].navContact;
-    document.getElementById("hero-title").textContent = translations[currentLang].heroTitle;
-    document.getElementById("hero-subtitle").textContent = translations[currentLang].heroSubtitle;
-    document.getElementById("hero-btn").textContent = translations[currentLang].heroBtn;
-    document.getElementById("about-title").textContent = translations[currentLang].aboutTitle;
-    document.getElementById("about-text").innerHTML = translations[currentLang].aboutText;
-    document.getElementById("contact-title").textContent = translations[currentLang].contactTitle;
-    document.getElementById("contact-text").innerHTML = translations[currentLang].contactText;
-    document.getElementById("footer-text").textContent = translations[currentLang].footerText;
+  function setLanguage(lang) {
+    // Fallback na HR ako nema prijevoda
+    const chosen = translations[lang] ? lang : "hr";
+    applyTranslations(chosen);
   }
+
+  // Dropdown toggle
+  langButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = langDropdown.classList.toggle("open");
+    langButton.setAttribute("aria-expanded", String(isOpen));
+  });
+  // Klik izvan dropdowna zatvara
+  document.addEventListener("click", () => {
+    langDropdown.classList.remove("open");
+    langButton.setAttribute("aria-expanded", "false");
+  });
+  // Tipka ESC zatvara
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      langDropdown.classList.remove("open");
+      langButton.setAttribute("aria-expanded", "false");
+    }
+  });
+  // Odabir jezika
+  langItems.forEach(item => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const lang = item.getAttribute("data-lang");
+      setLanguage(lang);
+      langDropdown.classList.remove("open");
+      langButton.setAttribute("aria-expanded", "false");
+    });
+  });
 
   // Sticky header
   window.addEventListener('scroll', function(){
@@ -188,8 +320,22 @@
     }
   });
 
-  // Load default language
-  applyTranslations();
+  // ====== Language init (localStorage → browser → HR) ======
+  (function initLanguage(){
+    const saved = localStorage.getItem("language");
+    if (saved && translations[saved]) {
+      setLanguage(saved);
+      return;
+    }
+    // Auto-detect from browser
+    const navLang = (navigator.language || navigator.userLanguage || "hr").toLowerCase();
+    let guess = "hr";
+    if (navLang.startsWith("hr")) guess = "hr";
+    else if (navLang.startsWith("en")) guess = "en";
+    else if (navLang.startsWith("it")) guess = "it";
+    else if (navLang.startsWith("de")) guess = "de";
+    setLanguage(guess);
+  })();
 </script>
 
 </body>
