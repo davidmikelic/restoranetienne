@@ -98,9 +98,17 @@
       .menu-grid.single-card{grid-template-columns:200px}
       .menu-item{min-height:170px;padding:16px}
     }
-    
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+/* ikone u tabovima */
+.tab-btn .tab-ico{
+  margin-right: 8px;
+  font-size: 18px;
+  color: #000;     /* crna ikona default */
+}
+
+/* kad je tab aktivan (pozadina crna), ikona ide bijela da se vidi */
+.tab-btn.active .tab-ico{
+  color: #fff;
+}
 
   </style>
 </head>
@@ -159,19 +167,26 @@
   </section>
 
   <section class="container">
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="food" id="tab-food">🍽 Hrana</button>
-      <button class="tab-btn" data-tab="drinks" id="tab-drinks">🥂 Pića</button>
-    </div>
+<div class="tabs">
+  <button class="tab-btn active" data-tab="food" id="tab-food">
+    <i class="fa-solid fa-utensils tab-ico" aria-hidden="true"></i>
+    Hrana
+  </button>
+  <button class="tab-btn" data-tab="drinks" id="tab-drinks">
+    <i class="fa-solid fa-champagne-glasses tab-ico" aria-hidden="true"></i>
+    Pića
+  </button>
+</div>
 
-    <!-- FOOD -->
+
+<!-- FOOD -->
     <div id="food" class="menu-section active">
 
       <section>
         <h2 data-i18n="secStarters">Predjela</h2>
         <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishPrsutSir">Istarski pršut</h3><div class="price">€ 15,50</div></div>
-          <div class="menu-item"><h3 data-i18n="dishSardele">Sardele na savor</h3><div class="price">€ 13,00</div></div>
+          <div class="menu-item"><h3 data-i18n="dishPrsutSir">Istarski pršut</h3<divclass="price">€15,50</div</div>
+          <div class="menu-item"><h3 data-i18n="dishSardele">Sardele nasavor</h3<divclass="price">€13,00</div</div>
         </div>
       </section>
 
@@ -391,7 +406,7 @@
       secFish:"Ribe i mekušci",dishSeabassFillet:"File brancina",
       dishGrilledSquid:"Lignje na žaru",dishFriedSquidPanko:"Lignje pržene u panko mrvicama s prilogom",
       secSalads:"Salate",dishMixedSalad:"Miješana salata",
-      secDesserts:"Deserti",dishCrepesJam:"Palačinke s marmeladom",dishCrepesChocolate:"Palačinke s čokoladom",
+      secDesserts:"Deserti",dishCrepesJam:"Palačinke s marmeladom",dishCrepesChocolate:"Palačinke s čokoladom"}
     en:{navHome:"Home",navMenu:"Menu",navContact:"Contact",
       heroTitle:"Welcome",heroSubtitle:"Opening hours: 14:00–20:00",heroBtn:"View menu",
       aboutTitle:"About us",
@@ -408,8 +423,8 @@
       secMeat:"Meat dishes",dishPorkMedallions:"Pork medallions with pancetta",dishChickenFillet:"Chicken fillet with side", dishKoljenica:"Pork knuckle with roasted potatoes",dishKobasica:"Istrian sausages with cabbage and potatoes",
       dishSchnitzel:"Wiener schnitzel",secFish:"Fish & molluscs",dishSeabassFillet:"Seabass fillet",dishGrilledSquid:"Grilled squid",dishFriedSquidPanko:"Panko-fried squid with side",
       secSalads:"Salads",dishMixedSalad:"Mixed salad",
-      secDesserts:"Desserts",dishCrepesJam:"Crepes with jam",dishCrepesChocolate:"Crepes with chocolate",
-    it:{navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",    
+      secDesserts:"Desserts",dishCrepesJam:"Crepes with jam",dishCrepesChocolate:"Crepes with chocolate"}
+    it:{navHome:"Home",navMenu:"Menù",navContact:"Contatti",    
       heroTitle:"Benvenuti",heroSubtitle:"Orario di apertura: 14:00–20:00",heroBtn:"Guarda il menù",
       aboutTitle:"Chi siamo",
       aboutText:"Il ristorante Etienne si trova a due passi dal mare e offre una splendida vista insieme a una ricca selezione di piatti locali e freschi. La nostra missione è offrire agli ospiti un'esperienza gastronomica indimenticabile in un'atmosfera mediterranea.",
@@ -423,7 +438,7 @@
       secMeat:"Piatti di carne",dishPorkMedallions:"Medaglioni di maiale con pancetta",dishChickenFillet:"Filetto di pollo con contorno",dishSchnitzel:"Cotoletta alla viennese",dishKoljenica:"Stinco di maiale con patate arrosto",dishKobasica:"Salsicce istriane con cavolo e patate",
       secFish:"Pesce e molluschi",dishSeabassFillet:"Filetto di branzino",dishGrilledSquid:"Calamari alla griglia",dishFriedSquidPanko:"Calamari fritti in panko con contorno",
       secSalads:"Insalate",dishMixedSalad:"Insalata mista",
-      secDesserts:"Dessert",dishCrepesJam:"Crêpes con marmellata",dishCrepesChocolate:"Crêpes al cioccolato",
+      secDesserts:"Dessert",dishCrepesJam:"Crêpes con marmellata",dishCrepesChocolate:"Crêpes al cioccolato"}
     de:{navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",
       heroTitle:"Willkommen",heroSubtitle:"Öffnungszeiten: 14:00–20:00",heroBtn:"Speisekarte ansehen",
       aboutTitle:"Über uns",
@@ -438,8 +453,9 @@
       secMeat:"Fleischgerichte",dishPorkMedallions:"Schweinemedaillons mit Pancetta",dishChickenFillet:"Hähnchenfilet mit Beilage",dishSchnitzel:"Wiener Schnitzel", dishKoljenica:"Schweinshaxe mit Bratkartoffeln",dishKobasica:"Istrische Würste mit Kraut und Kartoffeln",
       secFish:"Fisch & Weichtiere",dishSeabassFillet:"Wolfsbarschfilet",dishGrilledSquid:"Gegrillte Calamari",dishFriedSquidPanko:"In Panko frittierte Calamari mit Beilage",
       secSalads:"Salate",dishMixedSalad:"Gemischter Salat",
-      secDesserts:"Desserts",dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolade",
+      secDesserts:"Desserts",dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolade"}
   };
+
 
   /* ---------- Simple router (hash) ---------- */
   const pages = { home: document.getElementById('page-home'), menu: document.getElementById('page-menu') };
@@ -613,5 +629,3 @@ navLinks.contact.addEventListener('click', (e)=>{
 
 </body>
 </html>
-
-
