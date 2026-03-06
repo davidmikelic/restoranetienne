@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="hr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Restoran Etienne</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restoran Etienne</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<style>
     :root {
       --primary:#0d6efd; --bg:#f9fafb; --text:#1a1a1a; --muted:#6c757d; --light:#ffffff;
       --price-color:#000000;
@@ -113,283 +114,293 @@
   </style>
 </head>
 <body>
-
 <header>
-  <nav>
-    <div class="brand">Etienne</div>
-    <div class="links" style="display:flex;align-items:center;">
-      <a href="#home" id="nav-home">Početna</a>
-      <a href="#menu" id="nav-menu">Meni</a>
-      <a href="#contact" id="nav-contact">Kontakt</a>
-      <!-- 🌐 -->
-      <div class="lang-dropdown" id="langDropdown">
-        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Odabir jezika">
-          <i class="fa-solid fa-globe"></i>
-        </button>
-        <div class="lang-menu" role="menu" aria-label="Jezici">
-          <button class="lang-item" data-lang="hr" role="menuitem">HR</button>
-          <button class="lang-item" data-lang="en" role="menuitem">EN</button>
-          <button class="lang-item" data-lang="it" role="menuitem">IT</button>
-          <button class="lang-item" data-lang="de" role="menuitem">DE</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<!-- PAGE: HOME -->
-<div id="page-home" class="page active" aria-hidden="false">
-  <section class="hero">
-    <div>
-      <h1 id="hero-title">Dobrodošli</h1>
-      <p id="hero-subtitle">Radno vrijeme: 14:00–20:00</p>
-      <a href="#menu" class="btn" id="hero-btn">Pogledaj meni</a>
-    </div>
-  </section>
-
-  <section class="container">
-    <h2 id="about-title">O nama</h2>
-    <p id="about-text" class="lead">Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.</p>
-  </section>
-
-  <section id="contact" class="container">
-    <h2 id="contact-title">Kontakt</h2>
-    <p id="contact-text" class="lead">📍 Adresa: Kapovica 350, Medulin<br>
-      ☎ Telefon: <a href="tel:+38598224394">098 224 394</a><br>
-      ✉ Email: batana.beach@gmail.com</p>
-  </section>
+<nav>
+<div class="brand">Etienne</div>
+<div class="links" style="display:flex;align-items:center;">
+<a href="#home" id="nav-home">Početna</a>
+<a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a><a href="#menu" id="nav-menu">Meni</a>
+<a href="#contact" id="nav-contact">Kontakt</a>
+<!-- 🌐 -->
+<div class="lang-dropdown" id="langDropdown">
+<button aria-expanded="false" aria-haspopup="true" aria-label="Odabir jezika" class="lang-btn">
+<i class="fa-solid fa-globe"></i>
+</button>
+<div aria-label="Jezici" class="lang-menu" role="menu">
+<button class="lang-item" data-lang="hr" role="menuitem">HR</button>
+<button class="lang-item" data-lang="en" role="menuitem">EN</button>
+<button class="lang-item" data-lang="it" role="menuitem">IT</button>
+<button class="lang-item" data-lang="de" role="menuitem">DE</button>
 </div>
-
+</div>
+</div>
+</nav>
+</header>
+<!-- PAGE: HOME -->
+<div aria-hidden="false" class="page active" id="page-home">
+<section class="hero">
+<div>
+<h1 id="hero-title">Dobrodošli</h1>
+<p id="hero-subtitle">Radno vrijeme: 12:00–19:00</p>
+<a class="btn" href="#menu" id="hero-btn">Pogledaj meni</a>
+</div>
+</section>
+<section class="container">
+<h2 id="about-title">O nama</h2>
+<p class="lead" id="about-text">Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.</p>
+</section>
+<section class="container" id="contact">
+<h2 id="contact-title">Kontakt</h2>
+<p class="lead" id="contact-text">📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br/>
+      ☎ Telefon: <a href="tel:+38598224394">098 224 394</a><br/>
+      ✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a></p>
+</section>
+</div>
 <!-- PAGE: MENU -->
-<div id="page-menu" class="page" aria-hidden="true">
-  <section class="hero">
-    <div><h1 id="menu-hero-title" data-i18n="menuHeroTitle">Naš meni</h1></div>
-  </section>
-
-  <section class="container">
+<div aria-hidden="true" class="page" id="page-menu">
+<section class="hero">
+<div><h1 data-i18n="menuHeroTitle" id="menu-hero-title">Naš meni</h1></div>
+</section>
+<section class="container">
 <div class="tabs">
-  <button class="tab-btn active" data-tab="food" id="tab-food">
-    <i class="fa-solid fa-utensils tab-ico" aria-hidden="true"></i>
+<button class="tab-btn active" data-tab="food" id="tab-food">
+<i aria-hidden="true" class="fa-solid fa-utensils tab-ico"></i>
     Hrana
   </button>
-  <button class="tab-btn" data-tab="drinks" id="tab-drinks">
-    <i class="fa-solid fa-champagne-glasses tab-ico" aria-hidden="true"></i>
+<button class="tab-btn" data-tab="drinks" id="tab-drinks">
+<i aria-hidden="true" class="fa-solid fa-champagne-glasses tab-ico"></i>
     Pića
   </button>
-</div>
-
-
+<button class="tab-btn" data-i18n="tabWine" data-tab="wine" id="tab-wine">Vina</button></div>
 <!-- FOOD -->
-    <div id="food" class="menu-section active">
-
-      <section>
-        <h2 data-i18n="secStarters">Predjela</h2>
-        <div class="menu-grid">
-         <div class="menu-item"><h3 data-i18n="dishPrsutSir">Istarski pršut</h3<divclass="price">€ 15,50</div></div>
-         <div class="menu-item"><h3 data-i18n="dishSardele">Sardele nasavor</h3<divclass="price">€ 13,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secSoups">Juhe</h2>
-        <div class="menu-grid single-card">
-          <div class="menu-item"><h3 data-i18n="dishBeefSoup">Goveđa juha</h3><div class="price">€ 5,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secPasta">Tjestenine</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishPastaSeafood">Tjestenina s morskim plodovima</h3><div class="price">€ 19,50</div></div>
-          <div class="menu-item"><h3 data-i18n="dishPastaTruffleProsciutto">Palenta na brodet</h3><div class="price">€ 19,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishRavioliShrimp">Šugo od kokoške sa njokama</h3><div class="price">€ 18,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishTagliatelleSalmon">Zeleni rezanci s lososom i gorgonzolom</h3><div class="price">€ 17,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishSpaghettiCarbonara">Špageti Carbonara</h3><div class="price">€ 14,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secMeat">Mesna jela</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishPorkMedallions">Svinjski medaljoni s pancetom</h3><div class="price">€ 17,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishChickenFillet">Pileći file s prilogom</h3><div class="price">€ 12,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishSchnitzel">Bečki odrezak</h3><div class="price">€ 13,50</div></div>
-          <div class="menu-item"><h3 data-i18n="dishKoljenica">Svinjska koljenica sa pečenim krompirom</h3><div class="price">€ 19,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishKobasica">Istarske kobasice sa kupusom i krumpirom</h3><div class="price">€ 17,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secFish">Ribe i mekušci</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishSeabassFillet">File brancina</h3><div class="price">€ 18,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishGrilledSquid">Lignje na žaru</h3><div class="price">€ 19,00</div></div>
-          <div class="menu-item"><h3 data-i18n="dishFriedSquidPanko">Lignje pržene u panko mrvicama s prilogom</h3><div class="price">€ 19,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secSalads">Salate</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishMixedSalad">Miješana salata</h3><div class="price">€ 5,50</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secDesserts">Deserti</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="dishCrepesJam">Palačinke s marmeladom</h3><div class="price">€ 5,50</div></div>
-          <div class="menu-item"><h3 data-i18n="dishCrepesChocolate">Palačinke s čokoladom</h3><div class="price">€ 5,50</div></div>
-        </div>
-      </section>
-    </div>
-
-    <!-- DRINKS -->
-    <div id="drinks" class="menu-section">
-      <section>
-        <h2 data-i18n="secHotDrinks">Topli napitci</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Espresso</h3><div class="price">€ 1,80</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkDoubleEspresso">Dupli espresso</h3><div class="price">€ 3,60</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkDecafEspresso">Espresso bez kofeina</h3><div class="price">€ 2,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkCappuccinoLarge">Veliki cappuccino</h3><div class="price">€ 2,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkMacchiatoLarge">Veliki macchiato</h3><div class="price">€ 2,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkWhiteCoffee">Bijela kava</h3><div class="price">€ 2,80</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkCoffeeCream">Kava sa šlagom</h3><div class="price">€ 2,80</div></div>
-          <div class="menu-item"><h3>Nescafe</h3><div class="price">€ 3,00</div></div>
-          <div class="menu-item"><h3>Ice coffee</h3><div class="price">€ 6,20</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkTea">Čaj</h3><div class="price">€ 2,20</div></div>
-          <div class="menu-item"><h3>Irish coffee</h3><div class="price">€ 6,50</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secSoftDrinks">Bezalkoholna pića</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Pepsi 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Pepsi Zero 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Schweppes Tangerine 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Schweppes Bitter Lemon 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Schweppes Tonic water 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Pašareta 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkIcedTea">Ledeni čaj 0,25 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkLemonade">Limunada 0,40 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkSparkling1">Mineralna 1,00 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkSparkling05">Mineralna 0,50 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkStill1">Prirodna voda 1,00 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3 data-i18n="drinkStill05">Prirodna voda 0,50 l</h3><div class="price">€ 3,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secDraftDrinks">Šankomat (točeno)</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="draftColaSprite03">Cola / Sprite 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="draftColaSprite05">Cola / Sprite 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3 data-i18n="draftOrange03">Naranča 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="draftOrange05">Naranča 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3 data-i18n="draftApple03">Jabuka 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3 data-i18n="draftApple05">Jabuka 0,50 l</h3><div class="price">€ 5,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secMixedDrinks">Miješana pića</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Gemišt 0,30 l</h3><div class="price">€ 3,20</div></div>
-          <div class="menu-item"><h3>Gemišt 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3>Bambus 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Bambus 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3>Miš maš 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Miš maš 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3>Radla 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Radla 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3>Špeci 0,30 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Špeci 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3>Apfelscholle 0,30 l</h3><div class="price">€ 3,20</div></div>
-          <div class="menu-item"><h3>Apfelscholle 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3>Aperol mix 0,30 l</h3><div class="price">€ 7,30</div></div>
-          <div class="menu-item"><h3>Hugo 0,30 l</h3><div class="price">€ 7,30</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secCocktails">Kokteli</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Summer Sunrise</h3><p>vodka, orange juice, grenadine</p><div class="price">€ 10,00</div></div>
-          <div class="menu-item"><h3>Pina Colada</h3><p>bacardi, pineapple juice, cream, coconut syrup</p><div class="price">€ 10,00</div></div>
-          <div class="menu-item"><h3>Cuba Libre</h3><p>bacardi, cola, lemon</p><div class="price">€ 10,00</div></div>
-          <div class="menu-item"><h3>Mojito</h3><p>bacardi, black sugar, lime, mint, soda</p><div class="price">€ 11,00</div></div>
-          <div class="menu-item"><h3>Blue Hawaii</h3><p>bacardi, vodka, blue curacao, pineapple juice</p><div class="price">€ 10,00</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secBeers">Pivo</h2>
-        <div class="menu-grid">
-          <div class="menu-item"><h3 data-i18n="beerDraught05">Pivo točeno 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3 data-i18n="beerDraught03">Pivo točeno 0,30 l</h3><div class="price">€ 3,20</div></div>
-          <div class="menu-item"><h3>Tuborg 0,33 l</h3><div class="price">€ 3,50</div></div>
-          <div class="menu-item"><h3>Pan Lager 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3>Pan Zlatni 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3 data-i18n="beerNonAlcoholic">Pan Bezalkoholni 0,50 l</h3><div class="price">€ 4,50</div></div>
-          <div class="menu-item"><h3 data-i18n="beerBudweiserDarkLight">Budweiser tamni / svijetli 0,50 l</h3><div class="price">€ 5,00</div></div>
-          <div class="menu-item"><h3>Erdinger / Paulaner 0,50 l</h3><div class="price">€ 5,50</div></div>
-        </div>
-      </section>
-
-      <section>
-        <h2 data-i18n="secWines">Vina</h2>
-        <div class="menu-grid">
-          <div class="menu-item">
-            <h3 data-i18n="wineHouseOpen">Domaće otvoreno vino bijelo / crno</h3>
-            <p data-i18n="wineHouseOpenNote">Kućno vino (bijelo/crno)</p>
-            <div class="price">1 l € 15,00</div>
-          </div>
-        </div>
-
-        <h3 class="subcategory" data-i18n="subWhiteWines">Bijela vina</h3>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Malvazija Babos</h3><div class="price">0,75 l € 28,50</div></div>
-          <div class="menu-item"><h3>Valbisugo Babos</h3><div class="price">0,75 l € 35,00</div></div>
-          <div class="menu-item"><h3>Muškat Babos</h3><div class="price">0,75 l € 28,50</div></div>
-        </div>
-
-        <h3 class="subcategory" data-i18n="subRedWines">Crna vina</h3>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Merlot Babos</h3><div class="price">0,75 l € 28,50</div></div>
-          <div class="menu-item"><h3>Marana Babos</h3><div class="price">0,75 l € 35,00</div></div>
-        </div>
-
-        <h3 class="subcategory" data-i18n="subSparkling">Pjenušci</h3>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Brut Babos</h3><div class="price">0,75 l € 32,50</div></div>
-          <div class="menu-item"><h3>Rosé Babos</h3><div class="price">0,75 l € 32,50</div></div>
-        </div>
-
-        <h3 class="subcategory" data-i18n="subDessertWines">Desertna vina</h3>
-        <div class="menu-grid">
-          <div class="menu-item"><h3>Martini Bianco</h3><div class="price">0,10 l € 4,00</div></div>
-          <div class="menu-item"><h3>Martini Rosso</h3><div class="price">0,10 l € 4,00</div></div>
-        </div>
-      </section>
-    </div>
-  </section>
+<div class="menu-section active" id="food">
+<section>
+<h2 data-i18n="secStarters">Predjela</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishPrsutSir">Istarski pršut</h3><div class="price">€ 13,50</div></div>
+<div class="menu-item"><h3 data-i18n="dishSardele">Srdele na savor</h3><div class="price">€ 13,00</div></div>
 </div>
-
+</section>
+<section>
+<h2 data-i18n="secSoups">Juhe</h2>
+<div class="menu-grid single-card">
+<div class="menu-item"><h3 data-i18n="dishBeefSoup">Goveđa juha</h3><div class="price">€ 5,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secPasta">Tjestenine</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishPastaSeafood">Tjestenina s morskim plodovima</h3><div class="price">€ 19,50</div></div>
+<div class="menu-item"><h3 data-i18n="dishPastaTruffleProsciutto">Palenta na brodet</h3><div class="price">€ 19,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishRavioliShrimp">Šugo od kokoške sa njokama</h3><div class="price">€ 18,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishTagliatelleSalmon">Zeleni rezanci s lososom i gorgonzolom</h3><div class="price">€ 17,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishSpaghettiCarbonara">Špageti Carbonara</h3><div class="price">€ 14,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secMeat">Mesna jela</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishPorkMedallions">Svinjski medaljoni s pancetom</h3><div class="price">€ 17,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishChickenFillet">Pileći file s prilogom</h3><div class="price">€ 12,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishSchnitzel">Bečki odrezak</h3><div class="price">€ 13,50</div></div>
+<div class="menu-item"><h3 data-i18n="dishKoljenica">Svinjska koljenica sa pečenim krompirom</h3><div class="price">€ 19,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishKobasica">Istarske kobasice sa kupusom i krumpirom</h3><div class="price">€ 17,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secFish">Ribe i mekušci</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishSeabassFillet">File brancina</h3><div class="price">€ 18,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishGrilledSquid">Lignje na žaru</h3><div class="price">€ 19,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishFriedSquidPanko">Lignje pržene u panko mrvicama s prilogom</h3><div class="price">€ 19,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secSalads">Salate</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishMixedSalad">Miješana salata</h3><div class="price">€ 5,50</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secDesserts">Deserti</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="dishCrepesJam">Palačinke s marmeladom</h3><div class="price">€ 5,50</div></div>
+<div class="menu-item"><h3 data-i18n="dishCrepesChocolate">Palačinke s čokoladom</h3><div class="price">€ 5,50</div></div>
+</div>
+</section>
+</div>
+<!-- DRINKS -->
+<div class="menu-section" id="drinks">
+<section>
+<h2 data-i18n="secHotDrinks">Topli napitci</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="drinkEspresso">Espresso</h3><div class="price">€ 1,80</div></div>
+<div class="menu-item"><h3 data-i18n="drinkDoubleEspresso">Dupli espresso</h3><div class="price">€ 3,60</div></div>
+<div class="menu-item"><h3 data-i18n="drinkDecafEspresso">Espresso bez kofeina</h3><div class="price">€ 2,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkCappuccinoLarge">Veliki cappuccino</h3><div class="price">€ 2,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkMacchiatoLarge">Veliki macchiato</h3><div class="price">€ 2,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkWhiteCoffee">Bijela kava</h3><div class="price">€ 2,80</div></div>
+<div class="menu-item"><h3 data-i18n="drinkCoffeeCream">Kava sa šlagom</h3><div class="price">€ 2,80</div></div>
+<div class="menu-item"><h3 data-i18n="drinkNescafe">Nescafe</h3><div class="price">€ 3,00</div></div>
+<div class="menu-item"><h3 data-i18n="drinkIceCoffee">Ice coffee</h3><div class="price">€ 6,20</div></div>
+<div class="menu-item"><h3 data-i18n="drinkTea">Čaj</h3><div class="price">€ 2,20</div></div>
+<div class="menu-item"><h3 data-i18n="drinkIrishCoffee">Irish coffee</h3><div class="price">€ 6,50</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secSoftDrinks">Bezalkoholna pića</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3>Pepsi 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Pepsi Zero 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Schweppes Tangerine 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Schweppes Bitter Lemon 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Schweppes Tonic water 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Pašareta 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkIcedTea">Ledeni čaj 0,25 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkLemonade">Limunada 0,40 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkSparkling1">Mineralna 1,00 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkSparkling05">Mineralna 0,50 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkStill1">Prirodna voda 1,00 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3 data-i18n="drinkStill05">Prirodna voda 0,50 l</h3><div class="price">€ 3,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secDraftDrinks">Šankomat (točeno)</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="draftColaSprite03">Cola / Sprite 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="draftColaSprite05">Cola / Sprite 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3 data-i18n="draftOrange03">Naranča 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="draftOrange05">Naranča 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3 data-i18n="draftApple03">Jabuka 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3 data-i18n="draftApple05">Jabuka 0,50 l</h3><div class="price">€ 5,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secMixedDrinks">Miješana pića</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3>Gemišt 0,30 l</h3><div class="price">€ 3,20</div></div>
+<div class="menu-item"><h3>Gemišt 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3>Bambus 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Bambus 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3>Miš maš 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Miš maš 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3>Radla 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Radla 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3>Špeci 0,30 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Špeci 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3>Apfelscholle 0,30 l</h3><div class="price">€ 3,20</div></div>
+<div class="menu-item"><h3>Apfelscholle 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3>Aperol mix 0,30 l</h3><div class="price">€ 7,30</div></div>
+<div class="menu-item"><h3>Hugo 0,30 l</h3><div class="price">€ 7,30</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secCocktails">Kokteli</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3>Summer Sunrise</h3><p>vodka, orange juice, grenadine</p><div class="price">€ 10,00</div></div>
+<div class="menu-item"><h3>Pina Colada</h3><p>bacardi, pineapple juice, cream, coconut syrup</p><div class="price">€ 10,00</div></div>
+<div class="menu-item"><h3>Cuba Libre</h3><p>bacardi, cola, lemon</p><div class="price">€ 10,00</div></div>
+<div class="menu-item"><h3>Mojito</h3><p>bacardi, black sugar, lime, mint, soda</p><div class="price">€ 11,00</div></div>
+<div class="menu-item"><h3>Blue Hawaii</h3><p>bacardi, vodka, blue curacao, pineapple juice</p><div class="price">€ 10,00</div></div>
+</div>
+</section>
+<section>
+<h2 data-i18n="secBeers">Pivo</h2>
+<div class="menu-grid">
+<div class="menu-item"><h3 data-i18n="beerDraught05">Pivo točeno 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3 data-i18n="beerDraught03">Pivo točeno 0,30 l</h3><div class="price">€ 3,20</div></div>
+<div class="menu-item"><h3>Tuborg 0,33 l</h3><div class="price">€ 3,50</div></div>
+<div class="menu-item"><h3>Pan Lager 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3>Pan Zlatni 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3 data-i18n="beerNonAlcoholic">Pan Bezalkoholni 0,50 l</h3><div class="price">€ 4,50</div></div>
+<div class="menu-item"><h3 data-i18n="beerBudweiserDarkLight">Budweiser tamni / svijetli 0,50 l</h3><div class="price">€ 5,00</div></div>
+<div class="menu-item"><h3>Erdinger / Paulaner 0,50 l</h3><div class="price">€ 5,50</div></div>
+</div>
+</section>
+</div><div class="menu-section" id="wine"><section>
+<h2 data-i18n="secWines">Vina</h2>
+<div class="menu-grid">
+<div class="menu-item">
+<h3 data-i18n="wineHouseOpen">Domaće otvoreno vino bijelo / crno</h3>
+<p data-i18n="wineHouseOpenNote">Kućno vino (bijelo/crno)</p>
+<div class="price">1 l € 15,00</div>
+</div>
+</div>
+<h3 class="subcategory" data-i18n="subWhiteWines">Bijela vina</h3>
+<div class="menu-grid">
+<div class="menu-item"><h3>Malvazija Babos</h3><div class="price">0,75 l € 28,50</div></div>
+<div class="menu-item"><h3>Valbisugo Babos</h3><div class="price">0,75 l € 35,00</div></div>
+<div class="menu-item"><h3>Muškat Babos</h3><div class="price">0,75 l € 28,50</div></div>
+</div>
+<h3 class="subcategory" data-i18n="subRedWines">Crna vina</h3>
+<div class="menu-grid">
+<div class="menu-item"><h3>Merlot Babos</h3><div class="price">0,75 l € 28,50</div></div>
+<div class="menu-item"><h3>Marana Babos</h3><div class="price">0,75 l € 35,00</div></div>
+</div>
+<h3 class="subcategory" data-i18n="subSparkling">Pjenušci</h3>
+<div class="menu-grid">
+<div class="menu-item"><h3>Brut Babos</h3><div class="price">0,75 l € 32,50</div></div>
+<div class="menu-item"><h3>Rosé Babos</h3><div class="price">0,75 l € 32,50</div></div>
+</div>
+<h3 class="subcategory" data-i18n="subDessertWines">Desertna vina</h3>
+<div class="menu-grid">
+<div class="menu-item"><h3>Martini Bianco</h3><div class="price">0,10 l € 4,00</div></div>
+<div class="menu-item"><h3>Martini Rosso</h3><div class="price">0,10 l € 4,00</div></div>
+</div>
+</section></div>
+</section>
+</div>
 <footer>
-  <span id="footer-text">© 2025 Restoran Etienne | Sva prava pridržana</span>
+<span id="footer-text">© 2025 Restoran Etienne | Sva prava pridržana</span>
 </footer>
-
 <script>
   /* ---------- Translations (skraćeno: ostaje isto kao ranije) ---------- */
   const T = {
-    hr:{navHome:"Početna",navMenu:"Meni",navContact:"Kontakt",
-      heroTitle:"Dobrodošli",heroSubtitle:"Radno vrijeme: 14:00–20:00",heroBtn:"Pogledaj meni",
+    hr:{
+secHotDrinks:"Topli napitci",
+secSoftDrinks:"Bezalkoholna pića",
+secDraftDrinks:"Šankomat (točeno)",
+secMixedDrinks:"Miješana pića",
+secCocktails:"Kokteli",
+secBeers:"Pivo",
+secWines:"Vina",
+
+navReviews:"Recenzije",
+wineHouseOpenNote:"Kućno vino (bijelo/crno)",
+wineHouseOpen:"Domaće otvoreno vino bijelo / crno",
+subDessertWines:"Desertna vina",
+subSparkling:"Pjenušci",
+subRedWines:"Crna vina",
+subWhiteWines:"Bijela vina",
+tabWine:"🍷 Vina",
+draftApple05:"Jabuka 0,50 l",
+draftApple03:"Jabuka 0,30 l",
+draftOrange05:"Naranča 0,50 l",
+draftOrange03:"Naranča 0,30 l",
+draftColaSprite05:"Cola / Sprite 0,50 l",
+draftColaSprite03:"Cola / Sprite 0,30 l",
+drinkStill05:"Prirodna voda 0,50 l",
+drinkStill1:"Prirodna voda 1,00 l",
+drinkSparkling05:"Mineralna 0,50 l",
+drinkSparkling1:"Mineralna 1,00 l",
+drinkLemonade:"Limunada 0,40 l",
+drinkIcedTea:"Ledeni čaj 0,25 l",
+drinkIrishCoffee:"Irish coffee",
+drinkTea:"Čaj",
+drinkIceCoffee:"Ice coffee",
+drinkNescafe:"Nescafe",
+drinkCoffeeCream:"Kava sa šlagom",
+drinkWhiteCoffee:"Bijela kava",
+drinkMacchiatoLarge:"Veliki macchiato",
+drinkCappuccinoLarge:"Veliki cappuccino",
+drinkDecafEspresso:"Espresso bez kofeina",
+drinkDoubleEspresso:"Dupli espresso",
+drinkEspresso:"Espresso",navHome:"Početna",navMenu:"Meni",navContact:"Kontakt",
+      heroTitle:"Dobrodošli",heroSubtitle:"Radno vrijeme: 12:00–19:00",heroBtn:"Pogledaj meni",
       aboutTitle:"O nama",
       aboutText:"Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
       contactTitle:"Kontakt",
-      contactText:"📍 Adresa: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      contactText:"📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
       footerText:"© 2025 Restoran Etienne | Sva prava pridržana",
 
       menuHeroTitle:"Naš meni",tabFood:"🍽 Hrana",tabDrinks:"🥂 Pića",
@@ -406,13 +417,57 @@
       secFish:"Ribe i mekušci",dishSeabassFillet:"File brancina",
       dishGrilledSquid:"Lignje na žaru",dishFriedSquidPanko:"Lignje pržene u panko mrvicama s prilogom",
       secSalads:"Salate",dishMixedSalad:"Miješana salata",
-      secDesserts:"Deserti",dishCrepesJam:"Palačinke s marmeladom",dishCrepesChocolate:"Palačinke s čokoladom"},
-    en:{navHome:"Home",navMenu:"Menu",navContact:"Contact",
-      heroTitle:"Welcome",heroSubtitle:"Opening hours: 14:00–20:00",heroBtn:"View menu",
+      secDesserts:"Deserti",
+      drinkEspresso:"Espresso",
+      drinkNescafe:"Nescafe",
+      drinkIceCoffee:"Ledena kava",
+      drinkIrishCoffee:"Irish coffee",
+dishCrepesJam:"Palačinke s marmeladom",dishCrepesChocolate:"Palačinke s čokoladom"},
+    en:{
+secHotDrinks:"Hot drinks",
+secSoftDrinks:"Soft drinks",
+secDraftDrinks:"Draft drinks",
+secMixedDrinks:"Mixed drinks",
+secCocktails:"Cocktails",
+secBeers:"Beer",
+secWines:"Wines",
+
+navReviews:"Reviews",
+wineHouseOpenNote:"House wine (white/red)",
+wineHouseOpen:"House wine white / red",
+subDessertWines:"Dessert wines",
+subSparkling:"Sparkling wines",
+subRedWines:"Red wines",
+subWhiteWines:"White wines",
+tabWine:"🍷 Wines",
+draftApple05:"Apple juice 0.50 l",
+draftApple03:"Apple juice 0.30 l",
+draftOrange05:"Orange juice 0.50 l",
+draftOrange03:"Orange juice 0.30 l",
+draftColaSprite05:"Cola / Sprite 0.50 l",
+draftColaSprite03:"Cola / Sprite 0.30 l",
+drinkStill05:"Still water 0.50 l",
+drinkStill1:"Still water 1.00 l",
+drinkSparkling05:"Sparkling water 0.50 l",
+drinkSparkling1:"Sparkling water 1.00 l",
+drinkLemonade:"Lemonade 0.40 l",
+drinkIcedTea:"Iced tea 0.25 l",
+drinkIrishCoffee:"Irish coffee",
+drinkTea:"Tea",
+drinkIceCoffee:"Ice coffee",
+drinkNescafe:"Nescafe",
+drinkCoffeeCream:"Coffee with cream",
+drinkWhiteCoffee:"White coffee",
+drinkMacchiatoLarge:"Large macchiato",
+drinkCappuccinoLarge:"Large cappuccino",
+drinkDecafEspresso:"Decaf espresso",
+drinkDoubleEspresso:"Double espresso",
+drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menu",navContact:"Contact",
+      heroTitle:"Welcome",heroSubtitle:"Opening hours: 12:00–19:00",heroBtn:"View menu",
       aboutTitle:"About us",
       aboutText:"Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
       contactTitle:"Contact",
-      contactText:"📍 Address: Kapovica 350, Medulin<br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      contactText:"📍 Address: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
       footerText:"© 2025 Restaurant Etienne | All rights reserved",
       menuHeroTitle:"Our Menu",tabFood:"🍽 Food",tabDrinks:"🥂 Drinks",
       secStarters:"Starters",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sardines marinated in vinegar and onions",
@@ -423,13 +478,57 @@
       secMeat:"Meat dishes",dishPorkMedallions:"Pork medallions with pancetta",dishChickenFillet:"Chicken fillet with side", dishKoljenica:"Pork knuckle with roasted potatoes",dishKobasica:"Istrian sausages with cabbage and potatoes",
       dishSchnitzel:"Wiener schnitzel",secFish:"Fish & molluscs",dishSeabassFillet:"Seabass fillet",dishGrilledSquid:"Grilled squid",dishFriedSquidPanko:"Panko-fried squid with side",
       secSalads:"Salads",dishMixedSalad:"Mixed salad",
-      secDesserts:"Desserts",dishCrepesJam:"Crepes with jam",dishCrepesChocolate:"Crepes with chocolate"},
-    it:{navHome:"Home",navMenu:"Menù",navContact:"Contatti",    
-      heroTitle:"Benvenuti",heroSubtitle:"Orario di apertura: 14:00–20:00",heroBtn:"Guarda il menù",
+      secDesserts:"Desserts",
+      drinkEspresso:"Espresso",
+      drinkNescafe:"Nescafe",
+      drinkIceCoffee:"Ice coffee",
+      drinkIrishCoffee:"Irish coffee",
+dishCrepesJam:"Crepes with jam",dishCrepesChocolate:"Crepes with chocolate"},
+    it:{
+secHotDrinks:"Bevande calde",
+secSoftDrinks:"Bevande analcoliche",
+secDraftDrinks:"Bevande alla spina",
+secMixedDrinks:"Bevande miste",
+secCocktails:"Cocktail",
+secBeers:"Birra",
+secWines:"Vini",
+
+navReviews:"Recensioni",
+wineHouseOpenNote:"Vino della casa (bianco/rosso)",
+wineHouseOpen:"Vino della casa bianco / rosso",
+subDessertWines:"Vini da dessert",
+subSparkling:"Spumanti",
+subRedWines:"Vini rossi",
+subWhiteWines:"Vini bianchi",
+tabWine:"🍷 Vini",
+draftApple05:"Mela 0,50 l",
+draftApple03:"Mela 0,30 l",
+draftOrange05:"Arancia 0,50 l",
+draftOrange03:"Arancia 0,30 l",
+draftColaSprite05:"Cola / Sprite 0,50 l",
+draftColaSprite03:"Cola / Sprite 0,30 l",
+drinkStill05:"Acqua naturale 0,50 l",
+drinkStill1:"Acqua naturale 1,00 l",
+drinkSparkling05:"Acqua frizzante 0,50 l",
+drinkSparkling1:"Acqua frizzante 1,00 l",
+drinkLemonade:"Limonata 0,40 l",
+drinkIcedTea:"Tè freddo 0,25 l",
+drinkIrishCoffee:"Caffè irlandese",
+drinkTea:"Tè",
+drinkIceCoffee:"Caffè freddo",
+drinkNescafe:"Nescafè",
+drinkCoffeeCream:"Caffè con panna",
+drinkWhiteCoffee:"Caffè latte",
+drinkMacchiatoLarge:"Macchiato grande",
+drinkCappuccinoLarge:"Cappuccino grande",
+drinkDecafEspresso:"Espresso decaffeinato",
+drinkDoubleEspresso:"Espresso doppio",
+drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menù",navContact:"Contatti",    
+      heroTitle:"Benvenuti",heroSubtitle:"Orario di apertura: 12:00–19:00",heroBtn:"Guarda il menù",
       aboutTitle:"Chi siamo",
       aboutText:"Il ristorante Etienne si trova a due passi dal mare e offre una splendida vista insieme a una ricca selezione di piatti locali e freschi. La nostra missione è offrire agli ospiti un'esperienza gastronomica indimenticabile in un'atmosfera mediterranea.",
       contactTitle:"Contatti",
-      contactText:"📍 Indirizzo: Kapovica 350, Medulin<br>☎ Telefono: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: batana.beach@gmail.com",
+      contactText:"📍 Indirizzo: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefono: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
       footerText:"© 2025 Ristorante Etienne | Tutti i diritti riservati",
       menuHeroTitle:"Il nostro menù",tabFood:"🍽 Cibo",tabDrinks:"🥂 Bevande",
       secStarters:"Antipasti",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sarde in savòr",
@@ -438,13 +537,57 @@
       secMeat:"Piatti di carne",dishPorkMedallions:"Medaglioni di maiale con pancetta",dishChickenFillet:"Filetto di pollo con contorno",dishSchnitzel:"Cotoletta alla viennese",dishKoljenica:"Stinco di maiale con patate arrosto",dishKobasica:"Salsicce istriane con cavolo e patate",
       secFish:"Pesce e molluschi",dishSeabassFillet:"Filetto di branzino",dishGrilledSquid:"Calamari alla griglia",dishFriedSquidPanko:"Calamari fritti in panko con contorno",
       secSalads:"Insalate",dishMixedSalad:"Insalata mista",
-      secDesserts:"Dessert",dishCrepesJam:"Crêpes con marmellata",dishCrepesChocolate:"Crêpes al cioccolato"},
-    de:{navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",
-      heroTitle:"Willkommen",heroSubtitle:"Öffnungszeiten: 14:00–20:00",heroBtn:"Speisekarte ansehen",
+      secDesserts:"Dessert",
+      drinkEspresso:"Espresso",
+      drinkNescafe:"Nescafe",
+      drinkIceCoffee:"Caffè freddo",
+      drinkIrishCoffee:"Irish coffee",
+dishCrepesJam:"Crêpes con marmellata",dishCrepesChocolate:"Crêpes al cioccolato"},
+    de:{
+secHotDrinks:"Heißgetränke",
+secSoftDrinks:"Alkoholfreie Getränke",
+secDraftDrinks:"Getränke vom Zapfhahn",
+secMixedDrinks:"Mixgetränke",
+secCocktails:"Cocktails",
+secBeers:"Bier",
+secWines:"Weine",
+
+navReviews:"Bewertungen",
+wineHouseOpenNote:"Hauswein (weiß/rot)",
+wineHouseOpen:"Hauswein weiß / rot",
+subDessertWines:"Dessertweine",
+subSparkling:"Schaumweine",
+subRedWines:"Rotweine",
+subWhiteWines:"Weißweine",
+tabWine:"🍷 Weine",
+draftApple05:"Apfel 0,50 l",
+draftApple03:"Apfel 0,30 l",
+draftOrange05:"Orange 0,50 l",
+draftOrange03:"Orange 0,30 l",
+draftColaSprite05:"Cola / Sprite 0,50 l",
+draftColaSprite03:"Cola / Sprite 0,30 l",
+drinkStill05:"Stilles Wasser 0,50 l",
+drinkStill1:"Stilles Wasser 1,00 l",
+drinkSparkling05:"Mineralwasser 0,50 l",
+drinkSparkling1:"Mineralwasser 1,00 l",
+drinkLemonade:"Limonade 0,40 l",
+drinkIcedTea:"Eistee 0,25 l",
+drinkIrishCoffee:"Irischer Kaffee",
+drinkTea:"Tee",
+drinkIceCoffee:"Eiskaffee",
+drinkNescafe:"Nescafé",
+drinkCoffeeCream:"Kaffee mit Sahne",
+drinkWhiteCoffee:"Milchkaffee",
+drinkMacchiatoLarge:"Großer Macchiato",
+drinkCappuccinoLarge:"Großer Cappuccino",
+drinkDecafEspresso:"Entkoffeinierter Espresso",
+drinkDoubleEspresso:"Doppelter Espresso",
+drinkEspresso:"Espresso",navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",
+      heroTitle:"Willkommen",heroSubtitle:"Öffnungszeiten: 12:00–19:00",heroBtn:"Speisekarte ansehen",
       aboutTitle:"Über uns",
       aboutText:"Das Restaurant Etienne liegt direkt am Meer und bietet einen wunderschönen Ausblick sowie eine große Auswahl an regionalen und frischen Gerichten. Unsere Mission ist es, unseren Gästen ein unvergessliches gastronomisches Erlebnis in mediterranem Ambiente zu bieten.",
       contactTitle:"Kontakt",
-      contactText:"📍 Adresse: Kapovica 350, Medulin<br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ E-Mail: batana.beach@gmail.com",
+      contactText:"📍 Adresse: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ E-Mail: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
       footerText:"© 2025 Restaurant Etienne | Alle Rechte vorbehalten",
       menuHeroTitle:"Unsere Speisekarte",tabFood:"🍽 Essen",tabDrinks:"🥂 Getränke",
       secStarters:"Vorspeisen",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sardinen in Essig-Zwiebel-Marinade",
@@ -453,7 +596,12 @@
       secMeat:"Fleischgerichte",dishPorkMedallions:"Schweinemedaillons mit Pancetta",dishChickenFillet:"Hähnchenfilet mit Beilage",dishSchnitzel:"Wiener Schnitzel", dishKoljenica:"Schweinshaxe mit Bratkartoffeln",dishKobasica:"Istrische Würste mit Kraut und Kartoffeln",
       secFish:"Fisch & Weichtiere",dishSeabassFillet:"Wolfsbarschfilet",dishGrilledSquid:"Gegrillte Calamari",dishFriedSquidPanko:"In Panko frittierte Calamari mit Beilage",
       secSalads:"Salate",dishMixedSalad:"Gemischter Salat",
-      secDesserts:"Desserts",dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolade"}
+      secDesserts:"Desserts",
+      drinkEspresso:"Espresso",
+      drinkNescafe:"Nescafe",
+      drinkIceCoffee:"Ice coffee",
+      drinkIrishCoffee:"Irish coffee",
+dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolade"}
   };
 
 
@@ -511,6 +659,7 @@
     navLinks.home.textContent = t.navHome;
     navLinks.menu.textContent = t.navMenu;
     navLinks.contact.textContent = t.navContact;
+    if(document.getElementById('nav-reviews')) document.getElementById('nav-reviews').textContent = t.navReviews;
     // home
     document.getElementById('hero-title').textContent = t.heroTitle;
     document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
@@ -626,6 +775,5 @@ navLinks.contact.addEventListener('click', (e)=>{
 });
 
 </script>
-
 </body>
 </html>
