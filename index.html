@@ -111,13 +111,52 @@
   color: #fff;
 }
 
-  </style>
+  
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  font-size:24px;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* mobile */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .links{
+    position:absolute;
+    top:70px;
+    right:0;
+    background:rgba(0,0,0,0.9);
+    width:200px;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    padding:20px;
+    display:none !important;
+  }
+
+  .links a{
+    margin:10px 0;
+    font-size:18px;
+  }
+
+  .links.active{
+    display:flex !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <header>
 <nav>
 <div class="brand">Etienne</div>
-<div class="links" style="display:flex;align-items:center;">
+<div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+<div class="links" id="navLinks" style="display:flex;align-items:center;">
 <a href="#home" id="nav-home">Početna</a>
 <a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a><a href="#menu" id="nav-menu">Meni</a>
 <a href="#contact" id="nav-contact">Kontakt</a>
@@ -774,6 +813,17 @@ navLinks.contact.addEventListener('click', (e)=>{
     handleHash();
   }
 });
+
+
+/* hamburger menu */
+const hamburger = document.getElementById("hamburger");
+const navLinksMenu = document.getElementById("navLinks");
+
+if(hamburger){
+  hamburger.addEventListener("click", () => {
+    navLinksMenu.classList.toggle("active");
+  });
+}
 
 </script>
 </body>
