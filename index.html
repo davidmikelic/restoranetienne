@@ -23,7 +23,7 @@
     nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;transition:.3s;text-shadow:0 1px 2px rgba(0,0,0,.4)}
     /* hover i aktivni link sada crni */
     nav a:hover{color:#000}
-    nav a.active{color:#000 !important}
+    nav a.active{color:#fff !important;font-weight:700;}
 
     .brand{font-weight:700;font-size:22px;color:#fff;letter-spacing:1px}
 
@@ -112,41 +112,88 @@
 }
 
   
-/* HAMBURGER */
+
+/* MODERN HAMBURGER MENU */
+
 .hamburger{
-  display:none;
-  font-size:24px;
-  color:#fff;
-  cursor:pointer;
+display:block;
+font-size:26px;
+color:#fff;
+cursor:pointer;
 }
 
-/* mobile */
-@media (max-width:768px){
+/* dropdown menu */
 
-  .hamburger{
-    display:block;
-  }
+.links{
+position:absolute;
+top:70px;
+right:20px;
+background:rgba(0,0,0,0.95);
+width:240px;
+border-radius:12px;
+padding:15px;
+flex-direction:column !important;
+display:none !important;
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+animation:menuFade 0.25s ease;
+}
 
-  .links{
-    position:absolute;
-    top:70px;
-    right:0;
-    background:rgba(0,0,0,0.9);
-    width:200px;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    padding:20px;
-    display:none !important;
-  }
+.links a{
+color:#fff;
+text-decoration:none;
+padding:12px 10px;
+border-radius:8px;
+font-size:18px;
+margin:3px 0;
+}
 
-  .links a{
-    margin:10px 0;
-    font-size:18px;
-  }
+.links a:hover{
+background:rgba(255,255,255,0.08);
+}
 
-  .links.active{
-    display:flex !important;
-  }
+.links.active{
+display:flex !important;
+}
+
+
+/* FIXED HAMBURGER */
+.links{display:none;position:absolute;top:70px;right:20px;background:rgba(0,0,0,.95);width:240px;border-radius:12px;padding:15px;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.links.active{display:flex}
+.links a{color:#fff}
+.links a.active{color:#fff;font-weight:700;background:rgba(255,255,255,.08)}
+
+@keyframes menuFade{
+from{opacity:0;transform:translateY(-10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+}
+
+
+/* hamburger rotate animation */
+
+
+
+
+.hamburger i{
+display:inline-block;
+transition: transform 0.45s ease-in-out;
+transform: rotate(0deg);
+backface-visibility: hidden;
+}
+
+.hamburger.active i{
+transform: rotate(90deg);
+}
+
+
+
+
+
+/* center text in dropdown */
+.links{
+align-items:center;
+text-align:center;
 }
 
 </style>
@@ -156,7 +203,7 @@
 <nav>
 <div class="brand">Etienne</div>
 <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
-<div class="links" id="navLinks" style="display:flex;align-items:center;">
+<div class="links" id="navLinks">
 <a href="#home" id="nav-home">Početna</a>
 <a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a><a href="#menu" id="nav-menu">Meni</a>
 <a href="#contact" id="nav-contact">Kontakt</a>
@@ -821,9 +868,22 @@ const navLinksMenu = document.getElementById("navLinks");
 
 if(hamburger){
   hamburger.addEventListener("click", () => {
-    navLinksMenu.classList.toggle("active");
+    navLinksMenu.classList.toggle("active"); hamburger.classList.toggle("active");
   });
 }
+
+/* close hamburger when clicking outside */
+document.addEventListener("click", (e) => {
+  if(
+    navLinksMenu.classList.contains("active") &&
+    !navLinksMenu.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ){
+    navLinksMenu.classList.remove("active");
+    hamburger.classList.remove("active");
+  }
+});
+
 
 </script>
 </body>
