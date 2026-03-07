@@ -1,779 +1,157 @@
 <!DOCTYPE html>
-
 <html lang="hr">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Restoran Etienne</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Restoran Etienne Medulin | Meni i kontakt</title>
+<meta name="description" content="Restoran Etienne Medulin – svježa riba, tjestenine i domaća istarska jela uz more. Pogledajte naš meni i kontakt.">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <style>
-    :root {
-      --primary:#0d6efd; --bg:#f9fafb; --text:#1a1a1a; --muted:#6c757d; --light:#ffffff;
-      --price-color:#000000;
-      --menu-title-size:30px;   /* H2 u meniju */
-      --menu-subcat-size:22px;  /* podnaslovi (Bijela vina...) */
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+:root{--primary:#0d6efd;--bg:#f9fafb;--text:#1a1a1a;--muted:#6c757d;--light:#ffffff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 
-    /* NAV */
-    header{position:fixed;top:0;left:0;width:100%;z-index:100;background:transparent;transition:background .3s}
-    header.scrolled{background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
-    nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
-    nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;transition:.3s;text-shadow:0 1px 2px rgba(0,0,0,.4)}
-    /* hover i aktivni link sada crni */
-    nav a:hover{color:#000}
-    nav a.active{color:#000 !important}
+/* NAV */
+header{position:fixed;top:0;left:0;width:100%;z-index:100;background:transparent;transition:background .3s}
+header.scrolled{background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
 
-    .brand{font-weight:700;font-size:22px;color:#fff;letter-spacing:1px}
+nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
 
-    /* Lang dropdown (samo kugla) */
-    .lang-dropdown{position:relative;display:inline-block;margin-left:16px}
-    .lang-btn{cursor:pointer;background:none;border:none;color:#fff;font-size:18px;padding:6px 8px;display:flex;align-items:center}
-    .lang-btn .fa-globe{ text-shadow:0 1px 2px rgba(0,0,0,.4)}
-    .lang-menu{position:absolute;right:0;top:120%;background:rgba(0,0,0,.85);color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:10px;overflow:hidden;min-width:140px;backdrop-filter:blur(6px);transform:scale(.95);opacity:0;pointer-events:none;transition:.15s}
-    .lang-dropdown.open .lang-menu{transform:scale(1);opacity:1;pointer-events:auto}
-    .lang-item{display:block;width:100%;text-align:left;padding:10px 14px;background:transparent;border:none;color:#fff;cursor:pointer;font-weight:600;letter-spacing:.5px}
-    .lang-item:hover{background:rgba(255,255,255,.08)}
-    .lang-item.active{color:#61dafb}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;transition:.3s}
+nav a:hover{color:#000}
 
-    /* HERO */
-    .hero{background:url("etienne.jpg") center/cover no-repeat;height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative}
-    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
-    .hero > div{position:relative;z-index:2}
-    .hero h1{font-size:clamp(36px,6vw,64px);margin-bottom:16px;font-weight:700}
-    .hero p{font-size:20px;margin-bottom:28px;color:#f1f1f1}
-    .btn{background:var(--primary);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-    .btn:hover{background:#0b5ed7}
+.brand{font-weight:700;font-size:22px;color:#fff;letter-spacing:1px}
 
-    /* PAGES (views) */
-    .page{display:none}
-    .page.active{display:block}
-    section.container{max-width:1100px;margin:auto;padding:90px 20px}
-    h2{font-size:32px;margin-bottom:20px;text-align:center;font-weight:700}
-    p.lead{text-align:center;color:var(--muted);font-size:18px;max-width:700px;margin:0 auto}
+.links{display:flex;align-items:center}
 
-    footer{background:var(--light);color:var(--muted);text-align:center;padding:24px;font-size:14px}
+.menu-toggle{display:none;background:none;border:none;color:white;font-size:24px;cursor:pointer}
 
-    /* Tabs (meni) */
-    .tabs{display:flex;justify-content:center;margin-bottom:30px;gap:12px}
-    .tab-btn{background:var(--light);border:1px solid #ddd;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s}
-    .tab-btn.active{background:#000;color:#fff;border-color:#000}  /* aktivna tab tipka sada crna */
+/* HERO */
+.hero{background:url("etienne.jpg") center/cover no-repeat;height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.hero>div{position:relative;z-index:2}
 
-    /* Jednake kućice + centriranje sadržaja */
-    .menu-section{display:none}
-    .menu-section.active{display:block}
-    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:stretch;justify-items:stretch}
-    .menu-item{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:180px;width:100%}
-    .menu-item:hover{transform:translateY(-5px);box-shadow:0 8px 18px rgba(0,0,0,.1)}
-    .menu-item h3{margin-bottom:8px;font-size:20px}
-    .menu-item p{margin-bottom:10px;color:var(--muted);font-size:15px}
-    .price{font-weight:700;color:var(--price-color);font-size:16px;margin-top:10px} /* cijena crna */
+.hero h1{font-size:clamp(36px,6vw,64px);margin-bottom:16px;font-weight:700}
+.hero p{font-size:20px;margin-bottom:28px;color:#f1f1f1}
 
-    /* Jedna kartica u redu → drži standardnu širinu i centriraj */
-    .menu-grid.single-card{grid-template-columns:260px;justify-content:center}
+.btn{background:var(--primary);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;margin:6px}
+.btn:hover{background:#0b5ed7}
 
-    /* === Ujednačeni naslovi u MENIJU === */
-    #page-menu section > h2{
-      font-family: inherit;
-      font-weight: 700;
-      font-size: var(--menu-title-size);
-      line-height: 1.2;
-      text-align: center;
-      margin: 48px 0 24px;
-      letter-spacing: .2px;
-    }
-    #page-menu .subcategory{
-      font-family: inherit;
-      font-weight: 700;
-      font-size: var(--menu-subcat-size);
-      line-height: 1.25;
-      text-align: center !important;
-      margin: 40px 0 18px !important;
-      letter-spacing: .2px;
-    }
+section.container{max-width:1100px;margin:auto;padding:90px 20px}
 
-    @media (max-width:600px){ 
-      nav a{margin-left:12px} .lang-dropdown{margin-left:12px}
-      .menu-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-      .menu-grid.single-card{grid-template-columns:200px}
-      .menu-item{min-height:170px;padding:16px}
-    }
-/* ikone u tabovima */
-.tab-btn .tab-ico{
-  margin-right: 8px;
-  font-size: 18px;
-  color: #000;     /* crna ikona default */
+h2{font-size:32px;margin-bottom:20px;text-align:center;font-weight:700}
+p.lead{text-align:center;color:var(--muted);font-size:18px;max-width:700px;margin:0 auto}
+
+footer{background:var(--light);color:var(--muted);text-align:center;padding:24px;font-size:14px}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.menu-toggle{display:block}
+
+.links{
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:rgba(0,0,0,.9);
+flex-direction:column;
+align-items:center;
+display:none;
+padding:20px 0
 }
 
-/* kad je tab aktivan (pozadina crna), ikona ide bijela da se vidi */
-.tab-btn.active .tab-ico{
-  color: #fff;
-}
+.links a{margin:10px 0}
 
-  </style>
+.links.active{display:flex}
+
+}
+</style>
 </head>
+
 <body>
+
 <header>
 <nav>
+
 <div class="brand">Etienne</div>
-<div class="links" style="display:flex;align-items:center;">
-<a href="#home" id="nav-home">Početna</a>
-<a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a><a href="#menu" id="nav-menu">Meni</a>
-<a href="#contact" id="nav-contact">Kontakt</a>
-<!-- 🌐 -->
-<div class="lang-dropdown" id="langDropdown">
-<button aria-expanded="false" aria-haspopup="true" aria-label="Odabir jezika" class="lang-btn">
-<i class="fa-solid fa-globe"></i>
+
+<button class="menu-toggle">
+<i class="fa-solid fa-bars"></i>
 </button>
-<div aria-label="Jezici" class="lang-menu" role="menu">
-<button class="lang-item" data-lang="hr" role="menuitem">HR</button>
-<button class="lang-item" data-lang="en" role="menuitem">EN</button>
-<button class="lang-item" data-lang="it" role="menuitem">IT</button>
-<button class="lang-item" data-lang="de" role="menuitem">DE</button>
+
+<div class="links">
+<a href="#home">Početna</a>
+<a href="https://www.google.com/search?q=Restoran+Etienne+Recenzije" target="_blank">Recenzije</a>
+<a href="#menu">Meni</a>
+<a href="#contact">Kontakt</a>
 </div>
-</div>
-</div>
+
 </nav>
 </header>
-<!-- PAGE: HOME -->
-<div aria-hidden="false" class="page active" id="page-home">
+
 <section class="hero">
 <div>
-<h1 id="hero-title">Dobrodošli</h1>
-<p id="hero-subtitle">Radno vrijeme: 12:00–19:00</p>
-<a class="btn" href="#menu" id="hero-btn">Pogledaj meni</a>
+<h1>Dobrodošli</h1>
+<p>Radno vrijeme: 12:00–19:00</p>
+
+<a class="btn" href="#menu">Pogledaj meni</a>
+<a class="btn" href="mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola">Rezerviraj stol</a>
+
 </div>
 </section>
+
 <section class="container">
-<h2 id="about-title">O nama</h2>
-<p class="lead" id="about-text">Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.</p>
+<h2>O nama</h2>
+<p class="lead">
+Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela.
+Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.
+</p>
 </section>
+
 <section class="container" id="contact">
-<h2 id="contact-title">Kontakt</h2>
-<p class="lead" id="contact-text">📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br/>
-      ☎ Telefon: <a href="tel:+38598224394">098 224 394</a><br/>
-      ✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a></p>
+<h2>Kontakt</h2>
+
+<p class="lead">
+📍 Adresa:
+<a href="https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin" target="_blank">
+Kapovica 350, Medulin
+</a>
+<br>
+☎ Telefon:
+<a href="tel:+38598224394">098 224 394</a>
+
+</p>
+
+<iframe
+src="https://www.google.com/maps?q=Restoran+Etienne+Medulin&output=embed"
+width="100%"
+height="350"
+style="border:0;border-radius:10px;margin-top:20px"
+loading="lazy">
+</iframe>
+
 </section>
-</div>
-<!-- PAGE: MENU -->
-<div aria-hidden="true" class="page" id="page-menu">
-<section class="hero">
-<div><h1 data-i18n="menuHeroTitle" id="menu-hero-title">Naš meni</h1></div>
-</section>
-<section class="container">
-<div class="tabs">
-<button class="tab-btn active" data-tab="food" id="tab-food">
-<i aria-hidden="true" class="fa-solid fa-utensils tab-ico"></i>
-    Hrana
-  </button>
-<button class="tab-btn" data-tab="drinks" id="tab-drinks">
-<i aria-hidden="true" class="fa-solid fa-champagne-glasses tab-ico"></i>
-    Pića
-  </button>
-<button class="tab-btn" data-i18n="tabWine" data-tab="wine" id="tab-wine">Vina</button></div>
-<!-- FOOD -->
-<div class="menu-section active" id="food">
-<section>
-<h2 data-i18n="secStarters">Predjela</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishPrsutSir">Istarski pršut</h3><div class="price">€ 13,50</div></div>
-<div class="menu-item"><h3 data-i18n="dishSardele">Srdele na savor</h3><div class="price">€ 13,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secSoups">Juhe</h2>
-<div class="menu-grid single-card">
-<div class="menu-item"><h3 data-i18n="dishBeefSoup">Goveđa juha</h3><div class="price">€ 5,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secPasta">Tjestenine</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishPastaSeafood">Tjestenina s morskim plodovima</h3><div class="price">€ 19,50</div></div>
-<div class="menu-item"><h3 data-i18n="dishPastaTruffleProsciutto">Palenta na brodet</h3><div class="price">€ 19,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishRavioliShrimp">Šugo od kokoške sa njokama</h3><div class="price">€ 18,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishTagliatelleSalmon">Zeleni rezanci s lososom i gorgonzolom</h3><div class="price">€ 17,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishSpaghettiCarbonara">Špageti Carbonara</h3><div class="price">€ 14,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secMeat">Mesna jela</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishPorkMedallions">Svinjski medaljoni s pancetom</h3><div class="price">€ 17,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishChickenFillet">Pileći file s prilogom</h3><div class="price">€ 12,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishSchnitzel">Bečki odrezak</h3><div class="price">€ 13,50</div></div>
-<div class="menu-item"><h3 data-i18n="dishKoljenica">Svinjska koljenica sa pečenim krompirom</h3><div class="price">€ 19,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishKobasica">Istarske kobasice sa kupusom i krumpirom</h3><div class="price">€ 17,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secFish">Ribe i mekušci</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishSeabassFillet">File brancina</h3><div class="price">€ 18,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishGrilledSquid">Lignje na žaru</h3><div class="price">€ 19,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishFriedSquidPanko">Lignje pržene u panko mrvicama s prilogom</h3><div class="price">€ 19,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secSalads">Salate</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishMixedSalad">Miješana salata</h3><div class="price">€ 5,50</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secDesserts">Deserti</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishCrepesJam">Palačinke s marmeladom</h3><div class="price">€ 5,50</div></div>
-<div class="menu-item"><h3 data-i18n="dishCrepesChocolate">Palačinke s čokoladom</h3><div class="price">€ 5,50</div></div>
-</div>
-</section>
-</div>
-<!-- DRINKS -->
-<div class="menu-section" id="drinks">
-<section>
-<h2 data-i18n="secHotDrinks">Topli napitci</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="drinkEspresso">Espresso</h3><div class="price">€ 1,80</div></div>
-<div class="menu-item"><h3 data-i18n="drinkDoubleEspresso">Dupli espresso</h3><div class="price">€ 3,60</div></div>
-<div class="menu-item"><h3 data-i18n="drinkDecafEspresso">Espresso bez kofeina</h3><div class="price">€ 2,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkCappuccinoLarge">Veliki cappuccino</h3><div class="price">€ 2,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkMacchiatoLarge">Veliki macchiato</h3><div class="price">€ 2,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkWhiteCoffee">Bijela kava</h3><div class="price">€ 2,80</div></div>
-<div class="menu-item"><h3 data-i18n="drinkCoffeeCream">Kava sa šlagom</h3><div class="price">€ 2,80</div></div>
-<div class="menu-item"><h3 data-i18n="drinkNescafe">Nescafe</h3><div class="price">€ 3,00</div></div>
-<div class="menu-item"><h3 data-i18n="drinkIceCoffee">Ice coffee</h3><div class="price">€ 6,20</div></div>
-<div class="menu-item"><h3 data-i18n="drinkTea">Čaj</h3><div class="price">€ 2,20</div></div>
-<div class="menu-item"><h3 data-i18n="drinkIrishCoffee">Irish coffee</h3><div class="price">€ 6,50</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secSoftDrinks">Bezalkoholna pića</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3>Pepsi 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Pepsi Zero 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Schweppes Tangerine 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Schweppes Bitter Lemon 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Schweppes Tonic water 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Pašareta 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkIcedTea">Ledeni čaj 0,25 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkLemonade">Limunada 0,40 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkSparkling1">Mineralna 1,00 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkSparkling05">Mineralna 0,50 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkStill1">Prirodna voda 1,00 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3 data-i18n="drinkStill05">Prirodna voda 0,50 l</h3><div class="price">€ 3,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secDraftDrinks">Šankomat (točeno)</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="draftColaSprite03">Cola / Sprite 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="draftColaSprite05">Cola / Sprite 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3 data-i18n="draftOrange03">Naranča 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="draftOrange05">Naranča 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3 data-i18n="draftApple03">Jabuka 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3 data-i18n="draftApple05">Jabuka 0,50 l</h3><div class="price">€ 5,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secMixedDrinks">Miješana pića</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3>Gemišt 0,30 l</h3><div class="price">€ 3,20</div></div>
-<div class="menu-item"><h3>Gemišt 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3>Bambus 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Bambus 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3>Miš maš 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Miš maš 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3>Radla 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Radla 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3>Špeci 0,30 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Špeci 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3>Apfelscholle 0,30 l</h3><div class="price">€ 3,20</div></div>
-<div class="menu-item"><h3>Apfelscholle 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3>Aperol mix 0,30 l</h3><div class="price">€ 7,30</div></div>
-<div class="menu-item"><h3>Hugo 0,30 l</h3><div class="price">€ 7,30</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secCocktails">Kokteli</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3>Summer Sunrise</h3><p>vodka, orange juice, grenadine</p><div class="price">€ 10,00</div></div>
-<div class="menu-item"><h3>Pina Colada</h3><p>bacardi, pineapple juice, cream, coconut syrup</p><div class="price">€ 10,00</div></div>
-<div class="menu-item"><h3>Cuba Libre</h3><p>bacardi, cola, lemon</p><div class="price">€ 10,00</div></div>
-<div class="menu-item"><h3>Mojito</h3><p>bacardi, black sugar, lime, mint, soda</p><div class="price">€ 11,00</div></div>
-<div class="menu-item"><h3>Blue Hawaii</h3><p>bacardi, vodka, blue curacao, pineapple juice</p><div class="price">€ 10,00</div></div>
-</div>
-</section>
-<section>
-<h2 data-i18n="secBeers">Pivo</h2>
-<div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="beerDraught05">Pivo točeno 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3 data-i18n="beerDraught03">Pivo točeno 0,30 l</h3><div class="price">€ 3,20</div></div>
-<div class="menu-item"><h3>Tuborg 0,33 l</h3><div class="price">€ 3,50</div></div>
-<div class="menu-item"><h3>Pan Lager 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3>Pan Zlatni 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3 data-i18n="beerNonAlcoholic">Pan Bezalkoholni 0,50 l</h3><div class="price">€ 4,50</div></div>
-<div class="menu-item"><h3 data-i18n="beerBudweiserDarkLight">Budweiser tamni / svijetli 0,50 l</h3><div class="price">€ 5,00</div></div>
-<div class="menu-item"><h3>Erdinger / Paulaner 0,50 l</h3><div class="price">€ 5,50</div></div>
-</div>
-</section>
-</div><div class="menu-section" id="wine"><section>
-<h2 data-i18n="secWines">Vina</h2>
-<div class="menu-grid">
-<div class="menu-item">
-<h3 data-i18n="wineHouseOpen">Domaće otvoreno vino bijelo / crno</h3>
-<p data-i18n="wineHouseOpenNote">Kućno vino (bijelo/crno)</p>
-<div class="price">1 l € 15,00</div>
-</div>
-</div>
-<h3 class="subcategory" data-i18n="subWhiteWines">Bijela vina</h3>
-<div class="menu-grid">
-<div class="menu-item"><h3>Malvazija Babos</h3><div class="price">0,75 l € 28,50</div></div>
-<div class="menu-item"><h3>Valbisugo Babos</h3><div class="price">0,75 l € 35,00</div></div>
-<div class="menu-item"><h3>Muškat Babos</h3><div class="price">0,75 l € 28,50</div></div>
-</div>
-<h3 class="subcategory" data-i18n="subRedWines">Crna vina</h3>
-<div class="menu-grid">
-<div class="menu-item"><h3>Merlot Babos</h3><div class="price">0,75 l € 28,50</div></div>
-<div class="menu-item"><h3>Marana Babos</h3><div class="price">0,75 l € 35,00</div></div>
-</div>
-<h3 class="subcategory" data-i18n="subSparkling">Pjenušci</h3>
-<div class="menu-grid">
-<div class="menu-item"><h3>Brut Babos</h3><div class="price">0,75 l € 32,50</div></div>
-<div class="menu-item"><h3>Rosé Babos</h3><div class="price">0,75 l € 32,50</div></div>
-</div>
-<h3 class="subcategory" data-i18n="subDessertWines">Desertna vina</h3>
-<div class="menu-grid">
-<div class="menu-item"><h3>Martini Bianco</h3><div class="price">0,10 l € 4,00</div></div>
-<div class="menu-item"><h3>Martini Rosso</h3><div class="price">0,10 l € 4,00</div></div>
-</div>
-</section></div>
-</section>
-</div>
+
 <footer>
-<span id="footer-text">© 2025 Restoran Etienne | Sva prava pridržana</span>
+© 2025 Restoran Etienne | Sva prava pridržana
 </footer>
+
 <script>
-  /* ---------- Translations (skraćeno: ostaje isto kao ranije) ---------- */
-  const T = {
-    hr:{
-secHotDrinks:"Topli napitci",
-secSoftDrinks:"Bezalkoholna pića",
-secDraftDrinks:"Šankomat (točeno)",
-secMixedDrinks:"Miješana pića",
-secCocktails:"Kokteli",
-secBeers:"Pivo",
-secWines:"Vina",
 
-navReviews:"Recenzije",
-wineHouseOpenNote:"Kućno vino (bijelo/crno)",
-wineHouseOpen:"Domaće otvoreno vino bijelo / crno",
-subDessertWines:"Desertna vina",
-subSparkling:"Pjenušci",
-subRedWines:"Crna vina",
-subWhiteWines:"Bijela vina",
-tabWine:"🍷 Vina",
-draftApple05:"Jabuka 0,50 l",
-draftApple03:"Jabuka 0,30 l",
-draftOrange05:"Naranča 0,50 l",
-draftOrange03:"Naranča 0,30 l",
-draftColaSprite05:"Cola / Sprite 0,50 l",
-draftColaSprite03:"Cola / Sprite 0,30 l",
-drinkStill05:"Prirodna voda 0,50 l",
-drinkStill1:"Prirodna voda 1,00 l",
-drinkSparkling05:"Mineralna 0,50 l",
-drinkSparkling1:"Mineralna 1,00 l",
-drinkLemonade:"Limunada 0,40 l",
-drinkIcedTea:"Ledeni čaj 0,25 l",
-drinkIrishCoffee:"Irish coffee",
-drinkTea:"Čaj",
-drinkIceCoffee:"Ice coffee",
-drinkNescafe:"Nescafe",
-drinkCoffeeCream:"Kava sa šlagom",
-drinkWhiteCoffee:"Bijela kava",
-drinkMacchiatoLarge:"Veliki macchiato",
-drinkCappuccinoLarge:"Veliki cappuccino",
-drinkDecafEspresso:"Espresso bez kofeina",
-drinkDoubleEspresso:"Dupli espresso",
-drinkEspresso:"Espresso",navHome:"Početna",navMenu:"Meni",navContact:"Kontakt",
-      heroTitle:"Dobrodošli",heroSubtitle:"Radno vrijeme: 12:00–19:00",heroBtn:"Pogledaj meni",
-      aboutTitle:"O nama",
-      aboutText:"Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
-      contactTitle:"Kontakt",
-      contactText:"📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
-      footerText:"© 2025 Restoran Etienne | Sva prava pridržana",
+const toggle=document.querySelector(".menu-toggle")
+const links=document.querySelector(".links")
 
-      menuHeroTitle:"Naš meni",tabFood:"🍽 Hrana",tabDrinks:"🥂 Pića",
-      secStarters:"Predjela",dishPrsutSir:"Istarski pršut",dishSardele:"Sardele na savor",
-      secSoups:"Juhe",dishBeefSoup:"Goveđa juha",
-      secPasta:"Tjestenine",dishPastaSeafood:"Tjestenina s morskim plodovima",
-      dishPastaTruffleProsciutto:"Palenta na brodet",
-      dishRavioliShrimp:"Šugo od kokoške sa njokama",
-      dishTagliatelleSalmon:"Zeleni rezanci s lososom i gorgonzolom",
-      dishSpaghettiCarbonara:"Špageti Carbonara",
-      secMeat:"Mesna jela",dishPorkMedallions:"Svinjski medaljoni s pancetom",
-      dishChickenFillet:"Pileći file s prilogom",dishSchnitzel:"Bečki odrezak",
-      dishKoljenica:"Svinjska koljenica sa pečenim krompirom",dishKobasica:"Istarske kobasice sa kupusom i krumpirom",
-      secFish:"Ribe i mekušci",dishSeabassFillet:"File brancina",
-      dishGrilledSquid:"Lignje na žaru",dishFriedSquidPanko:"Lignje pržene u panko mrvicama s prilogom",
-      secSalads:"Salate",dishMixedSalad:"Miješana salata",
-      secDesserts:"Deserti",
-      drinkEspresso:"Espresso",
-      drinkNescafe:"Nescafe",
-      drinkIceCoffee:"Ledena kava",
-      drinkIrishCoffee:"Irish coffee",
-dishCrepesJam:"Palačinke s marmeladom",dishCrepesChocolate:"Palačinke s čokoladom"},
-    en:{
-secHotDrinks:"Hot drinks",
-secSoftDrinks:"Soft drinks",
-secDraftDrinks:"Draft drinks",
-secMixedDrinks:"Mixed drinks",
-secCocktails:"Cocktails",
-secBeers:"Beer",
-secWines:"Wines",
+toggle.addEventListener("click",()=>{
+links.classList.toggle("active")
+})
 
-navReviews:"Reviews",
-wineHouseOpenNote:"House wine (white/red)",
-wineHouseOpen:"House wine white / red",
-subDessertWines:"Dessert wines",
-subSparkling:"Sparkling wines",
-subRedWines:"Red wines",
-subWhiteWines:"White wines",
-tabWine:"🍷 Wines",
-draftApple05:"Apple juice 0.50 l",
-draftApple03:"Apple juice 0.30 l",
-draftOrange05:"Orange juice 0.50 l",
-draftOrange03:"Orange juice 0.30 l",
-draftColaSprite05:"Cola / Sprite 0.50 l",
-draftColaSprite03:"Cola / Sprite 0.30 l",
-drinkStill05:"Still water 0.50 l",
-drinkStill1:"Still water 1.00 l",
-drinkSparkling05:"Sparkling water 0.50 l",
-drinkSparkling1:"Sparkling water 1.00 l",
-drinkLemonade:"Lemonade 0.40 l",
-drinkIcedTea:"Iced tea 0.25 l",
-drinkIrishCoffee:"Irish coffee",
-drinkTea:"Tea",
-drinkIceCoffee:"Ice coffee",
-drinkNescafe:"Nescafe",
-drinkCoffeeCream:"Coffee with cream",
-drinkWhiteCoffee:"White coffee",
-drinkMacchiatoLarge:"Large macchiato",
-drinkCappuccinoLarge:"Large cappuccino",
-drinkDecafEspresso:"Decaf espresso",
-drinkDoubleEspresso:"Double espresso",
-drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menu",navContact:"Contact",
-      heroTitle:"Welcome",heroSubtitle:"Opening hours: 12:00–19:00",heroBtn:"View menu",
-      aboutTitle:"About us",
-      aboutText:"Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
-      contactTitle:"Contact",
-      contactText:"📍 Address: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
-      footerText:"© 2025 Restaurant Etienne | All rights reserved",
-      menuHeroTitle:"Our Menu",tabFood:"🍽 Food",tabDrinks:"🥂 Drinks",
-      secStarters:"Starters",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sardines marinated in vinegar and onions",
-      secSoups:"Soups",dishBeefSoup:"Beef soup",
-      secPasta:"Pasta",dishPastaSeafood:"Seafood pasta",dishPastaTruffleProsciutto:"Polenta with fish stew",
-      dishRavioliShrimp:"Chicken ragù with gnocchi",dishTagliatelleSalmon:"Green tagliatelle with salmon and gorgonzola",
-      dishSpaghettiCarbonara:"Spaghetti Carbonara",
-      secMeat:"Meat dishes",dishPorkMedallions:"Pork medallions with pancetta",dishChickenFillet:"Chicken fillet with side", dishKoljenica:"Pork knuckle with roasted potatoes",dishKobasica:"Istrian sausages with cabbage and potatoes",
-      dishSchnitzel:"Wiener schnitzel",secFish:"Fish & molluscs",dishSeabassFillet:"Seabass fillet",dishGrilledSquid:"Grilled squid",dishFriedSquidPanko:"Panko-fried squid with side",
-      secSalads:"Salads",dishMixedSalad:"Mixed salad",
-      secDesserts:"Desserts",
-      drinkEspresso:"Espresso",
-      drinkNescafe:"Nescafe",
-      drinkIceCoffee:"Ice coffee",
-      drinkIrishCoffee:"Irish coffee",
-dishCrepesJam:"Crepes with jam",dishCrepesChocolate:"Crepes with chocolate"},
-    it:{
-secHotDrinks:"Bevande calde",
-secSoftDrinks:"Bevande analcoliche",
-secDraftDrinks:"Bevande alla spina",
-secMixedDrinks:"Bevande miste",
-secCocktails:"Cocktail",
-secBeers:"Birra",
-secWines:"Vini",
-
-navReviews:"Recensioni",
-wineHouseOpenNote:"Vino della casa (bianco/rosso)",
-wineHouseOpen:"Vino della casa bianco / rosso",
-subDessertWines:"Vini da dessert",
-subSparkling:"Spumanti",
-subRedWines:"Vini rossi",
-subWhiteWines:"Vini bianchi",
-tabWine:"🍷 Vini",
-draftApple05:"Mela 0,50 l",
-draftApple03:"Mela 0,30 l",
-draftOrange05:"Arancia 0,50 l",
-draftOrange03:"Arancia 0,30 l",
-draftColaSprite05:"Cola / Sprite 0,50 l",
-draftColaSprite03:"Cola / Sprite 0,30 l",
-drinkStill05:"Acqua naturale 0,50 l",
-drinkStill1:"Acqua naturale 1,00 l",
-drinkSparkling05:"Acqua frizzante 0,50 l",
-drinkSparkling1:"Acqua frizzante 1,00 l",
-drinkLemonade:"Limonata 0,40 l",
-drinkIcedTea:"Tè freddo 0,25 l",
-drinkIrishCoffee:"Caffè irlandese",
-drinkTea:"Tè",
-drinkIceCoffee:"Caffè freddo",
-drinkNescafe:"Nescafè",
-drinkCoffeeCream:"Caffè con panna",
-drinkWhiteCoffee:"Caffè latte",
-drinkMacchiatoLarge:"Macchiato grande",
-drinkCappuccinoLarge:"Cappuccino grande",
-drinkDecafEspresso:"Espresso decaffeinato",
-drinkDoubleEspresso:"Espresso doppio",
-drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menù",navContact:"Contatti",    
-      heroTitle:"Benvenuti",heroSubtitle:"Orario di apertura: 12:00–19:00",heroBtn:"Guarda il menù",
-      aboutTitle:"Chi siamo",
-      aboutText:"Il ristorante Etienne si trova a due passi dal mare e offre una splendida vista insieme a una ricca selezione di piatti locali e freschi. La nostra missione è offrire agli ospiti un'esperienza gastronomica indimenticabile in un'atmosfera mediterranea.",
-      contactTitle:"Contatti",
-      contactText:"📍 Indirizzo: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefono: <a href='tel:+38598224394'>098 224 394</a><br>✉ Email: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
-      footerText:"© 2025 Ristorante Etienne | Tutti i diritti riservati",
-      menuHeroTitle:"Il nostro menù",tabFood:"🍽 Cibo",tabDrinks:"🥂 Bevande",
-      secStarters:"Antipasti",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sarde in savòr",
-      secSoups:"Zuppe",dishBeefSoup:"Brodo di manzo",
-      secPasta:"Paste",dishPastaSeafood:"Pasta ai frutti di mare",dishPastaTruffleProsciutto:"Polenta con brodetto di pesce",dishRavioliShrimp:"Ragù di pollo con gnocchi",dishTagliatelleSalmon:"Tagliatelle verdi con salmone e gorgonzola",dishSpaghettiCarbonara:"Spaghetti alla Carbonara",
-      secMeat:"Piatti di carne",dishPorkMedallions:"Medaglioni di maiale con pancetta",dishChickenFillet:"Filetto di pollo con contorno",dishSchnitzel:"Cotoletta alla viennese",dishKoljenica:"Stinco di maiale con patate arrosto",dishKobasica:"Salsicce istriane con cavolo e patate",
-      secFish:"Pesce e molluschi",dishSeabassFillet:"Filetto di branzino",dishGrilledSquid:"Calamari alla griglia",dishFriedSquidPanko:"Calamari fritti in panko con contorno",
-      secSalads:"Insalate",dishMixedSalad:"Insalata mista",
-      secDesserts:"Dessert",
-      drinkEspresso:"Espresso",
-      drinkNescafe:"Nescafe",
-      drinkIceCoffee:"Caffè freddo",
-      drinkIrishCoffee:"Irish coffee",
-dishCrepesJam:"Crêpes con marmellata",dishCrepesChocolate:"Crêpes al cioccolato"},
-    de:{
-secHotDrinks:"Heißgetränke",
-secSoftDrinks:"Alkoholfreie Getränke",
-secDraftDrinks:"Getränke vom Zapfhahn",
-secMixedDrinks:"Mixgetränke",
-secCocktails:"Cocktails",
-secBeers:"Bier",
-secWines:"Weine",
-
-navReviews:"Bewertungen",
-wineHouseOpenNote:"Hauswein (weiß/rot)",
-wineHouseOpen:"Hauswein weiß / rot",
-subDessertWines:"Dessertweine",
-subSparkling:"Schaumweine",
-subRedWines:"Rotweine",
-subWhiteWines:"Weißweine",
-tabWine:"🍷 Weine",
-draftApple05:"Apfel 0,50 l",
-draftApple03:"Apfel 0,30 l",
-draftOrange05:"Orange 0,50 l",
-draftOrange03:"Orange 0,30 l",
-draftColaSprite05:"Cola / Sprite 0,50 l",
-draftColaSprite03:"Cola / Sprite 0,30 l",
-drinkStill05:"Stilles Wasser 0,50 l",
-drinkStill1:"Stilles Wasser 1,00 l",
-drinkSparkling05:"Mineralwasser 0,50 l",
-drinkSparkling1:"Mineralwasser 1,00 l",
-drinkLemonade:"Limonade 0,40 l",
-drinkIcedTea:"Eistee 0,25 l",
-drinkIrishCoffee:"Irischer Kaffee",
-drinkTea:"Tee",
-drinkIceCoffee:"Eiskaffee",
-drinkNescafe:"Nescafé",
-drinkCoffeeCream:"Kaffee mit Sahne",
-drinkWhiteCoffee:"Milchkaffee",
-drinkMacchiatoLarge:"Großer Macchiato",
-drinkCappuccinoLarge:"Großer Cappuccino",
-drinkDecafEspresso:"Entkoffeinierter Espresso",
-drinkDoubleEspresso:"Doppelter Espresso",
-drinkEspresso:"Espresso",navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",
-      heroTitle:"Willkommen",heroSubtitle:"Öffnungszeiten: 12:00–19:00",heroBtn:"Speisekarte ansehen",
-      aboutTitle:"Über uns",
-      aboutText:"Das Restaurant Etienne liegt direkt am Meer und bietet einen wunderschönen Ausblick sowie eine große Auswahl an regionalen und frischen Gerichten. Unsere Mission ist es, unseren Gästen ein unvergessliches gastronomisches Erlebnis in mediterranem Ambiente zu bieten.",
-      contactTitle:"Kontakt",
-      contactText:"📍 Adresse: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ E-Mail: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
-      footerText:"© 2025 Restaurant Etienne | Alle Rechte vorbehalten",
-      menuHeroTitle:"Unsere Speisekarte",tabFood:"🍽 Essen",tabDrinks:"🥂 Getränke",
-      secStarters:"Vorspeisen",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sardinen in Essig-Zwiebel-Marinade",
-      secSoups:"Suppen",dishBeefSoup:"Rindsuppe",
-      secPasta:"Pasta",dishPastaSeafood:"Pasta mit Meeresfrüchten",dishPastaTruffleProsciutto:"Polenta mit Fischragout",dishRavioliShrimp:"Hühner-Ragout mit Gnocchi",dishTagliatelleSalmon:"Grüne Tagliatelle mit Lachs und Gorgonzola",dishSpaghettiCarbonara:"Spaghetti Carbonara",
-      secMeat:"Fleischgerichte",dishPorkMedallions:"Schweinemedaillons mit Pancetta",dishChickenFillet:"Hähnchenfilet mit Beilage",dishSchnitzel:"Wiener Schnitzel", dishKoljenica:"Schweinshaxe mit Bratkartoffeln",dishKobasica:"Istrische Würste mit Kraut und Kartoffeln",
-      secFish:"Fisch & Weichtiere",dishSeabassFillet:"Wolfsbarschfilet",dishGrilledSquid:"Gegrillte Calamari",dishFriedSquidPanko:"In Panko frittierte Calamari mit Beilage",
-      secSalads:"Salate",dishMixedSalad:"Gemischter Salat",
-      secDesserts:"Desserts",
-      drinkEspresso:"Espresso",
-      drinkNescafe:"Nescafe",
-      drinkIceCoffee:"Ice coffee",
-      drinkIrishCoffee:"Irish coffee",
-dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolade"}
-  };
-
-
-  /* ---------- Simple router (hash) ---------- */
-  const pages = { home: document.getElementById('page-home'), menu: document.getElementById('page-menu') };
-  const navLinks = { home: document.getElementById('nav-home'), menu: document.getElementById('nav-menu'), contact: document.getElementById('nav-contact') };
-
-  function setActiveNav(which){
-    [navLinks.home, navLinks.menu, navLinks.contact].forEach(a=>a.classList.remove('active'));
-    if (which==='menu') navLinks.menu.classList.add('active');
-    else if (which==='home') navLinks.home.classList.add('active');
-    else navLinks.contact.classList.add('active');
-  }
-
-  function showPage(which){
-    Object.values(pages).forEach(p=>{ p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
-    const pageEl = which === 'menu' ? pages.menu : pages.home;
-    pageEl.classList.add('active');
-    pageEl.setAttribute('aria-hidden','false');
-    setActiveNav(which);
-    window.scrollTo({top:0,behavior:'instant'});
-  }
-
-  function handleHash(){
-    const hash = (location.hash || '#home').replace('#','');
-    if(hash === 'menu'){ showPage('menu'); }
-    else { showPage(hash==='contact' ? 'home' : 'home'); }
-  }
-
-  window.addEventListener('hashchange', handleHash);
-  window.addEventListener('load', handleHash);
-
-  // Sticky header color
-  window.addEventListener('scroll', ()=> {
-    const header = document.querySelector('header');
-    header.classList.toggle('scrolled', window.scrollY > 50);
-  });
-
-  /* ---------- Tabs on menu ---------- */
-  const tabs = document.querySelectorAll(".tab-btn");
-  const sections = document.querySelectorAll(".menu-section");
-  tabs.forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      tabs.forEach(b=>b.classList.remove("active"));
-      sections.forEach(s=>s.classList.remove("active"));
-      btn.classList.add("active");
-      document.getElementById(btn.dataset.tab).classList.add("active");
-    });
-  });
-
-  /* ---------- Language ---------- */
-  function applyTranslations(lang){
-    const t = T[lang] || T.hr;
-    // nav
-    navLinks.home.textContent = t.navHome;
-    navLinks.menu.textContent = t.navMenu;
-    navLinks.contact.textContent = t.navContact;
-    if(document.getElementById('nav-reviews')) document.getElementById('nav-reviews').textContent = t.navReviews;
-    // home
-    document.getElementById('hero-title').textContent = t.heroTitle;
-    document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
-    document.getElementById('hero-btn').textContent = t.heroBtn;
-    document.getElementById('about-title').textContent = t.aboutTitle;
-    document.getElementById('about-text').innerHTML = t.aboutText;
-    document.getElementById('contact-title').textContent = t.contactTitle;
-    document.getElementById('contact-text').innerHTML = t.contactText;
-    document.getElementById('footer-text').textContent = t.footerText;
-    // menu
-    document.getElementById('menu-hero-title').textContent = t.menuHeroTitle;
-    document.getElementById('tab-food').textContent = t.tabFood;
-    document.getElementById('tab-drinks').textContent = t.tabDrinks;
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(t[key]) el.textContent = t[key];
-    });
-    document.documentElement.lang = lang;
-    document.querySelectorAll(".lang-item").forEach(i=>i.classList.toggle("active", i.dataset.lang===lang));
-    localStorage.setItem('language', lang);
-  }
-
-  const langDropdown = document.getElementById("langDropdown");
-  const langButton = langDropdown.querySelector(".lang-btn");
-  langButton.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    const isOpen = langDropdown.classList.toggle("open");
-    langButton.setAttribute("aria-expanded", String(isOpen));
-  });
-  document.addEventListener("click", ()=>{
-    langDropdown.classList.remove("open");
-    langButton.setAttribute("aria-expanded","false");
-  });
-  document.addEventListener("keydown",(e)=>{
-    if(e.key==="Escape"){
-      langDropdown.classList.remove("open");
-      langButton.setAttribute("aria-expanded","false");
-    }
-  });
-  document.querySelectorAll(".lang-item").forEach(btn=>{
-    btn.addEventListener("click",(e)=>{
-      e.stopPropagation();
-      applyTranslations(btn.dataset.lang);
-      langDropdown.classList.remove("open");
-      langButton.setAttribute("aria-expanded","false");
-    });
-  });
-
-  (function init(){
-    const saved = localStorage.getItem('language');
-    let lang = saved && T[saved] ? saved : null;
-    if(!lang){
-      const navLang = (navigator.language || 'hr').toLowerCase();
-      if(navLang.startsWith('en')) lang = 'en';
-      else if(navLang.startsWith('it')) lang = 'it';
-      else if(navLang.startsWith('de')) lang = 'de';
-      else lang = 'hr';
-    }
-    applyTranslations(lang);
-  })();
-
-// pomoćna: glatko skrolaj do elementa uz offset za fiksni header
-function scrollToId(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-  const header = document.querySelector('header');
-  const offset = (header?.offsetHeight || 0) + 12;
-  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
-  window.scrollTo({ top: y, behavior: 'smooth' });
-}
-
-function setActiveNav(which){
-  [navLinks.home, navLinks.menu, navLinks.contact].forEach(a=>a.classList.remove('active'));
-  if (which==='menu') navLinks.menu.classList.add('active');
-  else if (which==='contact') navLinks.contact.classList.add('active');
-  else navLinks.home.classList.add('active');
-}
-
-function showPage(which){
-  Object.values(pages).forEach(p=>{ p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
-  const pageEl = which === 'menu' ? pages.menu : pages.home;
-  pageEl.classList.add('active');
-  pageEl.setAttribute('aria-hidden','false');
-  setActiveNav(which);
-}
-
-function handleHash(){
-  const hash = (location.hash || '#home').replace('#','');
-  if(hash === 'menu'){
-    showPage('menu');
-    window.scrollTo({top:0,behavior:'instant'});
-  } else if (hash === 'contact'){
-    // uvijek prikaži Početnu pa skrolaj na kontakt
-    showPage('contact');        // aktivira crni "Kontakt" u navigaciji
-    // mali delay da layout “sjedne”, pa skrol
-    requestAnimationFrame(()=>scrollToId('contact'));
-  } else {
-    showPage('home');
-    window.scrollTo({top:0,behavior:'instant'});
-  }
-}
-
-window.addEventListener('hashchange', handleHash);
-window.addEventListener('load', handleHash);
-
-// Ako netko klikne "Kontakt", osiguraj hash i ručno pozovi handler (robustno)
-navLinks.contact.addEventListener('click', (e)=>{
-  if(location.hash !== '#contact'){
-    e.preventDefault();
-    location.hash = '#contact';
-    handleHash();
-  }
-});
+window.addEventListener('scroll',()=>{
+const header=document.querySelector('header')
+header.classList.toggle('scrolled',window.scrollY>50)
+})
 
 </script>
+
 </body>
 </html>
