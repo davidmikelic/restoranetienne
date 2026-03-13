@@ -5,15 +5,20 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Restoran Etienne</title>
+
+<link rel="icon" type="image/png" href="favicon/favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <style>
     :root {
-      --primary:#0d6efd; --bg:#f9fafb; --text:#1a1a1a; --muted:#6c757d; --light:#ffffff;
+      --primary:#7a7a7a; --bg:#f9fafb; --text:#1a1a1a; --muted:#6c757d; --light:#ffffff;
       --price-color:#000000;
       --menu-title-size:30px;   /* H2 u meniju */
       --menu-subcat-size:22px;  /* podnaslovi (Bijela vina...) */
     }
     *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 
     /* NAV */
@@ -35,16 +40,16 @@
     .lang-dropdown.open .lang-menu{transform:scale(1);opacity:1;pointer-events:auto}
     .lang-item{display:block;width:100%;text-align:left;padding:10px 14px;background:transparent;border:none;color:#fff;cursor:pointer;font-weight:600;letter-spacing:.5px}
     .lang-item:hover{background:rgba(255,255,255,.08)}
-    .lang-item.active{color:#61dafb}
+    .lang-item.active{color:#fff;background:rgba(255,255,255,.08)}
 
     /* HERO */
-    .hero{background:url("etienne.jpg") center/cover no-repeat;height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative}
+    .hero{background:url("images/etienne.jpg") center/cover no-repeat;height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative}
     .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
     .hero > div{position:relative;z-index:2}
     .hero h1{font-size:clamp(36px,6vw,64px);margin-bottom:16px;font-weight:700}
     .hero p{font-size:20px;margin-bottom:28px;color:#f1f1f1}
     .btn{background:var(--primary);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-    .btn:hover{background:#0b5ed7}
+    .btn:hover{background:#5f5f5f}
 
     /* PAGES (views) */
     .page{display:none}
@@ -65,7 +70,7 @@
     .menu-section.active{display:block}
     .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:stretch;justify-items:stretch}
     .menu-item{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:180px;width:100%}
-    .menu-item:hover{transform:translateY(-5px);box-shadow:0 8px 18px rgba(0,0,0,.1)}
+    .menu-item:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 14px 30px rgba(0,0,0,.15)}
     .menu-item h3{margin-bottom:8px;font-size:20px}
     .menu-item p{margin-bottom:10px;color:var(--muted);font-size:15px}
     .price{font-weight:700;color:var(--price-color);font-size:16px;margin-top:10px} /* cijena crna */
@@ -122,21 +127,9 @@ color:#fff;
 cursor:pointer;
 }
 
-/* dropdown menu */
 
-.links{
-position:absolute;
-top:70px;
-right:20px;
-background:rgba(0,0,0,0.95);
-width:240px;
-border-radius:12px;
-padding:15px;
-flex-direction:column !important;
-display:none !important;
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
-animation:menuFade 0.25s ease;
-}
+
+
 
 .links a{
 color:#fff;
@@ -152,7 +145,7 @@ background:rgba(255,255,255,0.08);
 }
 
 .links.active{
-display:flex !important;
+display:flex;
 }
 
 
@@ -162,15 +155,12 @@ display:flex !important;
 .links a{color:#fff}
 .links a.active{color:#fff;font-weight:700;background:rgba(255,255,255,.08)}
 
-@keyframes menuFade{
-from{opacity:0;transform:translateY(-10px);}
+
 to{opacity:1;transform:translateY(0);}
 }
 
-}
 
 
-/* hamburger rotate animation */
 
 
 
@@ -196,18 +186,449 @@ align-items:center;
 text-align:center;
 }
 
+
+/* GALERIJA */
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:16px;
+margin-top:30px;
+}
+
+
+
+.right-controls{
+display:flex;
+align-items:center;
+gap:14px;
+margin-left:auto;
+}
+
+
+
+
+/* RESERVATION MODAL */
+.reservation-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.55);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+animation:fadeIn .25s ease;
+}
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+.reservation-box{
+background:#fff;
+padding:40px 30px 30px 30px;
+border-radius:14px;
+width:320px;
+display:flex;
+flex-direction:column;
+gap:12px;
+position:relative;
+animation:modalPop .25s ease;
+}
+@keyframes modalPop{
+from{
+opacity:0;
+transform:translateY(20px) scale(.95);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+.reservation-box input{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+.reservation-box button{
+background:#7a7a7a;
+color:#fff;
+border:none;
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+.reservation-close{
+position:absolute;
+top:8px;
+right:10px;
+font-size:26px;
+cursor:pointer;
+line-height:1;
+}
+
+
+.reservation-box select{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+
+/* COMPACT UNIFORM FORM FIELDS */
+.reservation-box input,
+.reservation-box select,
+
+
+
+
+
+
+/* CLEAN BOOKING FORM INPUTS */
+.reservation-box input,
+.reservation-box select{
+  width:100%;
+  height:40px;
+  padding:8px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  line-height:20px;
+  box-sizing:border-box;
+}
+
+/* PHONE INPUT FIX */
+
+
+
+
+/* Dial code same style */
+
+
+/* country dropdown scroll */
+.iti__country-list{
+  max-height:200px;
+  overflow-y:auto;
+}
+
+
+/* CENTER TABLE FORM */
+.reservation-table{
+  width:100%;
+}
+
+.reservation-table td{
+  padding:8px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+/* INPUTS */
+.reservation-table input,
+.reservation-table select{
+  width:100%;
+  height:42px;
+  padding:10px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  line-height:20px;
+  box-sizing:border-box;
+}
+
+/* PHONE INPUT */
+.iti{
+  width:100%;
+}
+
+.iti input{
+  width:100%;
+  height:42px;
+  padding-left:95px !important;
+  font-size:14px;
+  line-height:20px;
+}
+
+.iti__selected-dial-code{
+  font-family:inherit;
+  font-size:14px;
+}
+
+.iti__country-list{
+  max-height:200px;
+  overflow-y:auto;
+}
+
+
+
+to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/css/intlTelInput.css"/>
+
+<style>
+/* PHONE INPUT CLEAN */
+
+
+
+
+/* Dial code font same as input */
+
+
+
+/* samo jedan scroll u country listi */
+.iti__country-list{
+  max-height:200px;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+/* makni dodatni scroll */
+
+
+
+
+.iti *{
+  scrollbar-width:big;
+}
+
+.iti__country-list::-webkit-scrollbar{
+  width:6px;
+}
+
+/* COMPACT UNIFORM FORM FIELDS */
+.reservation-box input,
+.reservation-box select,
+
+
+
+
+
+
+
+/* CLEAN BOOKING FORM INPUTS */
+.reservation-box input,
+.reservation-box select{
+  width:100%;
+  height:40px;
+  padding:8px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  line-height:20px;
+  box-sizing:border-box;
+}
+
+/* PHONE INPUT FIX */
+
+
+
+
+
+
+
+
+
+/* Dial code same style */
+
+
+/* country dropdown scroll */
+.iti__country-list{
+  max-height:200px;
+  overflow-y:auto;
+}
+
+
+/* CENTER TABLE FORM */
+.reservation-table{
+  width:100%;
+}
+
+.reservation-table td{
+  padding:8px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+/* INPUTS */
+.reservation-table input,
+.reservation-table select{
+  width:100%;
+  height:42px;
+  padding:10px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  line-height:20px;
+  box-sizing:border-box;
+}
+
+/* PHONE INPUT */
+.iti{
+  width:100%;
+}
+
+.iti input{
+  width:100%;
+  height:42px;
+  padding-left:95px !important;
+  font-size:14px;
+  line-height:20px;
+}
+
+.iti__selected-dial-code{
+  font-family:inherit;
+  font-size:14px;
+}
+
+.iti__country-list{
+  max-height:200px;
+  overflow-y:auto;
+}
+
+
+
+to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.5.3/css/intlTelInput.css"/>
+
+<style>
+
+
+.g-lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.96);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+animation:fadeIn .35s;
+}
+
+.g-lightbox img{
+max-width:92%;
+max-height:90%;
+border-radius:14px;
+box-shadow:0 30px 80px rgba(0,0,0,.6);
+animation:zoomIn .35s;
+}
+
+.g-close{
+position:absolute;
+top:25px;
+right:35px;
+font-size:38px;
+color:white;
+cursor:pointer;
+}
+
+.g-nav{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:60px;
+color:white;
+cursor:pointer;
+padding:20px;
+user-select:none;
+}
+
+.g-prev{left:30px}
+.g-next{right:30px}
+
+.g-counter{
+position:absolute;
+bottom:30px;
+color:#fff;
+font-size:14px;
+letter-spacing:2px;
+opacity:.8;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{transform:scale(.85);opacity:.3}to{transform:scale(1);opacity:1}}
+</style>
+
+
+<style>
+
+</style>
+
+
+<style>
+
+.gallery-grid img{
+width:100%;
+height:220px;
+object-fit:cover;
+border:3px solid #7a7a7a;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+cursor:pointer;
+transition:transform .35s ease, box-shadow .35s ease, filter .35s ease, border-color .35s ease;
+}
+
+
+
+.gallery-grid img:hover{
+transform:translateY(-6px) scale(1.05);
+box-shadow:0 25px 60px rgba(0,0,0,.4);
+filter:brightness(1.05);
+border-color:#9a9a9a;
+}
+
+
+/* cinematic feel */
+.gallery-grid{
+perspective:1200px;
+}
+
+.gallery-grid img:active{
+transform:scale(.97);
+}
+</style>
+
+
+<style>
+.g-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(8px);
+display:none;align-items:center;justify-content:center;z-index:9999;animation:fadeIn .4s}
+.g-lightbox img{max-width:92%;max-height:92%;border-radius:16px;
+box-shadow:0 40px 120px rgba(0,0,0,.8);animation:zoomIn .45s}
+.g-close{position:absolute;top:25px;right:35px;font-size:40px;color:#fff;cursor:pointer}
+.g-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:60px;color:#fff;cursor:pointer;padding:20px}
+.g-prev{left:25px}.g-next{right:25px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{transform:scale(.85);opacity:.2}to{transform:scale(1);opacity:1}}
+</style>
+
 </head>
 <body>
 <header>
 <nav>
 <div class="brand">Etienne</div>
+<div class="right-controls">
 <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
-<div class="links" id="navLinks">
-<a href="#home" id="nav-home">Početna</a>
-<a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a><a href="#menu" id="nav-menu">Meni</a>
-<a href="#contact" id="nav-contact">Kontakt</a>
-<!-- 🌐 -->
 <div class="lang-dropdown" id="langDropdown">
 <button aria-expanded="false" aria-haspopup="true" aria-label="Odabir jezika" class="lang-btn">
 <i class="fa-solid fa-globe"></i>
@@ -220,6 +641,17 @@ text-align:center;
 </div>
 </div>
 </div>
+
+
+<div class="links" id="navLinks">
+<a href="#home" id="nav-home">Početna</a>
+<a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a>
+<a href="#menu" id="nav-menu">Meni</a>
+<a href="#contact" id="nav-contact">Kontakt</a>
+<a href="#" id="nav-reserve" data-i18n="navReserve" onclick="openReservation();return false;">Rezervacija stola</a>
+<!-- 🌐 -->
+
+</div>
 </nav>
 </header>
 <!-- PAGE: HOME -->
@@ -229,13 +661,24 @@ text-align:center;
 <h1 id="hero-title">Dobrodošli</h1>
 <p id="hero-subtitle">Radno vrijeme: 12:00–19:00</p>
 <a class="btn" href="#menu" id="hero-btn">Pogledaj meni</a>
-<a class="btn" href="mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola">Rezerviraj stol</a>
 </div>
 </section>
-<section class="container">
-<h2 id="about-title">O nama</h2>
-<p class="lead" id="about-text">Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.</p>
+
+
+<section class="container" id="gallery">
+<h2 id="about-title">Galerija</h2>
+<div class="gallery-grid">
+<img loading="lazy" src="images/galerija1.jpg" alt="">
+<img loading="lazy" src="images/galerija2.jpg" alt="">
+<img loading="lazy" src="images/galerija3.jpg" alt="">
+<img loading="lazy" src="images/galerija4.jpg" alt="">
+<img loading="lazy" src="images/galerija5.jpg" alt="">
+<img loading="lazy" src="images/galerija6.jpg" alt="">
+<img loading="lazy" src="images/galerija7.jpg" alt="">
+<img loading="lazy" src="images/galerija8.jpg" alt="">
+</div>
 </section>
+
 <section class="container" id="contact">
 <h2 id="contact-title">Kontakt</h2>
 <p class="lead" id="contact-text">📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br/>
@@ -280,7 +723,7 @@ text-align:center;
 <div class="menu-item"><h3 data-i18n="dishPastaSeafood">Tjestenina s morskim plodovima</h3><div class="price">€ 19,50</div></div>
 <div class="menu-item"><h3 data-i18n="dishPastaTruffleProsciutto">Palenta na brodet</h3><div class="price">€ 19,00</div></div>
 <div class="menu-item"><h3 data-i18n="dishRavioliShrimp">Šugo od kokoške sa njokama</h3><div class="price">€ 18,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishTagliatelleSalmon">Zeleni rezanci s lososom i gorgonzolom</h3><div class="price">€ 17,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishTagliatelleSalmon">Zeleni rezanci s lososom i gorgonzolom</h3><div class="price">€ 17,50</div></div>
 <div class="menu-item"><h3 data-i18n="dishSpaghettiCarbonara">Špageti Carbonara</h3><div class="price">€ 14,00</div></div>
 </div>
 </section>
@@ -291,15 +734,15 @@ text-align:center;
 <div class="menu-item"><h3 data-i18n="dishChickenFillet">Pileći file s prilogom</h3><div class="price">€ 12,00</div></div>
 <div class="menu-item"><h3 data-i18n="dishSchnitzel">Bečki odrezak</h3><div class="price">€ 13,50</div></div>
 <div class="menu-item"><h3 data-i18n="dishKoljenica">Svinjska koljenica sa pečenim krompirom</h3><div class="price">€ 19,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishKobasica">Istarske kobasice sa kupusom i krumpirom</h3><div class="price">€ 17,00</div></div>
 </div>
 </section>
 <section>
 <h2 data-i18n="secFish">Ribe i mekušci</h2>
 <div class="menu-grid">
-<div class="menu-item"><h3 data-i18n="dishSeabassFillet">File brancina</h3><div class="price">€ 18,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishGrilledSquid">Lignje na žaru</h3><div class="price">€ 19,00</div></div>
-<div class="menu-item"><h3 data-i18n="dishFriedSquidPanko">Lignje pržene u panko mrvicama s prilogom</h3><div class="price">€ 19,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishSeabassFillet">File bijele ribe</h3><div class="price">€ 18,50</div></div>
+<div class="menu-item"><h3 data-i18n="dishGrilledSquid">Lignje na žaru/pržene</h3><div class="price">€ 19,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishSardeleZar">Sardele na žaru</h3><div class="price">€ 14,00</div></div>
+<div class="menu-item"><h3 data-i18n="dishSardelePrzene">Sardele pržene</h3><div class="price">€ 15,00</div></div>
 </div>
 </section>
 <section>
@@ -441,6 +884,29 @@ text-align:center;
 <span id="footer-text">© 2025 Restoran Etienne | Sva prava pridržana</span>
 </footer>
 <script>
+
+// --- SUPABASE CONFIG ---
+const SUPABASE_URL = "https://ldspcvlzwtrftiugqwvq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_fEvoIFI8vkaJKVPDlkOB7w_RVZHQ85W";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// --- EMAILJS ---
+(function(){
+emailjs.init("2hLGZD_Kx-kB68-s9");
+})();
+
+const NAME_REGEX = /^[A-Za-zÀ-ž\s'-]{3,}$/;
+const PHONE_REGEX = /^\+?[0-9]{8,15}$/;
+
+const REQUIRED_MSG={
+  hr:"Obavezno polje",
+  en:"Required field",
+  it:"Campo obbligatorio",
+  de:"Pflichtfeld"
+};
+
+
+
   /* ---------- Translations (skraćeno: ostaje isto kao ranije) ---------- */
   const T = {
     hr:{
@@ -453,6 +919,8 @@ secBeers:"Pivo",
 secWines:"Vina",
 
 navReviews:"Recenzije",
+navReserve:"Rezervacija stola",
+resTitle:"Rezervacija stola",resName:"Ime i prezime",resPeople:"Broj osoba",resPhone:"Telefon",resTime:"Vrijeme",resSend:"Pošalji rezervaciju",resFull:"Nažalost svi stolovi za ovaj termin su rezervirani. Molimo odaberite drugi termin.",
 wineHouseOpenNote:"Kućno vino (bijelo/crno)",
 wineHouseOpen:"Domaće otvoreno vino bijelo / crno",
 subDessertWines:"Desertna vina",
@@ -484,7 +952,7 @@ drinkDecafEspresso:"Espresso bez kofeina",
 drinkDoubleEspresso:"Dupli espresso",
 drinkEspresso:"Espresso",navHome:"Početna",navMenu:"Meni",navContact:"Kontakt",
       heroTitle:"Dobrodošli",heroSubtitle:"Radno vrijeme: 12:00–19:00",heroBtn:"Pogledaj meni",
-      aboutTitle:"O nama",
+      aboutTitle:"Galerija",
       aboutText:"Restoran Etienne smješten je tik uz more, nudeći predivan pogled i bogat izbor domaćih i svježih jela. Naša misija je pružiti gostima nezaboravno gastronomsko iskustvo u mediteranskom ambijentu.",
       contactTitle:"Kontakt",
       contactText:"📍 Adresa: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>",
@@ -500,9 +968,9 @@ drinkEspresso:"Espresso",navHome:"Početna",navMenu:"Meni",navContact:"Kontakt",
       dishSpaghettiCarbonara:"Špageti Carbonara",
       secMeat:"Mesna jela",dishPorkMedallions:"Svinjski medaljoni s pancetom",
       dishChickenFillet:"Pileći file s prilogom",dishSchnitzel:"Bečki odrezak",
-      dishKoljenica:"Svinjska koljenica sa pečenim krompirom",dishKobasica:"Istarske kobasice sa kupusom i krumpirom",
-      secFish:"Ribe i mekušci",dishSeabassFillet:"File brancina",
-      dishGrilledSquid:"Lignje na žaru",dishFriedSquidPanko:"Lignje pržene u panko mrvicama s prilogom",
+      dishKoljenica:"Svinjska koljenica sa pečenim krompirom",
+      secFish:"Ribe i mekušci",dishSeabassFillet:"File bijele ribe",
+      dishGrilledSquid:"Lignje žar/pržene",dishSardeleZar:"Sardele na žaru",dishSardelePrzene:"Sardele pržene",
       secSalads:"Salate",dishMixedSalad:"Miješana salata",
       secDesserts:"Deserti",
       drinkEspresso:"Espresso",
@@ -520,6 +988,8 @@ secBeers:"Beer",
 secWines:"Wines",
 
 navReviews:"Reviews",
+navReserve:"Table reservation",
+resTitle:"Table reservation",resName:"Full name",resPeople:"Number of people",resPhone:"Phone",resTime:"Time",resSend:"Send reservation",resFull:"Unfortunately this time slot is fully booked. Please choose another time.",
 wineHouseOpenNote:"House wine (white/red)",
 wineHouseOpen:"House wine white / red",
 subDessertWines:"Dessert wines",
@@ -551,7 +1021,7 @@ drinkDecafEspresso:"Decaf espresso",
 drinkDoubleEspresso:"Double espresso",
 drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menu",navContact:"Contact",
       heroTitle:"Welcome",heroSubtitle:"Opening hours: 12:00–19:00",heroBtn:"View menu",
-      aboutTitle:"About us",
+      aboutTitle:"Gallery",
       aboutText:"Restaurant Etienne is located right by the sea, offering a beautiful view and a rich selection of local and fresh dishes. Our mission is to provide guests with an unforgettable gastronomic experience in a Mediterranean setting.",
       contactTitle:"Contact",
       contactText:"📍 Address: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Phone: <a href='tel:+38598224394'>098 224 394</a><br>",
@@ -562,8 +1032,8 @@ drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menu",navContact:"Contact",
       secPasta:"Pasta",dishPastaSeafood:"Seafood pasta",dishPastaTruffleProsciutto:"Polenta with fish stew",
       dishRavioliShrimp:"Chicken ragù with gnocchi",dishTagliatelleSalmon:"Green tagliatelle with salmon and gorgonzola",
       dishSpaghettiCarbonara:"Spaghetti Carbonara",
-      secMeat:"Meat dishes",dishPorkMedallions:"Pork medallions with pancetta",dishChickenFillet:"Chicken fillet with side", dishKoljenica:"Pork knuckle with roasted potatoes",dishKobasica:"Istrian sausages with cabbage and potatoes",
-      dishSchnitzel:"Wiener schnitzel",secFish:"Fish & molluscs",dishSeabassFillet:"Seabass fillet",dishGrilledSquid:"Grilled squid",dishFriedSquidPanko:"Panko-fried squid with side",
+      secMeat:"Meat dishes",dishPorkMedallions:"Pork medallions with pancetta",dishChickenFillet:"Chicken fillet with side", dishKoljenica:"Pork knuckle with roasted potatoes",
+      dishSchnitzel:"Wiener schnitzel",secFish:"Fish & molluscs",dishSeabassFillet:"Grilled white fish fillet",dishGrilledSquid:"Grilled/fried squid",dishSardeleZar:"Grilled sardines",dishSardelePrzene:"Fried sardines",
       secSalads:"Salads",dishMixedSalad:"Mixed salad",
       secDesserts:"Desserts",
       drinkEspresso:"Espresso",
@@ -581,6 +1051,8 @@ secBeers:"Birra",
 secWines:"Vini",
 
 navReviews:"Recensioni",
+navReserve:"Prenotazione tavolo",
+resTitle:"Prenotazione tavolo",resName:"Nome e cognome",resPeople:"Numero di persone",resPhone:"Telefono",resTime:"Orario",resSend:"Invia prenotazione",resFull:"Purtroppo questo orario è completo. Scegli un altro orario.",
 wineHouseOpenNote:"Vino della casa (bianco/rosso)",
 wineHouseOpen:"Vino della casa bianco / rosso",
 subDessertWines:"Vini da dessert",
@@ -612,7 +1084,7 @@ drinkDecafEspresso:"Espresso decaffeinato",
 drinkDoubleEspresso:"Espresso doppio",
 drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menù",navContact:"Contatti",    
       heroTitle:"Benvenuti",heroSubtitle:"Orario di apertura: 12:00–19:00",heroBtn:"Guarda il menù",
-      aboutTitle:"Chi siamo",
+      aboutTitle:"Galleria",
       aboutText:"Il ristorante Etienne si trova a due passi dal mare e offre una splendida vista insieme a una ricca selezione di piatti locali e freschi. La nostra missione è offrire agli ospiti un'esperienza gastronomica indimenticabile in un'atmosfera mediterranea.",
       contactTitle:"Contatti",
       contactText:"📍 Indirizzo: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefono: <a href='tel:+38598224394'>098 224 394</a><br>",
@@ -621,8 +1093,8 @@ drinkEspresso:"Espresso",navHome:"Home",navMenu:"Menù",navContact:"Contatti",
       secStarters:"Antipasti",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sarde in savòr",
       secSoups:"Zuppe",dishBeefSoup:"Brodo di manzo",
       secPasta:"Paste",dishPastaSeafood:"Pasta ai frutti di mare",dishPastaTruffleProsciutto:"Polenta con brodetto di pesce",dishRavioliShrimp:"Ragù di pollo con gnocchi",dishTagliatelleSalmon:"Tagliatelle verdi con salmone e gorgonzola",dishSpaghettiCarbonara:"Spaghetti alla Carbonara",
-      secMeat:"Piatti di carne",dishPorkMedallions:"Medaglioni di maiale con pancetta",dishChickenFillet:"Filetto di pollo con contorno",dishSchnitzel:"Cotoletta alla viennese",dishKoljenica:"Stinco di maiale con patate arrosto",dishKobasica:"Salsicce istriane con cavolo e patate",
-      secFish:"Pesce e molluschi",dishSeabassFillet:"Filetto di branzino",dishGrilledSquid:"Calamari alla griglia",dishFriedSquidPanko:"Calamari fritti in panko con contorno",
+      secMeat:"Piatti di carne",dishPorkMedallions:"Medaglioni di maiale con pancetta",dishChickenFillet:"Filetto di pollo con contorno",dishSchnitzel:"Cotoletta alla viennese",dishKoljenica:"Stinco di maiale con patate arrosto",
+      secFish:"Pesce e molluschi",dishSeabassFillet:"Filetto di pesce bianco",dishGrilledSquid:"Calamari alla griglia/fritti",dishSardeleZar:"Sardine alla griglia",dishSardelePrzene:"Sardine fritte",
       secSalads:"Insalate",dishMixedSalad:"Insalata mista",
       secDesserts:"Dessert",
       drinkEspresso:"Espresso",
@@ -640,6 +1112,8 @@ secBeers:"Bier",
 secWines:"Weine",
 
 navReviews:"Bewertungen",
+navReserve:"Tischreservierung",
+resTitle:"Tischreservierung",resName:"Name und Nachname",resPeople:"Personenzahl",resPhone:"Telefon",resTime:"Uhrzeit",resSend:"Reservierung senden",resFull:"Dieser Zeitraum ist leider ausgebucht. Bitte wählen Sie eine andere Uhrzeit.",
 wineHouseOpenNote:"Hauswein (weiß/rot)",
 wineHouseOpen:"Hauswein weiß / rot",
 subDessertWines:"Dessertweine",
@@ -671,7 +1145,7 @@ drinkDecafEspresso:"Entkoffeinierter Espresso",
 drinkDoubleEspresso:"Doppelter Espresso",
 drinkEspresso:"Espresso",navHome:"Startseite",navMenu:"Speisekarte",navContact:"Kontakt",
       heroTitle:"Willkommen",heroSubtitle:"Öffnungszeiten: 12:00–19:00",heroBtn:"Speisekarte ansehen",
-      aboutTitle:"Über uns",
+      aboutTitle:"Galerie",
       aboutText:"Das Restaurant Etienne liegt direkt am Meer und bietet einen wunderschönen Ausblick sowie eine große Auswahl an regionalen und frischen Gerichten. Unsere Mission ist es, unseren Gästen ein unvergessliches gastronomisches Erlebnis in mediterranem Ambiente zu bieten.",
       contactTitle:"Kontakt",
       contactText:"📍 Adresse: <a href='https://www.google.com/maps/dir/?api=1&destination=Restoran+Etienne+Medulin' target='_blank'>Kapovica 350, Medulin</a><br>☎ Telefon: <a href='tel:+38598224394'>098 224 394</a><br>✉ E-Mail: <a href='mailto:bumbari.b.m@gmail.com?subject=Rezervacija%20stola'>bumbari.b.m@gmail.com</a>",
@@ -680,8 +1154,8 @@ drinkEspresso:"Espresso",navHome:"Startseite",navMenu:"Speisekarte",navContact:"
       secStarters:"Vorspeisen",dishPrsutSir:"Istrian Prosciutto",dishSardele:"Sardinen in Essig-Zwiebel-Marinade",
       secSoups:"Suppen",dishBeefSoup:"Rindsuppe",
       secPasta:"Pasta",dishPastaSeafood:"Pasta mit Meeresfrüchten",dishPastaTruffleProsciutto:"Polenta mit Fischragout",dishRavioliShrimp:"Hühner-Ragout mit Gnocchi",dishTagliatelleSalmon:"Grüne Tagliatelle mit Lachs und Gorgonzola",dishSpaghettiCarbonara:"Spaghetti Carbonara",
-      secMeat:"Fleischgerichte",dishPorkMedallions:"Schweinemedaillons mit Pancetta",dishChickenFillet:"Hähnchenfilet mit Beilage",dishSchnitzel:"Wiener Schnitzel", dishKoljenica:"Schweinshaxe mit Bratkartoffeln",dishKobasica:"Istrische Würste mit Kraut und Kartoffeln",
-      secFish:"Fisch & Weichtiere",dishSeabassFillet:"Wolfsbarschfilet",dishGrilledSquid:"Gegrillte Calamari",dishFriedSquidPanko:"In Panko frittierte Calamari mit Beilage",
+      secMeat:"Fleischgerichte",dishPorkMedallions:"Schweinemedaillons mit Pancetta",dishChickenFillet:"Hähnchenfilet mit Beilage",dishSchnitzel:"Wiener Schnitzel", dishKoljenica:"Schweinshaxe mit Bratkartoffeln",
+      secFish:"Fisch & Weichtiere",dishSeabassFillet:"Gegrilltes Weißfischfilet",dishGrilledSquid:"Gegrillte/Frittierte Calamari",dishSardeleZar:"Gegrillte Sardinen",dishSardelePrzene:"Frittierte Sardinen",
       secSalads:"Salate",dishMixedSalad:"Gemischter Salat",
       secDesserts:"Desserts",
       drinkEspresso:"Espresso",
@@ -696,30 +1170,7 @@ dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolad
   const pages = { home: document.getElementById('page-home'), menu: document.getElementById('page-menu') };
   const navLinks = { home: document.getElementById('nav-home'), menu: document.getElementById('nav-menu'), contact: document.getElementById('nav-contact') };
 
-  function setActiveNav(which){
-    [navLinks.home, navLinks.menu, navLinks.contact].forEach(a=>a.classList.remove('active'));
-    if (which==='menu') navLinks.menu.classList.add('active');
-    else if (which==='home') navLinks.home.classList.add('active');
-    else navLinks.contact.classList.add('active');
-  }
-
-  function showPage(which){
-    Object.values(pages).forEach(p=>{ p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
-    const pageEl = which === 'menu' ? pages.menu : pages.home;
-    pageEl.classList.add('active');
-    pageEl.setAttribute('aria-hidden','false');
-    setActiveNav(which);
-    window.scrollTo({top:0,behavior:'instant'});
-  }
-
-  function handleHash(){
-    const hash = (location.hash || '#home').replace('#','');
-    if(hash === 'menu'){ showPage('menu'); }
-    else { showPage(hash==='contact' ? 'home' : 'home'); }
-  }
-
-  window.addEventListener('hashchange', handleHash);
-  window.addEventListener('load', handleHash);
+  
 
   // Sticky header color
   window.addEventListener('scroll', ()=> {
@@ -747,12 +1198,13 @@ dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolad
     navLinks.menu.textContent = t.navMenu;
     navLinks.contact.textContent = t.navContact;
     if(document.getElementById('nav-reviews')) document.getElementById('nav-reviews').textContent = t.navReviews;
+    if(document.getElementById('nav-reserve')) document.getElementById('nav-reserve').textContent = t.navReserve;
     // home
     document.getElementById('hero-title').textContent = t.heroTitle;
     document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
     document.getElementById('hero-btn').textContent = t.heroBtn;
     document.getElementById('about-title').textContent = t.aboutTitle;
-    document.getElementById('about-text').innerHTML = t.aboutText;
+    if(document.getElementById('about-text')) document.getElementById('about-text').innerHTML = t.aboutText;
     document.getElementById('contact-title').textContent = t.contactTitle;
     document.getElementById('contact-text').innerHTML = t.contactText;
     document.getElementById('footer-text').textContent = t.footerText;
@@ -761,9 +1213,14 @@ dishCrepesJam:"Crêpes mit Marmelade",dishCrepesChocolate:"Crêpes mit Schokolad
     document.getElementById('tab-food').textContent = t.tabFood;
     document.getElementById('tab-drinks').textContent = t.tabDrinks;
     document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(t[key]) el.textContent = t[key];
-    });
+  const key = el.getAttribute("data-i18n");
+  if(t[key]) el.textContent = t[key];
+});
+
+document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+  const key = el.getAttribute("data-i18n-placeholder");
+  if(t[key]) el.placeholder = t[key];
+});
     document.documentElement.lang = lang;
     document.querySelectorAll(".lang-item").forEach(i=>i.classList.toggle("active", i.dataset.lang===lang));
     localStorage.setItem('language', lang);
@@ -885,6 +1342,665 @@ document.addEventListener("click", (e) => {
 });
 
 
+
+function openReservation(){
+  document.getElementById("reservationModal").style.display="flex";
+  const lang=document.documentElement.lang || "hr";
+  applyTranslations(lang);
+}
+
+function resetReservationForm(){
+  const ids=["res-name","res-people","res-date","res-time","res-phone"];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    if(el.tagName==="SELECT") el.selectedIndex=0;
+    else el.value="";
+    el.style.border="";
+  });
+  const success=document.getElementById("res-success");
+  if(success) success.style.display="none";
+}
+
+function closeReservation(){
+  document.getElementById("reservationModal").style.display="none";
+  resetReservationForm();
+}
+
+async function sendReservation(){
+
+  const name=document.getElementById("res-name").value;
+  const people=document.getElementById("res-people").value;
+  const date=document.getElementById("res-date").value;
+  const time=document.getElementById("res-time").value;
+
+  // block reservations less than 30 minutes before
+  const now = new Date();
+  const selectedDateTime = new Date(date + "T" + time);
+  const diff = (selectedDateTime - now) / (1000*60);
+
+  if(diff < 30){
+    const lang=document.documentElement.lang || "hr";
+    const msgs={
+      hr:"Rezervacija mora biti najmanje 30 minuta unaprijed.",
+      en:"Reservation must be at least 30 minutes in advance.",
+      it:"La prenotazione deve essere fatta almeno 30 minuti prima.",
+      de:"Reservierungen müssen mindestens 30 Minuten im Voraus erfolgen."
+    };
+    alert(msgs[lang] || msgs.hr);
+    return;
+  }
+
+  const phone=document.getElementById("res-phone").value;
+
+  
+  // custom validation messages inside fields
+  let valid=true;
+
+  // NAME VALIDATION
+if(!name || !NAME_REGEX.test(name) || name.trim().split(" ").length < 2){
+
+  const el=document.getElementById("res-name");
+  const lang=document.documentElement.lang || "hr";
+
+  const msgs={
+    hr:"Upišite ime i prezime",
+    en:"Enter name and surname",
+    it:"Inserisci nome e cognome",
+    de:"Vorname und Nachname eingeben"
+  };
+
+  el.value="";
+  el.placeholder=msgs[lang] || msgs.hr;
+  el.style.border="2px solid red";
+  valid=false;
+}
+
+  if(!people){
+    const el=document.getElementById("res-people");
+    el.style.border="2px solid red";
+    valid=false;
+  }
+
+  if(!date){
+    const el=document.getElementById("res-date");
+    el.style.border="2px solid red";
+    valid=false;
+  }
+
+  if(!time){
+    const el=document.getElementById("res-time");
+    el.style.border="2px solid red";
+    valid=false;
+  }
+
+  // PHONE VALIDATION
+if(!phone || !PHONE_REGEX.test(phone)){
+
+  const el=document.getElementById("res-phone");
+  const lang=document.documentElement.lang || "hr";
+
+  const msgs={
+    hr:"Unesite ispravan broj telefona",
+    en:"Enter valid phone number",
+    it:"Inserisci numero valido",
+    de:"Gültige Telefonnummer eingeben"
+  };
+
+  el.value="";
+  el.placeholder=msgs[lang] || msgs.hr;
+  el.style.border="2px solid red";
+  valid=false;
+}
+
+  if(!valid) return;
+
+
+  
+  // check reservations in database
+  const { data, error } = await supabaseClient
+    .from("reservations")
+    .select("*")
+    .eq("date", date)
+    .eq("time", time);
+
+  if(error){
+    console.log(error);
+  }
+
+  if(data && data.length >= 4){
+    
+  const lang=document.documentElement.lang || "hr";
+  const msgs={
+    hr:"Nažalost svi stolovi za ovaj termin su rezervirani. Molimo odaberite drugi termin.",
+    en:"Unfortunately this time slot is fully booked. Please choose another time.",
+    it:"Purtroppo questo orario è completo. Scegli un altro orario.",
+    de:"Dieser Zeitraum ist leider ausgebucht. Bitte wählen Sie eine andere Uhrzeit."
+  };
+  const success=document.getElementById("res-success");
+  success.textContent=msgs[lang] || msgs.hr;
+  success.style.display="block";
+  return;
+
+  }
+
+  // BLOCK SAME PHONE SAME TIME
+const { data: phoneCheck } = await supabaseClient
+  .from("reservations")
+  .select("*")
+  .eq("date", date)
+  .eq("time", time)
+  .eq("phone", phone);
+
+if(phoneCheck && phoneCheck.length > 0){
+
+  const lang=document.documentElement.lang || "hr";
+
+  const msgs={
+    hr:"Ovaj broj već ima rezervaciju za taj termin.",
+    en:"This phone already has a reservation for that time.",
+    it:"Questo numero ha già una prenotazione per questo orario.",
+    de:"Diese Telefonnummer hat bereits eine Reservierung für diese Zeit."
+  };
+
+  const success=document.getElementById("res-success");
+  success.textContent=msgs[lang] || msgs.hr;
+  success.style.display="block";
+
+  return;
+}
+
+// insert reservation into database
+  
+await supabaseClient
+  .from("reservations")
+  .insert([{name:name, phone:phone, people:people, date:date, time:time}]);
+
+// send email
+emailjs.send("service_ndx871o","template_ua02wi9",{
+name:name,
+people:people,
+date:date,
+time:time,
+phone:phone
+});
+
+
+  const subject="Rezervacija stola";
+
+
+  const body=`Ime: ${name}
+Broj osoba: ${people}
+Datum: ${date}
+Vrijeme: ${time}
+Telefon: ${phone}`;
+
+  
+
+  const lang=document.documentElement.lang || "hr";
+
+  const messages={
+    hr:"Rezervacija je poslana ✔️",
+    en:"Reservation sent ✔️",
+    it:"Prenotazione inviata ✔️",
+    de:"Reservierung gesendet ✔️"
+  };
+
+  const success=document.getElementById("res-success");
+  success.textContent=messages[lang] || messages.hr;
+  success.style.display="block";
+
+  // reset form fields
+  document.getElementById("res-name").value="";
+  document.getElementById("res-people").value="";
+  document.getElementById("res-date").value="";
+  document.getElementById("res-time").value="";
+  document.getElementById("res-phone").value="";
+
+  setTimeout(()=>{
+    closeReservation();
+    success.style.display="none";
+  },3000);
+}
+
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  const d = document.getElementById("res-date");
+  if(!d) return;
+
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0];
+
+  const max = new Date();
+  max.setDate(today.getDate() + 7);
+  const maxDate = max.toISOString().split("T")[0];
+
+  d.setAttribute("min", minDate);
+  d.setAttribute("max", maxDate);
+});
+
+
 </script>
+
+
+<div id="reservationModal" class="reservation-modal">
+  <div class="reservation-box">
+    <span class="reservation-close" onclick="closeReservation()">&times;</span>
+
+    <h2 data-i18n="resTitle">Rezervacija stola</h2>
+
+    <input id="res-name" data-i18n-placeholder="resName" placeholder="Ime i prezime">
+
+    <select id="res-people">
+      <option value="" data-i18n="resPeople">Broj osoba</option>
+      <option>2</option><option>3</option><option>4</option>
+      <option>5</option><option>6</option><option>7</option><option>8</option>
+      <option>9</option><option>10+</option>
+    </select>
+
+    <input id="res-date" type="date" inputmode="none" onkeydown="return false;">
+    
+<select id="res-time">
+<option value="" data-i18n="resTime">Vrijeme</option>
+<option>12:00</option>
+<option>12:30</option>
+<option>13:00</option>
+<option>13:30</option>
+<option>14:00</option>
+<option>14:30</option>
+<option>15:00</option>
+<option>15:30</option>
+<option>16:00</option>
+<option>16:30</option>
+<option>17:00</option>
+<option>17:30</option>
+<option>18:00</option>
+<option>18:30</option>
+<option>19:00</option>
+<option>19:30</option>
+<option>20:00</option>
+</select>
+
+
+    <input type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
+
+    <button onclick="sendReservation()" data-i18n="resSend">
+      Pošalji rezervaciju
+    </button>
+
+    <div id="res-success" style="display:none;text-align:center;font-weight:600;margin-top:10px;"></div>
+  </div>
+</div>
+
+
+<script>
+// FIX: remove red validation style when user edits fields
+function clearError(el){
+  el.style.border="";
+}
+
+["res-name","res-phone"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){
+    el.addEventListener("input",()=>clearError(el));
+  }
+});
+
+["res-people","res-date","res-time"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){
+    el.addEventListener("change",()=>clearError(el));
+  }
+});
+</script>
+<script>
+
+  hideFullTimes();
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const d=document.getElementById("res-date");
+  const t=document.getElementById("res-time");
+
+  if(d){
+    d.addEventListener("change",refreshTimes);
+  }
+
+  if(t){
+    t.addEventListener("focus",refreshTimes);
+  }
+
+  // auto refresh every minute
+  setInterval(()=>{
+    const modal=document.getElementById("reservationModal");
+    if(modal && modal.style.display==="flex"){
+      refreshTimes();
+    }
+  },60000);
+});
+</script>
+
+<script>
+// close reservation modal when clicking dark background
+const reservationModal = document.getElementById("reservationModal");
+if(reservationModal){
+reservationModal.addEventListener("click", function(e){
+if(e.target === reservationModal){
+closeReservation();
+}
+});
+}
+
+// close hamburger when clicking link
+document.querySelectorAll("#navLinks a").forEach(link=>{
+link.addEventListener("click", ()=>{
+const menu=document.getElementById("navLinks");
+const burger=document.getElementById("hamburger");
+if(menu) menu.classList.remove("active");
+if(burger) burger.classList.remove("active");
+});
+});
+</script>
+
+
+<script>
+document.getElementById("res-name").addEventListener("input",function(){
+this.value=this.value.replace(/[0-9]/g,"");
+});
+
+document.getElementById("res-phone").addEventListener("input",function(){
+this.value=this.value.replace(/[^0-9+ ]/g,"");
+});
+</script>
+
+
+<script>
+const ALL_TIMES=[
+"12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30",
+"16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00"
+];
+
+async function refreshTimes(){
+
+  const dateEl=document.getElementById("res-date");
+  const timeEl=document.getElementById("res-time");
+  if(!dateEl || !timeEl) return;
+
+  const selectedDate=dateEl.value;
+  if(!selectedDate) return;
+
+  const now=new Date();
+  const todayStr=now.toISOString().split("T")[0];
+
+  let available=[...ALL_TIMES];
+
+  // --- 30 MIN RULE ---
+  if(selectedDate===todayStr){
+
+    const threshold=new Date(now.getTime()+30*60000);
+
+    let h=threshold.getHours();
+    let m=threshold.getMinutes();
+
+    if(m>0 && m<=30) m=30;
+    else if(m>30){ h+=1; m=0; }
+
+    const minTime=`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+
+    available=available.filter(t=>t>=minTime);
+  }
+
+  // --- CHECK SUPABASE FOR FULL TIMES (4 MAX) ---
+  const {data,error}=await supabaseClient
+  .from("reservations")
+  .select("time")
+  .eq("date",selectedDate);
+
+  if(!error && data){
+
+    const counts={};
+
+    data.forEach(r=>{
+      counts[r.time]=(counts[r.time]||0)+1;
+    });
+
+    available=available.filter(t=>!counts[t] || counts[t] < 4);
+  }
+
+  // rebuild dropdown
+  timeEl.innerHTML='<option value="">Vrijeme</option>';
+
+  available.forEach(t=>{
+    const opt=document.createElement("option");
+    opt.value=t;
+    opt.textContent=t;
+    timeEl.appendChild(opt);
+  });
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  const d=document.getElementById("res-date");
+  const t=document.getElementById("res-time");
+
+  if(d) d.addEventListener("change",refreshTimes);
+  if(t) t.addEventListener("focus",refreshTimes);
+
+  // refresh every minute while modal open
+  setInterval(()=>{
+    const modal=document.getElementById("reservationModal");
+    if(modal && modal.style.display==="flex"){
+      refreshTimes();
+    }
+  },60000);
+
+});
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/intlTelInput.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const phoneInput = document.querySelector("#res-phone");
+  if(!phoneInput || !window.intlTelInput) return;
+
+  window.
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.5.3/js/intlTelInput.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+ const input=document.querySelector("#res-phone");
+ if(!input) return;
+ const iti=window.
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+const phoneInput = document.querySelector("#res-phone");
+if(!phoneInput) return;
+
+window.
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+const phoneInput=document.querySelector("#res-phone");
+if(!phoneInput) return;
+
+window.
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+const phoneInput=document.querySelector("#res-phone");
+if(!phoneInput) return;
+
+const iti=window.
+
+const form=phoneInput.closest("form");
+if(form){
+form.addEventListener("submit",function(){
+phoneInput.value=iti.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+});
+}
+
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+const phoneInput=document.querySelector("#res-phone");
+if(!phoneInput) return;
+
+const iti=window.intlTelInput(phoneInput,{
+initialCountry:"hr",
+preferredCountries:["hr","de","it","si","at"],
+separateDialCode:true,
+nationalMode:false,
+formatOnDisplay:true,
+autoPlaceholder:"polite",
+utilsScript:"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+});
+
+const form=phoneInput.closest("form");
+if(form){
+form.addEventListener("submit",function(){
+try{
+phoneInput.value=iti.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+}catch(e){
+// fallback if utils not loaded
+}
+});
+}
+
+});
+</script>
+
+
+
+
+
+
+<script>
+if(e.key==="ArrowLeft") prevImage();
+if(e.key==="Escape") closeGallery();
+}
+});
+</script>
+
+
+<div class="g-lightbox" id="gLightbox">
+<span class="g-close" onclick="gClose()">&times;</span>
+<span class="g-nav g-prev" onclick="gPrev()">&#10094;</span>
+<img id="gImg">
+<span class="g-nav g-next" onclick="gNext()">&#10095;</span>
+<div class="g-counter" id="gCounter"></div>
+</div>
+
+<script>
+const gImages=[...document.querySelectorAll(".gallery-grid img")];
+const gLightbox=document.getElementById("gLightbox");
+const gImg=document.getElementById("gImg");
+const gCounter=document.getElementById("gCounter");
+let gIndex=0;
+
+gImages.forEach((img,i)=>{
+img.addEventListener("click",()=>{
+gIndex=i;
+gShow();
+});
+});
+
+function gShow(){
+gLightbox.style.display="flex";
+gImg.src=gImages[gIndex].src;
+gCounter.textContent=(gIndex+1)+" / "+gImages.length;
+}
+
+function gClose(){gLightbox.style.display="none";}
+
+function gNext(){
+gIndex=(gIndex+1)%gImages.length;
+gShow();
+}
+
+function gPrev(){
+gIndex=(gIndex-1+gImages.length)%gImages.length;
+gShow();
+}
+
+document.addEventListener("keydown",e=>{
+if(gLightbox.style.display==="flex"){
+if(e.key==="ArrowRight") gNext();
+if(e.key==="ArrowLeft") gPrev();
+if(e.key==="Escape") gClose();
+}
+});
+</script>
+
+<div class="g-lightbox" id="gLightbox">
+<span class="g-close" onclick="gClose()">&times;</span>
+<span class="g-nav g-prev" onclick="gPrev()">&#10094;</span>
+<img id="gImg">
+<span class="g-nav g-next" onclick="gNext()">&#10095;</span>
+</div>
+
+<script>
+const gImages=[...document.querySelectorAll(".gallery-grid img")];
+const gLightbox=document.getElementById("gLightbox");
+const gImg=document.getElementById("gImg");
+let gIndex=0;
+
+gImages.forEach((img,i)=>{
+img.addEventListener("click",()=>{
+gIndex=i;
+showImg();
+});
+});
+
+function showImg(){
+gLightbox.style.display="flex";
+gImg.src=gImages[gIndex].src;
+}
+
+function gClose(){gLightbox.style.display="none";}
+function gNext(){gIndex=(gIndex+1)%gImages.length;showImg();}
+function gPrev(){gIndex=(gIndex-1+gImages.length)%gImages.length;showImg();}
+
+document.addEventListener("keydown",e=>{
+if(gLightbox.style.display==="flex"){
+if(e.key==="ArrowRight") gNext();
+if(e.key==="ArrowLeft") gPrev();
+if(e.key==="Escape") gClose();
+}
+});
+
+// swipe support
+let startX=0;
+gLightbox.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+gLightbox.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50) gNext();
+if(endX-startX>50) gPrev();
+});
+</script>
+
 </body>
 </html>
