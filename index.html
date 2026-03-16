@@ -150,11 +150,27 @@ display:flex;
 
 
 /* FIXED HAMBURGER */
-.links{display:none;position:absolute;top:70px;right:20px;background:rgba(0,0,0,.95);width:240px;border-radius:12px;padding:15px;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.links.active{display:flex}
-.links a{color:#fff}
-.links a.active{color:#fff;font-weight:700;background:rgba(255,255,255,.08)}
+.links{
+position:absolute;
+top:70px;
+right:20px;
+background:rgba(0,0,0,.95);
+width:240px;
+border-radius:12px;
+padding:15px;
+flex-direction:column;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
 
+display:flex;
+transform:translateX(120%);
+opacity:0;
+transition:transform .35s ease, opacity .35s ease;
+}
+
+.links.active{
+transform:translateX(0);
+opacity:1;
+}
 
 to{opacity:1;transform:translateY(0);}
 }
@@ -620,91 +636,48 @@ box-shadow:0 40px 120px rgba(0,0,0,.8);animation:zoomIn .45s}
 .g-prev{left:25px}.g-next{right:25px}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes zoomIn{from{transform:scale(.85);opacity:.2}to{transform:scale(1);opacity:1}}
-</style>
 
-
-<style>
-/* =========================
-   MOBILE FIX (phones)
-   ========================= */
-@media (max-width:768px){
-
-nav{
-padding:14px 16px;
+/* LANG GLOBE INSIDE HAMBURGER */
+#navLinks .lang-dropdown{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+margin:0;
 }
 
-.brand{
-font-size:20px;
+#navLinks .lang-btn{
+background:none;
+border:none;
+color:#fff;
+font-size:22px;
+cursor:pointer;
+padding:10px 0;
 }
 
-.links{
-top:60px;
-right:12px;
-width:85%;
+/* hide languages */
+#navLinks .lang-menu{
+display:none;
+flex-direction:column;
+align-items:center;
+position:static;
+background:none;
+border:none;
+box-shadow:none;
 }
 
-.hero{
-height:70vh;
-padding:20px;
+/* show when clicked */
+#navLinks .lang-dropdown.open .lang-menu{
+display:flex;
 }
 
-.hero h1{
-font-size:32px;
+#navLinks .lang-item{
+text-align:center;
+padding:8px 0;
+width:100%;
+font-weight:600;
 }
 
-.hero p{
-font-size:16px;
-}
-
-.menu-grid{
-grid-template-columns:1fr;
-gap:14px;
-}
-
-.menu-item{
-min-height:auto;
-padding:18px;
-}
-
-.tabs{
-flex-wrap:wrap;
-gap:8px;
-}
-
-.tab-btn{
-padding:10px 16px;
-font-size:14px;
-}
-
-.gallery-grid{
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.gallery-grid img{
-height:150px;
-}
-
-section.container{
-padding:70px 16px;
-}
-
-.reservation-box{
-width:92%;
-padding:26px 20px;
-}
-
-.reservation-box input,
-.reservation-box select{
-height:42px;
-font-size:14px;
-}
-
-.iti input{
-padding-left:85px !important;
-}
-
-}
 </style>
 
 </head>
@@ -714,6 +687,11 @@ padding-left:85px !important;
 <div class="brand">Etienne</div>
 <div class="right-controls">
 <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+
+</div>
+
+
+<div class="links" id="navLinks">
 <div class="lang-dropdown" id="langDropdown">
 <button aria-expanded="false" aria-haspopup="true" aria-label="Odabir jezika" class="lang-btn">
 <i class="fa-solid fa-globe"></i>
@@ -725,10 +703,6 @@ padding-left:85px !important;
 <button class="lang-item" data-lang="de" role="menuitem">DE</button>
 </div>
 </div>
-</div>
-
-
-<div class="links" id="navLinks">
 <a href="#home" id="nav-home">Početna</a>
 <a id="nav-reviews" href="https://www.google.com/search?sca_esv=b964d58e7340a202&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXqzYZAwByFbNseyxOhdjAMpmd-ZQJuk-cGjzzGxLN3s0oG_g2z1T04hHsOCdl5fZOalFFAsHdWCMtyty7pSJu8Fnd8uHEsi0S2sKLqkzMeMmJyACA%3D%3D&q=Restoran+Etienne+Recenzije&sa=X&ved=2ahUKEwikqbOP3IuTAxWUQ_EDHVzRO9kQ0bkNegQIPhAH&biw=1152&bih=971" target="_blank">Recenzije</a>
 <a href="#menu" id="nav-menu">Meni</a>
