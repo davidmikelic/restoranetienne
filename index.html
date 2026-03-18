@@ -422,39 +422,35 @@ to{opacity:1}
 }
 
 
-/* PHONE DROPDOWN FIX (mobile layering) */
+/* FIX DATE INPUT (mobile) */
+.reservation-box input[type="date"]{
+  appearance:none;
+  -webkit-appearance:none;
+  height:42px;
+  padding:10px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:#fff;
+}
+
+/* PHONE DROPDOWN FIX */
+.reservation-box{
+  position:relative;
+  z-index:1000;
+}
+
 .iti{
-  position: relative;
-  z-index: 9999;
+  position:relative;
+  z-index:2000;
 }
 
 .iti__country-list{
-  z-index: 10000 !important;
+  position:absolute;
+  z-index:9999 !important;
 }
 
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-// DATE LIMIT (today + 7 days)
-function setupDateInput(){
-  const dateInput = document.getElementById("res-date");
-  if(!dateInput) return;
-
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-
-  const format = (d)=>{
-    const month = String(d.getMonth()+1).padStart(2,'0');
-    const day = String(d.getDate()).padStart(2,'0');
-    return `${d.getFullYear()}-${month}-${day}`;
-  };
-
-  dateInput.min = format(today);
-  dateInput.max = format(maxDate);
-  dateInput.value = "";
-}
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/css/intlTelInput.css"/>
 
@@ -1469,7 +1465,25 @@ document.addEventListener("click", (e) => {
 
 function openReservation(){
   document.getElementById("reservationModal").style.display="flex";
-  setupDateInput();
+
+  // DATE LIMIT (today + 7 days)
+  const dateInput = document.getElementById("res-date");
+  if(dateInput){
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 7);
+
+    const format = (d)=>{
+      const m = String(d.getMonth()+1).padStart(2,'0');
+      const day = String(d.getDate()).padStart(2,'0');
+      return `${d.getFullYear()}-${m}-${day}`;
+    };
+
+    dateInput.min = format(today);
+    dateInput.max = format(maxDate);
+    dateInput.value = "";
+  }
+
   const lang=document.documentElement.lang || "hr";
   applyTranslations(lang);
 }
