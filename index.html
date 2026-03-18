@@ -204,11 +204,30 @@ text-align:center;
 
 
 /* GALERIJA */
+/* GALERIJA */
 .gallery-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:16px;
-margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:30px;
+}
+
+@media (max-width:900px){
+  .gallery-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media (max-width:600px){
+  .gallery-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media (max-width:400px){
+  .gallery-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 
@@ -386,6 +405,20 @@ to{transform:scale(1);opacity:1}
 @keyframes fadeIn{
 from{opacity:0}
 to{opacity:1}
+}
+
+
+/* FIX DATE INPUT (mobile i safari) */
+.reservation-box input[type="date"]{
+  appearance: none;
+  -webkit-appearance: none;
+  height:42px;
+  padding:10px 12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  background:#fff;
+  color:#1a1a1a;
 }
 
 </style>
@@ -596,7 +629,7 @@ opacity:.8;
 
 .gallery-grid img{
 width:100%;
-height:220px;
+height:160px;
 object-fit:cover;
 border:3px solid #7a7a7a;
 border-radius:14px;
@@ -678,6 +711,12 @@ width:100%;
 font-weight:600;
 }
 
+</style>
+
+
+<style>
+.reservation-box{ overflow:visible !important; }
+.iti__country-list{ z-index:99999 !important; }
 </style>
 
 </head>
@@ -1682,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </select>
 
 
-    <input type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
+    <input type="tel"  id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
 
     <button onclick="sendReservation()" data-i18n="resSend">
       Pošalji rezervaciju
@@ -2062,38 +2101,14 @@ if(endX-startX>50) gPrev();
 </script>
 
 
-<script>
-function fixDate(){
-  const el = document.getElementById("res-date");
-  if(!el) return;
-
-  const today = new Date();
-  const max = new Date();
-  max.setDate(today.getDate()+7);
-
-  const f = d=>d.toISOString().split("T")[0];
-
-  el.min = f(today);
-  el.max = f(max);
-
-  if(el.value < el.min) el.value = "";
-}
-
-document.addEventListener("click", e=>{
-  if(e.target && e.target.id==="res-date"){
-    fixDate();
-  }
-});
-</script>
-
-
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/intlTelInput.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   const input = document.querySelector("#res-phone");
   if(input){
-    window.intlTelInput(input,{
+    window.iti = window.intlTelInput(input,{
       initialCountry:"hr",
+      preferredCountries:["hr","de","it","en"],
       separateDialCode:true,
       utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/utils.js"
     });
@@ -2101,16 +2116,31 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 
-<style>
-/* CRITICAL FIX */
-.reservation-box{
-  overflow:visible !important;
-}
 
-.iti__country-list{
-  z-index:99999 !important;
+<script>
+function setupDate(){
+  const el = document.getElementById("res-date");
+  if(!el) return;
+  const today = new Date();
+  const max = new Date();
+  max.setDate(today.getDate()+7);
+  const f = d=>d.toISOString().split("T")[0];
+  el.min = f(today);
+  el.max = f(max);
 }
-</style>
+document.addEventListener("click", e=>{
+  if(e.target && e.target.id==="res-date"){
+    setupDate();
+  }
+});
+document.addEventListener("change", e=>{
+  if(e.target && e.target.id==="res-date"){
+    const el=e.target;
+    if(el.value < el.min) el.value = el.min;
+    if(el.value > el.max) el.value = el.max;
+  }
+});
+</script>
 
 </body>
 </html>
