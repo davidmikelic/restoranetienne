@@ -204,30 +204,11 @@ text-align:center;
 
 
 /* GALERIJA */
-/* GALERIJA */
 .gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-top:30px;
-}
-
-@media (max-width:900px){
-  .gallery-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media (max-width:600px){
-  .gallery-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media (max-width:400px){
-  .gallery-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:16px;
+margin-top:30px;
 }
 
 
@@ -408,49 +389,41 @@ to{opacity:1}
 }
 
 
-/* FIX DATE INPUT (mobile i safari) */
-.reservation-box input[type="date"]{
-  appearance: none;
-  -webkit-appearance: none;
-  height:42px;
-  padding:10px 12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:14px;
-  background:#fff;
-  color:#1a1a1a;
-}
-
-
-/* FIX DATE INPUT (mobile) */
-.reservation-box input[type="date"]{
-  appearance:none;
-  -webkit-appearance:none;
-  height:42px;
-  padding:10px 12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  background:#fff;
-}
-
-/* PHONE DROPDOWN FIX */
-.reservation-box{
-  position:relative;
-  z-index:1000;
-}
-
-.iti{
-  position:relative;
-  z-index:2000;
-}
-
+/* PHONE DROPDOWN SAFE FIX */
 .iti__country-list{
-  position:absolute;
+  position:absolute !important;
   z-index:9999 !important;
 }
 
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+function setupDateInput(){
+  const dateInput = document.getElementById("res-date");
+  if(!dateInput) return;
+
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+
+  const format = (d)=> d.toISOString().split("T")[0];
+
+  dateInput.setAttribute("min", format(today));
+  dateInput.setAttribute("max", format(maxDate));
+
+  if(!dateInput.dataset.initialized){
+    dateInput.value = "";
+    dateInput.dataset.initialized = "true";
+  }
+}
+
+// ALSO trigger when user clicks field (mobile fix)
+document.addEventListener("focusin", (e)=>{
+  if(e.target && e.target.id === "res-date"){
+    setupDateInput();
+  }
+});
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/css/intlTelInput.css"/>
 
@@ -657,7 +630,7 @@ opacity:.8;
 
 .gallery-grid img{
 width:100%;
-height:160px;
+height:220px;
 object-fit:cover;
 border:3px solid #7a7a7a;
 border-radius:14px;
@@ -1465,25 +1438,7 @@ document.addEventListener("click", (e) => {
 
 function openReservation(){
   document.getElementById("reservationModal").style.display="flex";
-
-  // DATE LIMIT (today + 7 days)
-  const dateInput = document.getElementById("res-date");
-  if(dateInput){
-    const today = new Date();
-    const maxDate = new Date();
-    maxDate.setDate(today.getDate() + 7);
-
-    const format = (d)=>{
-      const m = String(d.getMonth()+1).padStart(2,'0');
-      const day = String(d.getDate()).padStart(2,'0');
-      return `${d.getFullYear()}-${m}-${day}`;
-    };
-
-    dateInput.min = format(today);
-    dateInput.max = format(maxDate);
-    dateInput.value = "";
-  }
-
+  setupDateInput();
   const lang=document.documentElement.lang || "hr";
   applyTranslations(lang);
 }
