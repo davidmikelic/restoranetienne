@@ -713,12 +713,6 @@ font-weight:600;
 
 </style>
 
-
-<style>
-.reservation-box{ overflow:visible !important; }
-.iti__country-list{ z-index:99999 !important; }
-</style>
-
 </head>
 <body>
 <header>
@@ -1721,7 +1715,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </select>
 
 
-    <input type="tel"  id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
+    <input type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
 
     <button onclick="sendReservation()" data-i18n="resSend">
       Pošalji rezervaciju
@@ -2097,48 +2091,6 @@ gLightbox.addEventListener("touchend",e=>{
 let endX=e.changedTouches[0].clientX;
 if(startX-endX>50) gNext();
 if(endX-startX>50) gPrev();
-});
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/intlTelInput.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  const input = document.querySelector("#res-phone");
-  if(input){
-    window.iti = window.intlTelInput(input,{
-      initialCountry:"hr",
-      preferredCountries:["hr","de","it","en"],
-      separateDialCode:true,
-      utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/utils.js"
-    });
-  }
-});
-</script>
-
-
-<script>
-function setupDate(){
-  const el = document.getElementById("res-date");
-  if(!el) return;
-  const today = new Date();
-  const max = new Date();
-  max.setDate(today.getDate()+7);
-  const f = d=>d.toISOString().split("T")[0];
-  el.min = f(today);
-  el.max = f(max);
-}
-document.addEventListener("click", e=>{
-  if(e.target && e.target.id==="res-date"){
-    setupDate();
-  }
-});
-document.addEventListener("change", e=>{
-  if(e.target && e.target.id==="res-date"){
-    const el=e.target;
-    if(el.value < el.min) el.value = el.min;
-    if(el.value > el.max) el.value = el.max;
-  }
 });
 </script>
 
