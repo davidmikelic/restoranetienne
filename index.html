@@ -388,42 +388,8 @@ from{opacity:0}
 to{opacity:1}
 }
 
-
-/* PHONE DROPDOWN SAFE FIX */
-.iti__country-list{
-  position:absolute !important;
-  z-index:9999 !important;
-}
-
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-function setupDateInput(){
-  const dateInput = document.getElementById("res-date");
-  if(!dateInput) return;
-
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-
-  const format = (d)=> d.toISOString().split("T")[0];
-
-  dateInput.setAttribute("min", format(today));
-  dateInput.setAttribute("max", format(maxDate));
-
-  if(!dateInput.dataset.initialized){
-    dateInput.value = "";
-    dateInput.dataset.initialized = "true";
-  }
-}
-
-// ALSO trigger when user clicks field (mobile fix)
-document.addEventListener("focusin", (e)=>{
-  if(e.target && e.target.id === "res-date"){
-    setupDateInput();
-  }
-});
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/css/intlTelInput.css"/>
 
@@ -1437,8 +1403,17 @@ document.addEventListener("click", (e) => {
 
 
 function openReservation(){
+  const dateInput = document.getElementById("res-date");
+  if(dateInput){
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate()+7);
+    const format = d=>d.toISOString().split("T")[0];
+    dateInput.min = format(today);
+    dateInput.max = format(maxDate);
+    dateInput.value="";
+  }
   document.getElementById("reservationModal").style.display="flex";
-  setupDateInput();
   const lang=document.documentElement.lang || "hr";
   applyTranslations(lang);
 }
@@ -1717,7 +1692,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </select>
 
 
-    <input type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
+    <input type="tel" type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
 
     <button onclick="sendReservation()" data-i18n="resSend">
       Pošalji rezervaciju
@@ -2093,6 +2068,22 @@ gLightbox.addEventListener("touchend",e=>{
 let endX=e.changedTouches[0].clientX;
 if(startX-endX>50) gNext();
 if(endX-startX>50) gPrev();
+});
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/intlTelInput.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const phoneInput = document.querySelector("#res-phone");
+  if(phoneInput){
+    window.iti = window.intlTelInput(phoneInput, {
+      initialCountry: "hr",
+      preferredCountries: ["hr","de","it","en"],
+      separateDialCode: true,
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/utils.js"
+    });
+  }
 });
 </script>
 
