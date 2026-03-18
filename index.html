@@ -1403,16 +1403,6 @@ document.addEventListener("click", (e) => {
 
 
 function openReservation(){
-  const dateInput = document.getElementById("res-date");
-  if(dateInput){
-    const today = new Date();
-    const maxDate = new Date();
-    maxDate.setDate(today.getDate()+7);
-    const format = d=>d.toISOString().split("T")[0];
-    dateInput.min = format(today);
-    dateInput.max = format(maxDate);
-    dateInput.value="";
-  }
   document.getElementById("reservationModal").style.display="flex";
   const lang=document.documentElement.lang || "hr";
   applyTranslations(lang);
@@ -1692,7 +1682,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </select>
 
 
-    <input type="tel" type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
+    <input type="tel" id="res-phone" data-i18n-placeholder="resPhone" placeholder="Telefon">
 
     <button onclick="sendReservation()" data-i18n="resSend">
       Pošalji rezervaciju
@@ -2072,20 +2062,55 @@ if(endX-startX>50) gPrev();
 </script>
 
 
+<script>
+function fixDate(){
+  const el = document.getElementById("res-date");
+  if(!el) return;
+
+  const today = new Date();
+  const max = new Date();
+  max.setDate(today.getDate()+7);
+
+  const f = d=>d.toISOString().split("T")[0];
+
+  el.min = f(today);
+  el.max = f(max);
+
+  if(el.value < el.min) el.value = "";
+}
+
+document.addEventListener("click", e=>{
+  if(e.target && e.target.id==="res-date"){
+    fixDate();
+  }
+});
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/intlTelInput.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-  const phoneInput = document.querySelector("#res-phone");
-  if(phoneInput){
-    window.iti = window.intlTelInput(phoneInput, {
-      initialCountry: "hr",
-      preferredCountries: ["hr","de","it","en"],
-      separateDialCode: true,
-      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/utils.js"
+  const input = document.querySelector("#res-phone");
+  if(input){
+    window.intlTelInput(input,{
+      initialCountry:"hr",
+      separateDialCode:true,
+      utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.11/build/js/utils.js"
     });
   }
 });
 </script>
+
+<style>
+/* CRITICAL FIX */
+.reservation-box{
+  overflow:visible !important;
+}
+
+.iti__country-list{
+  z-index:99999 !important;
+}
+</style>
 
 </body>
 </html>
