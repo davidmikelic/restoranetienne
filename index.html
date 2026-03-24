@@ -682,17 +682,61 @@ font-weight:600;
 
 
 <style>
-/* === MOBILE DATE FIX (REZERVACIJA) === */
+/* === STRONG MOBILE FIX (DATE SAME AS OTHER FIELDS) === */
 @media (max-width: 768px){
-  .reservation-box{ width: 90%; max-width: 320px; padding: 20px; }
-  .reservation-table{ width: 100%; table-layout: fixed; }
-  .reservation-table td{ padding: 6px; }
+
+  .reservation-box{
+    width: 92%;
+    max-width: 300px;
+    padding: 18px;
+  }
+
+  .reservation-table{
+    display: block;
+    width: 100%;
+  }
+
+  .reservation-table tr{
+    display: block;
+    width: 100%;
+  }
+
+  .reservation-table td{
+    display: block;
+    width: 100%;
+    padding: 6px 0;
+  }
+
+  /* SVI INPUTI IDENTIČNI */
   .reservation-table input,
-  .reservation-table select{ height: 40px; font-size: 14px; }
-  input[type="date"]{ width: 100%; max-width: 100%; height: 40px; padding: 8px 10px; font-size: 14px; }
-  input[type="date"]::-webkit-datetime-edit{ padding: 0; }
-  input[type="date"]::-webkit-calendar-picker-indicator{ margin: 0; }
-  .flatpickr-calendar{ width: 100% !important; max-width: 300px; left: 50% !important; transform: translateX(-50%) !important; }
+  .reservation-table select{
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  /* DATE FIX - ISTO KO OSTALI */
+  input[type="date"]{
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+  }
+
+  /* uklanja iOS stretch */
+  input[type="date"]::-webkit-date-and-time-value{
+    text-align: left;
+  }
+
+  input[type="date"]::-webkit-datetime-edit{
+    padding: 0;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    margin: 0;
+  }
 }
 </style>
 
